@@ -13,14 +13,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazorise" Version="1.6.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Update="MainLayout.razor">
-            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        </Content>
-    </ItemGroup>
-
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="npm run buildcss" />
+	</Target>
 </Project>

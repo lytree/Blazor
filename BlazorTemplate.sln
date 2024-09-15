@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Maui", "src\B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Shared.UI", "src\Blazor.Shared.UI\Blazor.Shared.UI.csproj", "{B11F7A7C-624E-4884-A828-F49567BF6624}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Hybrid.Linux", "src\Blazor.Hybrid.Linux\Blazor.Hybrid.Linux.csproj", "{AF791038-BE49-47D2-AB7B-8A657EBDD2DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{B11F7A7C-624E-4884-A828-F49567BF6624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B11F7A7C-624E-4884-A828-F49567BF6624}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B11F7A7C-624E-4884-A828-F49567BF6624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF791038-BE49-47D2-AB7B-8A657EBDD2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF791038-BE49-47D2-AB7B-8A657EBDD2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF791038-BE49-47D2-AB7B-8A657EBDD2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF791038-BE49-47D2-AB7B-8A657EBDD2DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{AF2572FF-46D6-4B37-9D36-C1FC9149F6BD} = {C7BF371E-FFCB-4E69-A396-A2997F070B4D}
 		{B4C81780-4343-4790-9170-781C08123ACA} = {C7BF371E-FFCB-4E69-A396-A2997F070B4D}
 		{D1D7913B-66D4-4052-84A0-D460FDBCB98A} = {C7BF371E-FFCB-4E69-A396-A2997F070B4D}
+		{AF791038-BE49-47D2-AB7B-8A657EBDD2DE} = {C7BF371E-FFCB-4E69-A396-A2997F070B4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D22826F5-22A1-43FC-A69F-90839F59D732}

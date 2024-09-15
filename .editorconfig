@@ -158,7 +158,6 @@ dotnet_diagnostic.CA2100.severity = silent
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:suggestion 
 [*.{cs,vb}] 
 # Add file header
-file_header_template = ********************************** \nDensen Informatica 中讯科技 \n作者：Alex Chow\ne-mail:zhouchuanglin@gmail.com \n**********************************
 dotnet_code_quality_unused_parameters = all:suggestion
 end_of_line = crlf
 tab_width = 4
