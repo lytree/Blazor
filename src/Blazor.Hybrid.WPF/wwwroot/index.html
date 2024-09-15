@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Blazor.Hybrid.Wpf</title>
+    <base href="/" />
+    <!--启用maui支持,直接忽略共享库并到主项目,所以不用引用共享库名称-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <!--不启用maui支持,引用共享库名称的css-->
+    <link href="_content/Blazor.Shared.UI/css/app.css" rel="stylesheet" />
+    <link href="Blazor.Hybrid.Wpf.styles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+
+    <script src="_framework/blazor.webview.js"></script>
+</body>
+
+</html>
