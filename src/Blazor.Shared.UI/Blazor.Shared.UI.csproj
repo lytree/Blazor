@@ -17,6 +17,8 @@
     </ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Exec Command="pnpm install" />
+        
 		<Exec Command="pnpm run buildcss" />
 	</Target>
 </Project>
