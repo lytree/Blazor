@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Linux", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Hybrid.Server", "src\Blazor.Hybrid.Server\Blazor.Hybrid.Server.csproj", "{F229E45B-5F90-42A5-A551-F9F94AC46E80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Shared.MASA", "src\Blazor.Shared.MASA\Blazor.Shared.MASA.csproj", "{BA5A4FCE-32F9-4185-937F-9C5063FED19B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Shared.Antd", "src\Blazor.Shared.Antd\Blazor.Shared.Antd.csproj", "{BA5A4FCE-32F9-4185-937F-9C5063FED19B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
