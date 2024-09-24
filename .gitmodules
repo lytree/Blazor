@@ -1,6 +1,6 @@
 [submodule "plugin/BabylonBlazor"]
 	path = plugin/BabylonBlazor
-	url = https://github.com/lytree/Plotly.Blazor.git
+	url = https://github.com/lytree/BabylonBlazor.git
 [submodule "plugin/BlazorSize"]
 	path = plugin/BlazorSize
 	url = https://github.com/lytree/BlazorSize.git
