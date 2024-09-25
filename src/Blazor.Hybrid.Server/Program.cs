@@ -1,37 +1,31 @@
+﻿// ********************************** 
+// Densen Informatica 中讯科技 
+// 作者：Alex Chow
+// e-mail:zhouchuanglin@gmail.com 
+// **********************************
 
+using Blazor.Hybrid.Linux;
+using Microsoft.Extensions.DependencyInjection;
+using Photino.Blazor;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddMasaBlazor(builder =>
+internal class Program
 {
-    builder.ConfigureTheme(theme =>
+    [STAThread]
+    private static void Main(string[] args)
     {
-        theme.Themes.Light.Primary = "#4318FF";
-        theme.Themes.Light.Accent = "#4318FF";
-    });
-}).AddI18nForServer("wwwroot/i18n");
+        var appBuilder = PhotinoBlazorAppBuilder.CreateDefault(args);
 
+        appBuilder.RootComponents.Add<App>("#app");
 
-var app = builder.Build();
+        var app = appBuilder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+        app.MainWindow
+            .SetTitle("Photino Blazor Sample");
+
+        AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
+        {
+        };
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
-
-app.Run();

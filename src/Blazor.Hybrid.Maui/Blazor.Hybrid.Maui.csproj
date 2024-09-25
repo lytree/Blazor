@@ -65,7 +65,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Blazor.Shared.UI\Blazor.Shared.UI.csproj" />
+      <ProjectReference Include="..\Blazor.Shared.UI\Blazor.Shared.Component.csproj" />
     </ItemGroup>
 
 </Project>

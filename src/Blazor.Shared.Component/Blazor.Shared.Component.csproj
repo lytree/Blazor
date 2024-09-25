@@ -1,14 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Blazor.Shared</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="AntDesign" Version="0.20.4.2" />
-    </ItemGroup>
 
 
     <ItemGroup>
@@ -21,4 +18,8 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
     </ItemGroup>
 
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+
+        <Exec Command="pnpm run buildcss" />
+    </Target>
 </Project>

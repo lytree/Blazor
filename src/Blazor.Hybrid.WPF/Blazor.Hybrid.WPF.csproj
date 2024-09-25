@@ -16,10 +16,10 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.*" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Blazor.Shared.UI\Blazor.Shared.UI.csproj" />
+      <ProjectReference Include="..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <Content Update="wwwroot\index.html">
+        <Content Update="wwwroot\**">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
