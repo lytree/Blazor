@@ -4,28 +4,18 @@
 // e-mail:zhouchuanglin@gmail.com 
 // **********************************
 
-using Blazor.Hybrid.Linux;
-using Microsoft.Extensions.DependencyInjection;
-using Photino.Blazor;
 
 internal class Program
 {
-    [STAThread]
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        var appBuilder = PhotinoBlazorAppBuilder.CreateDefault(args);
-
-        appBuilder.RootComponents.Add<App>("#app");
-
-        var app = appBuilder.Build();
-
-        app.MainWindow
-            .SetTitle("Photino Blazor Sample");
-
-        AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
-        {
-        };
-
-        app.Run();
+        CreateHostBuilder(args).Build().Run();
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
