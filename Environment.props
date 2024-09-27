@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <IsWindows>$([MSBuild]::IsOSPlatform('Windows'))</IsWindows>
+    <IsMac>$([MSBuild]::IsOSPlatform('OSX'))</IsMac>
+    <IsLinux>$([MSBuild]::IsOSPlatform('Linux'))</IsLinux>
+    <IsIOS>$([MSBuild]::IsOSPlatform('IOS'))</IsIOS>
+    <IsAndroid>$([MSBuild]::IsOSPlatform('Android'))</IsAndroid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants Condition="$(IsWindows) == 'true'">$(DefineConstants);WINDOWS</DefineConstants>
+    <DefineConstants Condition="$(IsMac) == 'true'">$(DefineConstants);MAC</DefineConstants>
+    <DefineConstants Condition="$(IsLinux) == 'true'">$(DefineConstants);LINUX</DefineConstants>
+    <DefineConstants Condition="$(IsIOS) == 'true'">$(DefineConstants);IOS</DefineConstants>
+    <DefineConstants Condition="$(IsAndroid) == 'true'">$(DefineConstants);Android</DefineConstants>
+  </PropertyGroup>
+</Project>

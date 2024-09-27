@@ -1,5 +1,5 @@
 <Project>
-
+	<Import Project="Environment.props" />
   <PropertyGroup>
 	<Copyright>Lytree</Copyright>
 	<Authors>Lytree</Authors>
