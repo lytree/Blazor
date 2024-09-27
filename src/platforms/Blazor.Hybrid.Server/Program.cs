@@ -27,6 +27,7 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
+    .AddAdditionalAssemblies(typeof(Blazor.Shared._Imports).Assembly)
     .AddInteractiveServerRenderMode();
 
 app.Run();
