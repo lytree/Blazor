@@ -23,7 +23,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="6.*" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
+        <ProjectReference Include="..\..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
     </ItemGroup>
     <ItemGroup>
         <Content Update="wwwroot\**">
