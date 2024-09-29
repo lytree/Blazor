@@ -1,4 +1,4 @@
-﻿namespace Blazor.Hybrid.Linux;
+﻿namespace Blazor.Hybrid.Linux.GTK.BlazorWebView;
 
 /// <summary>
 /// Used to provide information about a link (<![CDATA[<a>]]>) clicked within a Blazor WebView.

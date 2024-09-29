@@ -1,5 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Reflection;
+using Blazor.Hybrid.Core;
+using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 using CommunityToolkit.Diagnostics;
 using Gdk;
 using Gio.Internal;
@@ -76,7 +78,6 @@ internal sealed partial class BlazorWebView : IDisposable
 
     internal BlazorWebView(IServiceProvider serviceProvider, bool enableDeveloperTools)
     {
-        _logger = this.Log();
         Guard.IsNotNull(serviceProvider);
         _serviceProvider = serviceProvider;
         _appSchemeHandler = new AppSchemeHandler(this);
@@ -304,7 +305,7 @@ internal sealed partial class BlazorWebView : IDisposable
         string contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
         string bundleRootDir = Path.Combine(contentRoot, contentRootDir);
         var physicalProvider = new PhysicalFileProvider(bundleRootDir);
-        var embeddedProvider = new DevToysBlazorEmbeddedFileProvider();
+        var embeddedProvider = new BlazorEmbeddedFileProvider();
         return new CompositeFileProvider(physicalProvider, embeddedProvider);
     }
 

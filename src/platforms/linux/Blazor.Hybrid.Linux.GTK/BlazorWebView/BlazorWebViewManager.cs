@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using WebKit;
 using Task = System.Threading.Tasks.Task;
 
@@ -51,7 +52,7 @@ public partial class BlazorWebViewManager : WebViewManager
         Guard.IsNotNull(blazorMauiWebViewHandler);
         Guard.IsNotNull(blazorMauiWebViewHandler.View);
 
-        _logger = this.Log();
+        _logger = NullLogger.Instance;
         _blazorMauiWebViewHandler = blazorMauiWebViewHandler;
         _webview = blazorMauiWebViewHandler.View;
         _contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;

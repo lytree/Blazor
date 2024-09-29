@@ -6,6 +6,7 @@ using Blazor.Hybrid.Linux;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.JSInterop;
 using IComponent = Microsoft.AspNetCore.Components.IComponent;
 
@@ -125,7 +126,8 @@ internal static partial class StaticContentHotReloadManager
 
         public StaticContentChangeNotifier()
         {
-            _logger = this.Log();
+            _logger = NullLogger.Instance;
+
         }
 
         public void Attach(RenderHandle renderHandle)

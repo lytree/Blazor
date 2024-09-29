@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebView;
 
-namespace Blazor.Hybrid.Linux;
+namespace Blazor.Hybrid.Linux.GTK.BlazorWebView;
 
 /// <summary>
 /// Describes a root component that can be added to a <see cref="BlazorWkWebView"/>.

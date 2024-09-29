@@ -1,10 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Blazor.Hybrid</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Blazor.Hybrid.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
+        <PackageReference Include="OneOf" Version="3.0.271" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
+    </ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Gtk;
 using WebKit;
 using Settings = WebKit.Settings;
+using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 namespace Blazor.Hybrid.Linux;
 
 internal class MainWindow

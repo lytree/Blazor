@@ -8,15 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommunityToolkit.Common" Version="8.3.2" />
-      <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
-      <PackageReference Include="GirCore.Gtk-4.0" Version="0.5.0" />
-      <PackageReference Include="GirCore.WebKit-6.0" Version="0.5.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.8" />
+        <PackageReference Include="CommunityToolkit.Common" Version="8.3.2" />
+        <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
+        <PackageReference Include="GirCore.Gtk-4.0" Version="0.5.0" />
+        <PackageReference Include="GirCore.WebKit-6.0" Version="0.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.8" />
+        <PackageReference Include="Lytree.Framework" Version="1.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
+        <ProjectReference Include="..\..\..\shared\Blazor.Hybrid.Core\Blazor.Hybrid.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -26,6 +29,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Components\BlazorWebView\" />
+        <Folder Include="Components\" />
     </ItemGroup>
 </Project>

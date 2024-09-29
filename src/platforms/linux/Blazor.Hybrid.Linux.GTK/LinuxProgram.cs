@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gio;
+using CommunityToolkit.Diagnostics;
 namespace Blazor.Hybrid.Linux;
 
 internal class LinuxProgram
 {
     internal static ILogger? Logger;
-    private static MefComposer? MefComposer;
+    //private static MefComposer? MefComposer;
 
-    private readonly WindowService _windowService = new();
+    //private readonly WindowService _windowService = new();
     private readonly ServiceCollection _serviceCollection = new();
     private readonly DateTime _startTime = DateTime.Now;
 
@@ -45,31 +46,31 @@ internal class LinuxProgram
             LogUnhandledException((Exception)ex.ExceptionObject);
         };
 
-        // Clear older temp files.
-        FileHelper.ClearTempFiles(Constants.AppTempFolder);
+        //// Clear older temp files.
+        //Helper.ClearTempFiles(Constants.AppTempFolder);
 
-        // Initialize extension installation folder, and uninstall extensions that are planned for being removed.
-        string[] pluginFolders
-            = new[] { Path.Combine(AppContext.BaseDirectory!, "Plugins"), Constants.PluginInstallationFolder };
-        ExtensionInstallationManager.PreferredExtensionInstallationFolder = Constants.PluginInstallationFolder;
-        ExtensionInstallationManager.ExtensionInstallationFolders = pluginFolders;
-        ExtensionInstallationManager.UninstallExtensionsScheduledForRemoval();
+        //// Initialize extension installation folder, and uninstall extensions that are planned for being removed.
+        //string[] pluginFolders
+        //    = new[] { Path.Combine(AppContext.BaseDirectory!, "Plugins"), Constants.PluginInstallationFolder };
+        //ExtensionInstallationManager.PreferredExtensionInstallationFolder = Constants.PluginInstallationFolder;
+        //ExtensionInstallationManager.ExtensionInstallationFolders = pluginFolders;
+        //ExtensionInstallationManager.UninstallExtensionsScheduledForRemoval();
 
-        // Initialize MEF.
-        MefComposer
-            = new MefComposer(
-                assemblies: new[] { typeof(MainWindowViewModel).Assembly, typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly },
-                pluginFolders);
+        //// Initialize MEF.
+        //MefComposer
+        //    = new MefComposer(
+        //        assemblies: new[] { typeof(MainWindowViewModel).Assembly, typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly },
+        //        pluginFolders);
 
         LogInitialization((DateTime.Now - _startTime).TotalMilliseconds);
         LogAppStarting();
 
-        // Set the user-defined language.
-        string? languageIdentifier = MefComposer.Provider.Import<ISettingsProvider>().GetSetting(PredefinedSettings.Language);
-        LanguageDefinition languageDefinition
-            = LanguageManager.Instance.AvailableLanguages.FirstOrDefault(l => string.Equals(l.InternalName, languageIdentifier))
-              ?? LanguageManager.Instance.AvailableLanguages[0];
-        LanguageManager.Instance.SetCurrentCulture(languageDefinition);
+        //// Set the user-defined language.
+        //string? languageIdentifier = MefComposer.Provider.Import<ISettingsProvider>().GetSetting(PredefinedSettings.Language);
+        //LanguageDefinition languageDefinition
+        //    = LanguageManager.Instance.AvailableLanguages.FirstOrDefault(l => string.Equals(l.InternalName, languageIdentifier))
+        //      ?? LanguageManager.Instance.AvailableLanguages[0];
+        //LanguageManager.Instance.SetCurrentCulture(languageDefinition);
 
         // Create and open main window.
         _mainWindow = new MainWindow(serviceProvider, (Gtk.Application)sender);
@@ -79,11 +80,11 @@ internal class LinuxProgram
     {
         Guard.IsNotNull(MefComposer);
 
-        // Dispose every disposable tool instance.
-        MefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
+        //// Dispose every disposable tool instance.
+        //MefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
 
-        // Clear older temp files.
-        FileHelper.ClearTempFiles(Constants.AppTempFolder);
+        //// Clear older temp files.
+        //FileHelper.ClearTempFiles(Constants.AppTempFolder);
 
         Application.OnActivate -= OnApplicationActivate;
         Application.OnShutdown -= OnApplicationShutdown;
@@ -96,34 +97,34 @@ internal class LinuxProgram
         _serviceCollection.AddLogging((builder) =>
         {
 #if DEBUG
-            builder.AddDebug();
+            //builder.AddDebug();
             builder.SetMinimumLevel(LogLevel.Debug);
 #else
             builder.SetMinimumLevel(LogLevel.Information);
 #endif
 
-            // To save logs on local hard drive.
-            builder.AddFile(new FileStorage());
+            //// To save logs on local hard drive.
+            //builder.AddFile(new FileStorage());
 
             builder.AddFilter("Microsoft", LogLevel.Warning);
             builder.AddFilter("System", LogLevel.Warning);
         });
 
-        _serviceCollection.AddSingleton(provider => MefComposer!.Provider);
-        _serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
-        _serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
-        _serviceCollection.AddScoped<PopoverService, PopoverService>();
-        _serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
-        _serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
-        _serviceCollection.AddScoped<UIDialogService, UIDialogService>();
-        _serviceCollection.AddScoped<FontService, FontService>();
-        _serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
+        //_serviceCollection.AddSingleton(provider => MefComposer!.Provider);
+        //_serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
+        //_serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
+        //_serviceCollection.AddScoped<PopoverService, PopoverService>();
+        //_serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
+        //_serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
+        //_serviceCollection.AddScoped<UIDialogService, UIDialogService>();
+        //_serviceCollection.AddScoped<FontService, FontService>();
+        //_serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
 
         ServiceProvider serviceProvider = _serviceCollection.BuildServiceProvider();
 
         ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        LoggingExtensions.LoggerFactory = loggerFactory;
-        Logger = this.Log();
+        //LoggingExtensions.LoggerFactory = loggerFactory;
+        //Logger = this.Log();
 
         return serviceProvider;
     }

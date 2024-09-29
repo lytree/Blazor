@@ -1,4 +1,4 @@
-﻿namespace Blazor.Hybrid.Linux;
+﻿namespace Blazor.Hybrid.Linux.GTK.BlazorWebView;
 
 /// <summary>
 /// URL loading strategy for anchor tags <![CDATA[<a>]]> within a Blazor WebView.

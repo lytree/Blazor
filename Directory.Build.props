@@ -1,22 +1,22 @@
 <Project>
 	<Import Project="Environment.props" />
-  <PropertyGroup>
-	<Copyright>Lytree</Copyright>
-	<Authors>Lytree</Authors>
-	<Company>Lytree</Company>
-	<SignAssembly>true</SignAssembly>
-	<Nullable>enable</Nullable>
-	<ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Copyright>Lytree</Copyright>
+		<Authors>Lytree</Authors>
+		<Company>Lytree</Company>
+		<SignAssembly>true</SignAssembly>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <PropertyGroup>
-	<LangVersion>12</LangVersion>
-	<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
-	<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-  </PropertyGroup>
+	<PropertyGroup>
+		<LangVersion>12</LangVersion>
+		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<Using Include="System.Diagnostics.CodeAnalysis"/>
-  </ItemGroup>
+	<ItemGroup>
+		<Using Include="System.Diagnostics.CodeAnalysis"/>
+	</ItemGroup>
 
 </Project>
