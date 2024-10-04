@@ -16,7 +16,6 @@ internal class Program
         var appBuilder = PhotinoBlazorAppBuilder.CreateDefault(args);
 
         appBuilder.RootComponents.Add<App>("#app");
-
         var app = appBuilder.Build();
 
         app.MainWindow
