@@ -78,7 +78,7 @@ internal class LinuxProgram
 
     private void OnApplicationShutdown(object sender, object e)
     {
-        Guard.IsNotNull(MefComposer);
+        // Guard.IsNotNull(MefComposer);
 
         //// Dispose every disposable tool instance.
         //MefComposer.Provider.Import<GuiToolProvider>().DisposeTools();

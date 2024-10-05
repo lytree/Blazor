@@ -266,7 +266,7 @@ internal sealed partial class BlazorWebView : IDisposable
         string contentRootDir = Path.GetDirectoryName(HostPage!) ?? string.Empty;
         string hostPageRelativePath = Path.GetRelativePath(contentRootDir, HostPage!);
 
-        LogCreatingFileProvider(contentRootDir, hostPageRelativePath);
+        // LogCreatingFileProvider(contentRootDir, hostPageRelativePath);
 
         IFileProvider fileProvider = CreateFileProvider(contentRootDir);
 
@@ -281,16 +281,16 @@ internal sealed partial class BlazorWebView : IDisposable
 
         StaticContentHotReloadManager.AttachToWebViewManagerIfEnabled(_webViewManager);
 
-        foreach (RootComponent rootComponent in RootComponents)
-        {
-            LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
-                rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
+        // foreach (RootComponent rootComponent in RootComponents)
+        // {
+        //     LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
+        //         rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
 
-            // Since the page isn't loaded yet, this will always complete synchronously
-            _ = rootComponent.AddToWebViewManagerAsync(_webViewManager);
-        }
+        //     // Since the page isn't loaded yet, this will always complete synchronously
+        //     _ = rootComponent.AddToWebViewManagerAsync(_webViewManager);
+        // }
 
-        LogStartingInitialNavigation(StartPath);
+        // LogStartingInitialNavigation(StartPath);
         _webViewManager.Navigate(StartPath);
 
         Task.Run(async () =>
@@ -309,18 +309,18 @@ internal sealed partial class BlazorWebView : IDisposable
         return new CompositeFileProvider(physicalProvider, embeddedProvider);
     }
 
-    [LoggerMessage(EventId = 0, Level = LogLevel.Debug,
-        Message =
-            "Creating file provider at content root '{contentRootDir}', using host page relative path '{hostPageRelativePath}'.")]
-    partial void LogCreatingFileProvider(string contentRootDir, string hostPageRelativePath);
+    // [LoggerMessage(EventId = 0, Level = LogLevel.Debug,
+    //     Message =
+    //         "Creating file provider at content root '{contentRootDir}', using host page relative path '{hostPageRelativePath}'.")]
+    // partial void LogCreatingFileProvider(string contentRootDir, string hostPageRelativePath);
 
-    [LoggerMessage(EventId = 1, Level = LogLevel.Debug,
-        Message =
-            "Adding root component '{componentTypeName}' with selector '{componentSelector}'. Number of parameters: {parameterCount}")]
-    partial void LogAddingRootComponent(string componentTypeName, string componentSelector, int parameterCount);
+    // [LoggerMessage(EventId = 1, Level = LogLevel.Debug,
+    //     Message =
+    //         "Adding root component '{componentTypeName}' with selector '{componentSelector}'. Number of parameters: {parameterCount}")]
+    // partial void LogAddingRootComponent(string componentTypeName, string componentSelector, int parameterCount);
 
-    [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
-    partial void LogStartingInitialNavigation(string startPath);
+    // [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
+    // partial void LogStartingInitialNavigation(string startPath);
 
     private sealed class AppSchemeHandler
     {
