@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Maui", "src\platforms\phone\Blazor.Hybrid.Maui\Blazor.Hybrid.Maui.csproj", "{CCC5C0FE-F6EC-4073-953E-BF201A7AC12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Maui", "src\platforms\maui\Blazor.Hybrid.Maui\Blazor.Hybrid.Maui.csproj", "{CCC5C0FE-F6EC-4073-953E-BF201A7AC12E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Shared.Mobile", "src\Blazor.Shared.Mobile\Blazor.Shared.Mobile.csproj", "{DAE2C236-9DC4-4DC4-B386-464A0F5B6280}"
 EndProject
