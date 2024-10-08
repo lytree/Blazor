@@ -8,13 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Common" Version="8.3.2" />
-        <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
-        <PackageReference Include="GirCore.Gtk-4.0" Version="0.5.0" />
-        <PackageReference Include="GirCore.WebKit-6.0" Version="0.5.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.8" />
-        <PackageReference Include="Lytree.Framework" Version="1.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+        <PackageReference Include="CommunityToolkit.Common" />
+        <PackageReference Include="CommunityToolkit.Diagnostics"  />
+        <PackageReference Include="GirCore.Gtk-4.0"  />
+        <PackageReference Include="GirCore.WebKit-6.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView"  />
+        <PackageReference Include="Lytree.Framework" VersionOverride="1.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"  />
     </ItemGroup>
 
     <ItemGroup>
