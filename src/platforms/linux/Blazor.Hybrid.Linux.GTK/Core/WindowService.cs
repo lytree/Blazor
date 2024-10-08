@@ -1,6 +1,6 @@
 
 
-using Blazor.Shared;
+using Blazor.Shared.Core;
 using static GObject.Object;
 namespace Blazor.Hybrid.Linux.Core;
 internal sealed class WindowService : IWindowService

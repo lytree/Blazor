@@ -9,10 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Diagnostics" />
-        <PackageReference Include="OneOf" />
-        <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
-        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded"  />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+
     </ItemGroup>
 
 </Project>

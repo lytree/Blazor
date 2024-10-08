@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blazor.Hybrid.Core;
+namespace Blazor.Shared.Core;
 
 
 /// <summary>

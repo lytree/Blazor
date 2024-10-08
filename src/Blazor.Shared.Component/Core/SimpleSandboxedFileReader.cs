@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blazor.Hybrid.Core;
+namespace Blazor.Shared.Core;
 
 /// <summary>
 /// Represents a read-only access to a file on the file system.

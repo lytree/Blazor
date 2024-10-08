@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Reflection;
-using Blazor.Hybrid.Core;
+using Blazor.Shared.Core;
 using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 using CommunityToolkit.Diagnostics;
 using Gdk;

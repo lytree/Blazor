@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Diagnostics;
-using Blazor.Hybrid.Core;
+using Blazor.Shared.Core;
 using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared;
 namespace Blazor.Hybrid.Linux;

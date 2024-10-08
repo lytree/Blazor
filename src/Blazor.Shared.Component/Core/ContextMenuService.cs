@@ -1,6 +1,6 @@
 
 
-namespace Blazor.Shared;
+namespace Blazor.Shared.Core;
 public sealed class ContextMenuService
 {
     private readonly object _lock = new();

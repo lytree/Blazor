@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 using OneOf;
-namespace Blazor.Hybrid.Core;
+namespace Blazor.Shared.Core;
 
 internal sealed class BlazorSandboxedFileReader : SandboxedFileReader
 {

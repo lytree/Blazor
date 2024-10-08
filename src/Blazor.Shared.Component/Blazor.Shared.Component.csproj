@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net8.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Blazor.Shared</RootNamespace>
@@ -13,12 +13,10 @@
         <PackageReference Include="CommunityToolkit.Common" />
         <PackageReference Include="CommunityToolkit.Diagnostics"  />
         <PackageReference Include="System.ComponentModel.Composition" />
-    </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.*" />
-    </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="6.*" />
+        <PackageReference Include="OneOf" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded"  />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     </ItemGroup>
     <ItemGroup>
         <Content Update="wwwroot\**">

@@ -1,4 +1,4 @@
-namespace Blazor.Shared;
+namespace Blazor.Shared.Core;
 public interface IWindowService
 {
     event EventHandler<EventArgs>? WindowActivated;
