@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Photino.Blazor" Version="3.1.10" />
-        <PackageReference Include="Photino.Native" Version="3.1.6" />
-        <PackageReference Include="Photino.NET" Version="3.1.18" />
+        <PackageReference Include="Photino.Blazor" VersionOverride="3.1.10" />
+        <PackageReference Include="Photino.Native" VersionOverride="3.1.6" />
+        <PackageReference Include="Photino.NET" VersionOverride="3.1.18" />
     </ItemGroup>
 
     <ItemGroup>
