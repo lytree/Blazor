@@ -1,7 +1,6 @@
 using System.Net;
 
 namespace Blazor.Hybrid.Uno.Services.Caching;
-
 public sealed class WeatherCache : IWeatherCache
 {
     private readonly IApiClient _api;

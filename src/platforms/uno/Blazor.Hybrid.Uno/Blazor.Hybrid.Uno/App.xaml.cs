@@ -1,7 +1,6 @@
 using Uno.Resizetizer;
 
 namespace Blazor.Hybrid.Uno;
-
 public partial class App : Application
 {
     /// <summary>
@@ -19,6 +18,8 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
+            // Add navigation support for toolkit controls such as TabBar and NavigationView
+            .UseToolkitNavigation()
             .Configure(host => host
 #if DEBUG
                 // Switch to Development environment when running in DEBUG

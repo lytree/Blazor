@@ -1,7 +1,6 @@
 using Uno.UI.Runtime.Skia;
 
 namespace Blazor.Hybrid.Uno;
-
 public class Program
 {
     [STAThread]

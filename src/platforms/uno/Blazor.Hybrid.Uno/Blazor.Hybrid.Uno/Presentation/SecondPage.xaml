@@ -5,14 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  <Grid>
+  <Grid utu:SafeArea.Insets="VisibleBounds">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition />
     </Grid.RowDefinitions>
-    <TextBlock Text="Second Page" HorizontalAlignment="Center" />
+    <utu:NavigationBar Content="Second Page">
+      <utu:NavigationBar.MainCommand>
+        <AppBarButton>
+          <AppBarButton.Icon>
+            <BitmapIcon UriSource="ms-appx:///Assets/Images/back.png" />
+          </AppBarButton.Icon>
+        </AppBarButton>
+      </utu:NavigationBar.MainCommand>
+    </utu:NavigationBar>
     <StackPanel Grid.Row="1"
           HorizontalAlignment="Center"
           VerticalAlignment="Center">
@@ -20,11 +29,6 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="8" />
-      <Button Content="Back to Main Page"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        AutomationProperties.AutomationId="BackButton"
-        uen:Navigation.Request="-"/>
     </StackPanel>
 
   </Grid>

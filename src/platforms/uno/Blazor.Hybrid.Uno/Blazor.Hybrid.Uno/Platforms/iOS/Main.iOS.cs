@@ -1,7 +1,6 @@
 using UIKit;
 
 namespace Blazor.Hybrid.Uno.iOS;
-
 public class EntryPoint
 {
     // This is the main entry point of the application.

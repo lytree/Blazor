@@ -2,7 +2,6 @@ using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
 namespace Blazor.Hybrid.Uno.DataContracts.Serialization;
-
 /// <summary>
 /// Generated class for System.Text.Json Serialization
 /// </summary>

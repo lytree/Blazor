@@ -5,7 +5,6 @@ using Android.Views;
 using Android.Widget;
 
 namespace Blazor.Hybrid.Uno.Droid;
-
 [Activity(
     MainLauncher = true,
     ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
