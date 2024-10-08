@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
+                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
                 "/property:GenerateFullPaths=true",
                 "/property:TargetFramework=net8.0-browserwasm",
                 "/consoleloggerparameters:NoSummary"
@@ -20,7 +20,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
+                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
                 "/property:GenerateFullPaths=true",
                 "/property:TargetFramework=net8.0-browserwasm",
                 "/consoleloggerparameters:NoSummary"
@@ -33,7 +33,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
+                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
                 "/property:GenerateFullPaths=true",
                 "/property:TargetFramework=net8.0-desktop",
                 "/consoleloggerparameters:NoSummary"
@@ -46,13 +46,13 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
+                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
                 "/property:GenerateFullPaths=true",
                 "/property:TargetFramework=net8.0-desktop",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        }
+        },
         {
             "label": "Build Blazor.Hybrid.Linux.GTK",
             "command": "dotnet",
