@@ -281,14 +281,14 @@ internal sealed partial class BlazorWebView : IDisposable
 
         StaticContentHotReloadManager.AttachToWebViewManagerIfEnabled(_webViewManager);
 
-        // foreach (RootComponent rootComponent in RootComponents)
-        // {
-        //     LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
-        //         rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
+        foreach (RootComponent rootComponent in RootComponents)
+        {
+            // LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
+            //     rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
 
-        //     // Since the page isn't loaded yet, this will always complete synchronously
-        //     _ = rootComponent.AddToWebViewManagerAsync(_webViewManager);
-        // }
+            // Since the page isn't loaded yet, this will always complete synchronously
+            _ = rootComponent.AddToWebViewManagerAsync(_webViewManager);
+        }
 
         // LogStartingInitialNavigation(StartPath);
         _webViewManager.Navigate(StartPath);

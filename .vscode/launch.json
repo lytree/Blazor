@@ -5,12 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Blazor.Hybrid.Linux.GTK",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "Build Blazor.Hybrid.Linux.GTK",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.GTK/bin/Debug/net8.0/Blazor.Hybrid.Linux.GTK",
+            "args": [],
+            // "cwd": "${workspaceFolder}/CsharpTest",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "env": {
+                "DISPLAY":"10.100.50.123:1.0"
+            }
+        },
+        {
+            "name": "Blazor.Hybrid.Linux.Photino",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build Blazor.Hybrid.Linux.Photino",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.Photino/bin/Debug/net8.0/Blazor.Hybrid.Linux.Photino",
             "args": [],
             // "cwd": "${workspaceFolder}/CsharpTest",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console

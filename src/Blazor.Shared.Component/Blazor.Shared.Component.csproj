@@ -10,6 +10,9 @@
 
     <ItemGroup>
         <SupportedPlatform Include="browser" />
+        <PackageReference Include="CommunityToolkit.Common" />
+        <PackageReference Include="CommunityToolkit.Diagnostics"  />
+        <PackageReference Include="System.ComponentModel.Composition" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.*" />

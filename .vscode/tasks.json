@@ -2,12 +2,24 @@
 	"version": "2.0.0",
 	"tasks": [
         {
-            "label": "build",
+            "label": "Build Blazor.Hybrid.Linux.GTK",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.GTK/Blazor.Hybrid.Linux.GTK.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Blazor.Hybrid.Linux.Photino",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.Photino/Blazor.Hybrid.Linux.Photino.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gio;
 using CommunityToolkit.Diagnostics;
+using Blazor.Hybrid.Core;
+using Blazor.Hybrid.Linux.Core;
+using Blazor.Shared;
 namespace Blazor.Hybrid.Linux;
 
 internal class LinuxProgram
@@ -15,7 +17,7 @@ internal class LinuxProgram
     internal static ILogger? Logger;
     //private static MefComposer? MefComposer;
 
-    //private readonly WindowService _windowService = new();
+    private readonly WindowService _windowService = new();
     private readonly ServiceCollection _serviceCollection = new();
     private readonly DateTime _startTime = DateTime.Now;
 
@@ -111,10 +113,10 @@ internal class LinuxProgram
         });
 
         //_serviceCollection.AddSingleton(provider => MefComposer!.Provider);
-        //_serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
+        _serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
         //_serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
         //_serviceCollection.AddScoped<PopoverService, PopoverService>();
-        //_serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
+        _serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
         //_serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
         //_serviceCollection.AddScoped<UIDialogService, UIDialogService>();
         //_serviceCollection.AddScoped<FontService, FontService>();
