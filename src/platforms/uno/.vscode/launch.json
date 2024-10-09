@@ -45,6 +45,7 @@
       "args": [],
       "launchSettingsProfile": "Blazor.Hybrid.Uno (Desktop)",
       "env": {
+        "DISPLAY": "10.100.50.123:1.0",
         "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
       },
       "cwd": "${workspaceFolder}/Blazor.Hybrid.Uno",
