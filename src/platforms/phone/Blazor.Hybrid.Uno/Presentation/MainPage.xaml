@@ -1,0 +1,20 @@
+﻿<Page x:Class="Blazor.Hybrid.Uno.Presentation.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Blazor.Hybrid.Uno.Presentation"
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <ScrollViewer>
+    <Grid utu:SafeArea.Insets="VisibleBounds">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <utu:NavigationBar Content="{Binding Title}"/>
+      <WebView2 x:Name="MyWebView"
+          Source="https://platform.uno/"/>
+    </Grid>
+  </ScrollViewer>
+</Page>
