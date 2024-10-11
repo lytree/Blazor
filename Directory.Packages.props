@@ -9,12 +9,12 @@
         <PackageVersion Include="CommunityToolkit.Diagnostics" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="coverlet.collector" Version="6.0.0" />
-        <PackageVersion Include="FluentAssertions" Version="6.11.0" />
+        <PackageVersion Include="FluentAssertions" Version="6.12.1" />
         <PackageVersion Include="FuzzySharp" Version="2.0.2" />
         <PackageVersion Include="GirCore.Adw-1" Version="$(GirCore)" />
         <PackageVersion Include="GirCore.Gtk-4.0" Version="$(GirCore)" />
         <PackageVersion Include="GirCore.WebKit-6.0" Version="$(GirCore)" />
-        <PackageVersion Include="Markdig" Version="0.34.0" />
+        <PackageVersion Include="Markdig" Version="0.37.0" />
         <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.8" />
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
@@ -27,11 +27,11 @@
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
         <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.3.2" />
         <PackageVersion Include="Moq" Version="4.18.4" />
-        <PackageVersion Include="NuGet.Packaging" Version="6.9.1" />
-        <PackageVersion Include="Nuke.Common" Version="8.0.0" />
+        <PackageVersion Include="NuGet.Packaging" Version="6.11.1" />
+        <PackageVersion Include="Nuke.Common" Version="8.1.1" />
         <PackageVersion Include="OneOf" Version="3.0.271" />
         <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.5" />
-        <PackageVersion Include="System.Text.Json" Version="8.0.0" />
+        <PackageVersion Include="System.Text.Json" Version="8.0.5" />
         <PackageVersion Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
         <PackageVersion Include="System.ComponentModel.Composition" Version="8.0.0" />
         <PackageVersion Include="xunit" Version="$(XUnit)" />
