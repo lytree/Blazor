@@ -1,26 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
-        <RootNamespace>Blazor.Hybrid.WPF</RootNamespace>
-        <Nullable>enable</Nullable>
-        <UseWPF>true</UseWPF>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="8.*" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.*" />
-        <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.*" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.*" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Update="wwwroot\**">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <RootNamespace>Blazor.Hybrid.WPF</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" VersionOverride="8.0.91" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Hosting"  />
+    <PackageReference Include="Microsoft.Windows.Compatibility" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Blazor.Shared.Component\Blazor.Shared.Component.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

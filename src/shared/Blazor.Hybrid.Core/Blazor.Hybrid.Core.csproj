@@ -9,7 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Diagnostics" />
-
+        <PackageReference Include="CommunityToolkit.Common" />
+        <PackageReference Include="OneOf" />
     </ItemGroup>
 
 </Project>

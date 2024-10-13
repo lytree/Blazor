@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Linux.GTK", "src\platforms\linux\Blazor.Hybrid.Linux.GTK\Blazor.Hybrid.Linux.GTK.csproj", "{D7D0A568-377D-4156-85D8-B07B6F16266E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.GTK", "src\platforms\linux\Blazor.Hybrid.GTK\Blazor.Hybrid.GTK.csproj", "{D7D0A568-377D-4156-85D8-B07B6F16266E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Linux.Photino", "src\platforms\linux\Blazor.Hybrid.Linux.Photino\Blazor.Hybrid.Linux.Photino.csproj", "{F3098CFF-857C-4DE5-BC81-81DFB8F03F5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Photino", "src\platforms\linux\Blazor.Hybrid.Photino\Blazor.Hybrid.Photino.csproj", "{F3098CFF-857C-4DE5-BC81-81DFB8F03F5A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Uno", "src\platforms\linux\Blazor.Hybrid.Uno\Blazor.Hybrid.Uno.csproj", "{5DB9C411-9E7C-4B6D-BA9D-F494A6EACDB5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Shared.Component", "src\Blazor.Shared.Component\Blazor.Shared.Component.csproj", "{87D98693-B692-413C-893F-023BA919E74C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Core", "src\shared\Blazor.Hybrid.Core\Blazor.Hybrid.Core.csproj", "{52382477-561A-40F1-90B5-2079B6474646}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "platforms", "platforms", "{8F20BB93-3DDE-414C-9F2B-51FFCE6F7935}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Hybrid.Avalonia", "src\platforms\linux\Blazor.Hybrid.Avalonia\Blazor.Hybrid.Avalonia.csproj", "{6FE4C288-0E88-4ACC-8698-17E7297E564E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,19 @@ Global
 		{52382477-561A-40F1-90B5-2079B6474646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52382477-561A-40F1-90B5-2079B6474646}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52382477-561A-40F1-90B5-2079B6474646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FE4C288-0E88-4ACC-8698-17E7297E564E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE4C288-0E88-4ACC-8698-17E7297E564E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE4C288-0E88-4ACC-8698-17E7297E564E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE4C288-0E88-4ACC-8698-17E7297E564E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7D0A568-377D-4156-85D8-B07B6F16266E} = {8F20BB93-3DDE-414C-9F2B-51FFCE6F7935}
+		{F3098CFF-857C-4DE5-BC81-81DFB8F03F5A} = {8F20BB93-3DDE-414C-9F2B-51FFCE6F7935}
+		{5DB9C411-9E7C-4B6D-BA9D-F494A6EACDB5} = {8F20BB93-3DDE-414C-9F2B-51FFCE6F7935}
+		{6FE4C288-0E88-4ACC-8698-17E7297E564E} = {8F20BB93-3DDE-414C-9F2B-51FFCE6F7935}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F3398782-7B07-45D0-BE33-91F5FBCDDB26}
