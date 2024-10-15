@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Blazor.Hybrid.Avalonia.MainWindow"
+        xmlns:webview="clr-namespace:WebViewControl;assembly=WebViewControl.Avalonia"
         Title="Blazor.Hybrid.Avalonia">
-    Welcome to Avalonia!
+    <webview:WebView x:Name="webview" Focusable="True" Address="https://www.baidu.com/" />
 </Window>
