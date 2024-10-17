@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 /// <summary>
 /// Provides a set of helper method to play around with threads.

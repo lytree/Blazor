@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 
 /// <summary>

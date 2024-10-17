@@ -1,4 +1,4 @@
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 /// <summary>
 /// URL loading strategy for anchor tags <![CDATA[<a>]]> within a Blazor WebView.

@@ -1,4 +1,4 @@
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 /// <summary>
 /// Used to provide information about a link (<![CDATA[<a>]]>) clicked within a Blazor WebView.

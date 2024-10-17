@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using WebViewControl;
 using Task = System.Threading.Tasks.Task;
 
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 /// <summary>
 /// An implementation of <see cref="WebViewManager"/> that uses the <see cref="WKWebView"/> browser control

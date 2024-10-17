@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
-using Blazor.Hybrid.Avalonia;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.JSInterop;
 using IComponent = Microsoft.AspNetCore.Components.IComponent;
+using Blazor.Hybrid.Avalonia.Blazor;
 
 // This is important in order to get StaticContentHotReloadManager.UpdateContent method invoked.
 [assembly: MetadataUpdateHandler(typeof(StaticContentHotReloadManager))]
 
-namespace Blazor.Hybrid.Avalonia;
+namespace Blazor.Hybrid.Avalonia.Blazor;
 
 
 internal static partial class StaticContentHotReloadManager
