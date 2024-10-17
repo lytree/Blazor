@@ -13,6 +13,8 @@ namespace Blazor.Hybrid.Avalonia.Blazor;
 
 internal sealed partial class BlazorWebView : BaseControl, IDisposable
 {
+
+
     private const string DevToysInteropName = "devtoyswebinterop";
     private const string Scheme = "app";
     internal const string AppHostAddress = "0.0.0.0";
@@ -55,24 +57,22 @@ internal sealed partial class BlazorWebView : BaseControl, IDisposable
                 };
             })();
             """;
-
-    private readonly ILogger _logger;
-    private readonly IServiceProvider _serviceProvider;
     private readonly bool _enabledDeveloperTools;
-
+    private readonly ILogger _logger;
+    private readonly IServiceProvider _services;
     private BlazorWebViewManager? _webViewManager;
     private string? _hostPage;
 
     static BlazorWebView()
     {
-        
+
     }
 
     internal BlazorWebView(IServiceProvider serviceProvider, bool enableDeveloperTools)
     {
         Guard.IsNotNull(serviceProvider);
-        _serviceProvider = serviceProvider;
-        
+        _services = serviceProvider;
+
 
         _enabledDeveloperTools = enableDeveloperTools;
         View = CreateWebView();
@@ -99,7 +99,19 @@ internal sealed partial class BlazorWebView : BaseControl, IDisposable
             StartWebViewCoreIfPossible();
         }
     }
-
+    /// <summary>
+    /// Gets or sets an <see cref="IServiceProvider"/> containing services to be used by this control and also by application code.
+    /// This property must be set to a valid value for the Razor components to start.
+    /// </summary>
+    public IServiceProvider Services
+    {
+        get => _services!;
+        set
+        {
+            _services = value;
+            OnServicesPropertyChanged();
+        }
+    }
     /// <summary>
     /// Gets or sets the path for initial navigation within the Blazor navigation context when the Blazor component is finished loading.
     /// </summary>
@@ -176,9 +188,9 @@ internal sealed partial class BlazorWebView : BaseControl, IDisposable
     {
         var webView = new WebView();
 
-       
 
-        
+
+
         //// Handle messages.
         //UserContentManager.ScriptMessageReceivedSignal.Connect(
         //    userContentManager,
@@ -201,7 +213,7 @@ internal sealed partial class BlazorWebView : BaseControl, IDisposable
 
         //// Register a "app" url scheme to handle Blazor resources
         //webView.RegisterUriScheme(Scheme, HandleUriScheme);
-       
+
         return webView;
     }
 
