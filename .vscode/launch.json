@@ -46,11 +46,11 @@
             "args": [],
             // "cwd": "${workspaceFolder}/CsharpTest",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "integratedTerminal",
+            "console": "internalConsole",
             "stopAtEntry": false,
             "env": {
                 "DISPLAY": "10.100.50.123:0.0",
-                "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
+                "DOTNET_MODIFIABLE_ASSEMBLIES": "DEBUG"
             }
         },
         {

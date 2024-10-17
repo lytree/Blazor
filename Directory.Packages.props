@@ -10,6 +10,7 @@
         <AvaloniaVersion>11.1.4</AvaloniaVersion>
     </PropertyGroup>
     <ItemGroup>
+        <PackageVersion Include="Dotnet.Bundle" Version="0.9.13" />
         <PackageVersion Include="CommunityToolkit.Common" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Diagnostics" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitVersion)" />

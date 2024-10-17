@@ -17,5 +17,9 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" VersionOverride="$(AvaloniaVersion)" />
     <PackageReference Include="WebViewControl-Avalonia" VersionOverride="3.120.5" />
+    <PackageReference Include="CefGlue.Avalonia" VersionOverride="120.6099.205" />
+    <PackageReference Include="Dotnet.Bundle" />
   </ItemGroup>
+
+
 </Project>

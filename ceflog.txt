@@ -1,0 +1,98 @@
+[1015/101710.492426:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/102359.030826:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/105255.508658:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/110627.541913:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/110719.692794:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/110759.547033:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/111116.448031:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/111140.557756:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/111543.018214:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1015/112302.939797:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1016/133543.801375:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1016/133559.997628:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1016/133634.153093:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+
+[1016/133730.602538:VERBOSE1:bus.cc(916)] Method call: message_type: MESSAGE_METHOD_CALL
+interface: org.freedesktop.DBus
+member: GetNameOwner
+signature: s
+
+string "org.freedesktop.login1"
+

@@ -84,7 +84,8 @@
                 "build",
                 "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Avalonia/Blazor.Hybrid.Avalonia.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "/p:Configuration=Debug"
             ],
             "problemMatcher": "$msCompile"
         }
