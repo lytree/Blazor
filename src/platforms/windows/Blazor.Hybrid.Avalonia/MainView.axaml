@@ -3,14 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Blazor.Hybrid.Avalonia.ViewModels"
-             xmlns:blazor="clr-namespace:Blazor.Hybrid.Avalonia.Blazor"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Blazor.Hybrid.Avalonia.Views.MainView"
+             x:Class="Blazor.Hybrid.Avalonia.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
-    <blazor:BlazorWebView x:Name="webview" Focusable="True" Address="https://www.baidu.com/" />
+        <vm:MainViewModel />
+    </Design.DataContext>
+    <Decorator x:Name="browserWrapper"/>
 </UserControl>
