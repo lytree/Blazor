@@ -3,21 +3,30 @@ using Avalonia.Markup.Xaml;
 using Avalonia;
 using Xilium.CefGlue.Avalonia;
 using Xilium.CefGlue.Common.Handlers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Blazor.Hybrid.Avalonia;
 
 public partial class MainView : UserControl
 {
-    private AvaloniaCefBrowser browser;
+    private BlazorWebView browser;
+
+
+
+    private readonly ServiceCollection _serviceCollection = new();
     public MainView()
     {
-        
+        ServiceProvider serviceProvider = _serviceCollection.BuildServiceProvider();
+
         AvaloniaXamlLoader.Load(this);
         InitializeComponent();
         var browserWrapper = this.FindControl<Decorator>("browserWrapper");
 
-        browser = new AvaloniaCefBrowser();
-        browser.Address = "https://www.baidu.com";
+        browser = new BlazorWebView(serviceProvider,false);
+        browser.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(App) });
+        browser.HostPage = "wwwroot/index.html";
+        browser.ShowDeveloperTools();
+        //browser.RegisterJavascriptObject(new BindingTestClass(), "boundBeforeLoadObject");
         //browser.RegisterJavascriptObject(new BindingTestClass(), "boundBeforeLoadObject");
         //browser.LoadStart += OnBrowserLoadStart;
         //browser.TitleChanged += OnBrowserTitleChanged;

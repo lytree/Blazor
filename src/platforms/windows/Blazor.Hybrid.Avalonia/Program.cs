@@ -5,6 +5,7 @@ using System.Threading;
 using Avalonia;
 using Xilium.CefGlue;
 using Xilium.CefGlue.Common;
+using Xilium.CefGlue.Common.Shared;
 
 namespace Blazor.Hybrid.Avalonia;
 
@@ -33,7 +34,14 @@ class Program
 #else
             WindowlessRenderingEnabled = false
 #endif
-        }));
+        }, customSchemes: new[] {
+                        new CustomScheme()
+                        {
+                            SchemeName = "app",
+                            SchemeHandlerFactory = new BlazorSchemeHandler()
+                        }
+                      }));
+
         return builder.StartWithClassicDesktopLifetime(args);
     }
 
