@@ -54,28 +54,40 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Build Blazor.Hybrid.Linux.GTK",
+            "label": "Build Blazor.Hybrid.GTK",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.GTK/Blazor.Hybrid.Linux.GTK.csproj",
+                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.GTK/Blazor.Hybrid.GTK.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Build Blazor.Hybrid.Linux.Photino",
+            "label": "Build Blazor.Hybrid.Photino",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Linux.Photino/Blazor.Hybrid.Linux.Photino.csproj",
+                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Photino/Blazor.Hybrid.Photino.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        },
+        },{
+            "label": "Build Blazor.Hybrid.Avalonia",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Avalonia/Blazor.Hybrid.Avalonia.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
+                "/p:Configuration=Debug"
+            ],
+            "problemMatcher": "$msCompile"
+        }
     ]
 }

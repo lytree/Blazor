@@ -1,5 +1,10 @@
-namespace Blazor.Hybrid.Avalonia;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
+namespace Blazor.Hybrid.Avalonia;
 /// <summary>
 /// URL loading strategy for anchor tags <![CDATA[<a>]]> within a Blazor WebView.
 /// 

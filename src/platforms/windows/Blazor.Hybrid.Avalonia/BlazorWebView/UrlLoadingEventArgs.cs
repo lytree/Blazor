@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Blazor.Hybrid.Avalonia;
 
 /// <summary>
@@ -40,3 +46,4 @@ internal sealed class UrlLoadingEventArgs : EventArgs
     /// </summary>
     internal UrlLoadingStrategy UrlLoadingStrategy { get; set; }
 }
+

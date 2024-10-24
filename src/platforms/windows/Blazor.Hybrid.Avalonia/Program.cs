@@ -17,7 +17,7 @@ class Program
     [STAThread]
     public static int Main(string[] args)
     {
-        var builder = BuildAvaloniaApp();
+        var builder = BuildAvaloniaApp()
         //if(args.Contains("--drm"))
         //{
         //    SilenceConsole();
@@ -27,6 +27,20 @@ class Program
         //    // return builder.StartLinuxDrm(args, "/dev/dri/card1");
         //    return builder.StartLinuxDrm(args, "/dev/dri/card1", 1D);
         //}
+        .AfterSetup(_ => CefRuntimeLoader.Initialize(new CefSettings()
+        {
+#if WINDOWLESS
+                          WindowlessRenderingEnabled = true
+#else
+            WindowlessRenderingEnabled = false
+#endif
+        }, customSchemes: new[] {
+                        new CustomScheme()
+                        {
+                            SchemeName = "app",
+                            SchemeHandlerFactory = new BlazorSchemeHandler()
+                        }
+                      }));
 
         return builder.StartWithClassicDesktopLifetime(args);
     }
