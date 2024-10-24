@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using WebViewControl;
 using Task = System.Threading.Tasks.Task;
 
 namespace Blazor.Hybrid.Avalonia;
@@ -21,7 +20,6 @@ public partial class BlazorWebViewManager : WebViewManager
 {
     private readonly BlazorWebView _blazorMauiWebViewHandler;
     private readonly ILogger _logger;
-    private readonly WebView _webview;
     private readonly string _contentRootRelativeToAppRoot;
     private readonly Channel<string> _channel;
 
@@ -51,11 +49,9 @@ public partial class BlazorWebViewManager : WebViewManager
             hostPageRelativePath)
     {
         Guard.IsNotNull(blazorMauiWebViewHandler);
-        Guard.IsNotNull(blazorMauiWebViewHandler.View);
 
         _logger = NullLogger.Instance;
         _blazorMauiWebViewHandler = blazorMauiWebViewHandler;
-        _webview = blazorMauiWebViewHandler.View;
         _contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;
 
         // https://github.com/DevToys-app/DevToys/issues/1194
@@ -122,7 +118,6 @@ public partial class BlazorWebViewManager : WebViewManager
     protected override void NavigateCore(Uri absoluteUri)
     {
         LogNavigatingToUri(absoluteUri);
-        _webview.LoadUrl(absoluteUri.ToString());
     }
 
     /// <inheritdoc />
@@ -149,7 +144,7 @@ public partial class BlazorWebViewManager : WebViewManager
             while (true)
             {
                 string script = await reader.ReadAsync();
-                _webview.EvaluateScript(script).ForgetSafely();
+               
             }
         }
         catch (ChannelClosedException) { }

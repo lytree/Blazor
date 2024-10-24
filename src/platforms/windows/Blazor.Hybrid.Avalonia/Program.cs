@@ -3,6 +3,9 @@ using System.Linq;
 using System.Threading;
 
 using Avalonia;
+using Xilium.CefGlue;
+using Xilium.CefGlue.Common;
+using Xilium.CefGlue.Common.Shared;
 
 namespace Blazor.Hybrid.Avalonia;
 
@@ -18,7 +21,7 @@ class Program
         //if(args.Contains("--drm"))
         //{
         //    SilenceConsole();
-                
+
         //    // If Card0, Card1 and Card2 all don't work. You can also try:                 
         //    // return builder.StartLinuxFbDev(args);
         //    // return builder.StartLinuxDrm(args, "/dev/dri/card1");
@@ -33,6 +36,25 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+        .With(new Win32PlatformOptions()
+        {
+            // CompositionMode = new [] { Win32CompositionMode.WinUIComposition }
+        })
+                      .AfterSetup(_ => CefRuntimeLoader.Initialize(new CefSettings()
+                      {
+#if WINDOWLESS
+                          WindowlessRenderingEnabled = true
+#else
+                          WindowlessRenderingEnabled = false
+#endif
+                      },
+                      customSchemes: new[] {
+                        new CustomScheme()
+                        {
+                            SchemeName = "app",
+                            SchemeHandlerFactory = new AppSchemeHandler()
+                        }
+                        }))
             .WithInterFont()
             .LogToTrace();
 
@@ -42,9 +64,9 @@ class Program
         new Thread(() =>
             {
                 Console.CursorVisible = false;
-                while(true)
+                while (true)
                     Console.ReadKey(true);
             })
-            { IsBackground = true }.Start();
+        { IsBackground = true }.Start();
     }
 }
