@@ -10,7 +10,7 @@ using Uri = System.Uri;
 
 namespace Blazor.Hybrid.Avalonia;
 
-internal sealed partial class BlazorWebView : IDisposable
+internal sealed partial class BlazorWebView : WebView, IDisposable
 {
     private const string DevToysInteropName = "devtoyswebinterop";
     private const string Scheme = "app";
@@ -33,7 +33,7 @@ internal sealed partial class BlazorWebView : IDisposable
             };
             window.external = {
                 sendMessage: function(message) {
-                    window.webkit.messageHandlers.{{DevToysInteropName}}.postMessage(message);
+                    window.CefGlue.messageHandlers.{{DevToysInteropName}}.postMessage(message);
                 },
                 receiveMessage: function(callback) {
                     window.__receiveMessageCallbacks.push(callback);
@@ -170,6 +170,8 @@ internal sealed partial class BlazorWebView : IDisposable
 
     private void StartWebViewCoreIfPossible()
     {
+        if (IsInDesignMode)
+            return;
         if (HostPage == null || _webViewManager != null)
         {
             return;

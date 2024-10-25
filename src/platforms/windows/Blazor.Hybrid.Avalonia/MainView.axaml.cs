@@ -13,23 +13,24 @@ using Xilium.CefGlue.Avalonia;
 using Xilium.CefGlue.Common.Handlers;
 using Xilium.CefGlue;
 using Dispatcher = Avalonia.Threading.Dispatcher;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Blazor.Hybrid.Avalonia;
 
 public partial class MainView : UserControl
 {
 
-    private WebView browser;
+    private BlazorWebView browser;
     public MainView()
     {
 
         //DataContext = new MainWindowViewModel(this.FindControl<WebView>("webview"));
         InitializeComponent();
         var browserWrapper = this.FindControl<Decorator>("browserWrapper");
-
-        browser = new WebView();
-
-        browser.Address = "app://0.0.0.0/index";
+        var serviceCollection = new ServiceCollection();
+        browser = new BlazorWebView(serviceCollection.BuildServiceProvider(),true);
+        browser.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(App) });
+        browser.Address = "app://0.0.0.0/index.html";
   
         browserWrapper.Child = browser;
     }

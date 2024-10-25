@@ -48,14 +48,7 @@ class Program
 #else
                           WindowlessRenderingEnabled = false
 #endif
-                      },
-                      customSchemes: [
-                        new CustomScheme()
-                        {
-                            SchemeName = "app",
-                            SchemeHandlerFactory = new AppSchemeHandlerFactory()
-                        }
-                        ]))
+                      }))
             .WithInterFont()
             .LogToTrace();
 

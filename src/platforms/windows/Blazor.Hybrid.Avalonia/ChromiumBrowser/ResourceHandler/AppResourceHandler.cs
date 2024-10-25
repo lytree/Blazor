@@ -14,6 +14,7 @@ internal class AppResourceHandler : DefaultResourceHandler
     protected override RequestHandlingFashion ProcessRequestAsync(CefRequest request, CefCallback callback)
     {
 
+        
         Console.WriteLine(request);  
         return RequestHandlingFashion.ContinueAsync;
     }

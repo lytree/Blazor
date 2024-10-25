@@ -15,9 +15,10 @@ internal static class WebViewLoader {
     private static string[] CustomSchemes { get; } = new[] {
         ResourceUrl.LocalScheme,
         ResourceUrl.EmbeddedScheme,
-        ResourceUrl.CustomScheme,
+        ResourceUrl.AppScheme,
         Uri.UriSchemeHttp,
-        Uri.UriSchemeHttps
+        Uri.UriSchemeHttps,
+        Uri.UriSchemeFile
     };
 
     private static GlobalSettings globalSettings;

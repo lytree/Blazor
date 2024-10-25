@@ -7,7 +7,7 @@ namespace Blazor.Hybrid.Avalonia;
 public partial class ResourceUrl {
 
     public const string LocalScheme = "local";
-    public const string CustomScheme = "custom";
+    public const string AppScheme = "app";
 
     internal const string EmbeddedScheme = "embedded";
     internal const string PathSeparator = "/";

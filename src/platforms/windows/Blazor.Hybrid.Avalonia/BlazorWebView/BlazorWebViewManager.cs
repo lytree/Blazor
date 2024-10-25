@@ -18,8 +18,8 @@ namespace Blazor.Hybrid.Avalonia;
 /// </summary>
 public partial class BlazorWebViewManager : WebViewManager
 {
-    private readonly BlazorWebView _blazorMauiWebViewHandler;
     private readonly ILogger _logger;
+    private readonly WebView _webview;
     private readonly string _contentRootRelativeToAppRoot;
     private readonly Channel<string> _channel;
 
@@ -34,7 +34,7 @@ public partial class BlazorWebViewManager : WebViewManager
     /// <param name="hostPageRelativePath">Path to the host page within the fileProvider.</param>
     internal BlazorWebViewManager(
         Uri baseUri,
-        BlazorWebView blazorMauiWebViewHandler,
+        WebView webView,
         IServiceProvider provider,
         IFileProvider fileProvider,
         JSComponentConfigurationStore jsComponents,
@@ -48,10 +48,9 @@ public partial class BlazorWebViewManager : WebViewManager
             jsComponents,
             hostPageRelativePath)
     {
-        Guard.IsNotNull(blazorMauiWebViewHandler);
 
         _logger = NullLogger.Instance;
-        _blazorMauiWebViewHandler = blazorMauiWebViewHandler;
+        _webview = webView;
         _contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;
 
         // https://github.com/DevToys-app/DevToys/issues/1194

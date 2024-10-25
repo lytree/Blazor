@@ -15,10 +15,10 @@ internal class AppSchemeHandlerFactory : CefSchemeHandlerFactory
         {
             return new AppResourceHandler();
         }
-        //if (schemeName == "http")
-        //{
-        //   return new HttpResourceHandler();
-        //}
+        if (schemeName == "http" || schemeName == "https")
+        {
+            return new HttpResourceHandler();
+        }
         return null;
     }
 }

@@ -17,7 +17,7 @@ namespace Blazor.Hybrid.Avalonia;
 public partial class WebView : BaseControl
 {
 
-    private bool IsInDesignMode => false;
+    protected bool IsInDesignMode => false;
 
     public static readonly StyledProperty<string> AddressProperty =
         AvaloniaProperty.Register<WebView, string>(nameof(Address), defaultBindingMode: BindingMode.TwoWay);
