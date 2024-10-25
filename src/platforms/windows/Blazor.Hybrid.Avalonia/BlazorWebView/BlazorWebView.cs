@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using Blazor.Shared.Core;
 using CommunityToolkit.Diagnostics;
-using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Exception = System.Exception;
@@ -14,13 +9,14 @@ using Task = System.Threading.Tasks.Task;
 using Uri = System.Uri;
 
 namespace Blazor.Hybrid.Avalonia;
-internal sealed partial class BlazorWebView : AvaloniaCefBrowser
+
+internal sealed partial class BlazorWebView : IDisposable
 {
     private const string DevToysInteropName = "devtoyswebinterop";
     private const string Scheme = "app";
     internal const string AppHostAddress = "0.0.0.0";
     internal static readonly Uri AppOriginUri = new($"{Scheme}://{AppHostAddress}/");
-    
+
     private const string BlazorInitScript
         = $$"""
             window.__receiveMessageCallbacks = [];
@@ -59,19 +55,16 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
             })();
             """;
 
-
     private readonly ILogger _logger;
     private readonly IServiceProvider _serviceProvider;
-    private readonly AppSchemeHandler _appSchemeHandler;
     private readonly bool _enabledDeveloperTools;
-
 
     private BlazorWebViewManager? _webViewManager;
     private string? _hostPage;
 
     static BlazorWebView()
     {
-        Module.Initialize();
+
     }
 
     internal BlazorWebView(IServiceProvider serviceProvider, bool enableDeveloperTools)
@@ -80,17 +73,12 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
         _serviceProvider = serviceProvider;
 
         _enabledDeveloperTools = enableDeveloperTools;
-        View = CreateWebView();
-
-        View.OnContextMenu += BlazorGtkWebViewOnContextMenu;
         RootComponents.CollectionChanged += RootComponentsOnCollectionChanged;
-
     }
 
     /// <summary>
     /// Gets the view corresponding to the current Blazor web view.
     /// </summary>
-    internal WebView View { get; }
 
     /// <summary>
     /// Path to the host page within the application's static files. For example, <code>wwwroot\index.html</code>.
@@ -98,19 +86,24 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
     /// </summary>
     internal string? HostPage
     {
-        get => Address;
+        get => _hostPage;
         set
         {
-            Address = value;
+            _hostPage = value;
             StartWebViewCoreIfPossible();
         }
     }
+
     /// <summary>
     /// Gets or sets the path for initial navigation within the Blazor navigation context when the Blazor component is finished loading.
     /// </summary>
     internal string StartPath { get; set; } = "/";
-    internal RootComponentsCollection RootComponents { get; } = new();
 
+    /// <summary>
+    /// A collection of <see cref="RootComponent"/> instances that specify the Blazor <see cref="IComponent"/> types
+    /// to be used directly in the specified <see cref="HostPage"/>.
+    /// </summary>
+    internal RootComponentsCollection RootComponents { get; } = new();
 
     /// <summary>
     /// Allows customizing how links are opened.
@@ -135,7 +128,7 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
             _webViewManager = null;
         }
 
-        View.Dispose();
+
     }
 
     internal void OnUrlLoading(UrlLoadingEventArgs args)
@@ -144,11 +137,6 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
         UrlLoading?.Invoke(this, args);
     }
 
-    private bool BlazorGtkWebViewOnContextMenu(WebView sender, WebView.ContextMenuSignalArgs args)
-    {
-        // Returning true to prevent the context menu from opening.
-        return !_enabledDeveloperTools;
-    }
 
     private void RootComponentsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
@@ -179,77 +167,10 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
         _webViewManager?.MessageReceivedInternal(uri, message);
     }
 
-    private WebView CreateWebView()
-    {
-        var webView = new WebView();
-
-        try
-        {
-            Guard.IsNotNull(webView
-                .WebContext); // this might be null or crash when trying to access the WebContext property.
-        }
-        catch (Exception e)
-        {
-            throw new DllNotFoundException(
-                "WebKitGTK could not be found. Please verify that the package 'libwebkitgtk-6.0-4' is installed on the operating system and retry.");
-        }
-
-        // Make web view transparent
-        webView.SetBackgroundColor(new RGBA { Red = 255, Blue = 0, Green = 0, Alpha = 0 });
-
-        // Initialize some basic properties of the WebView
-        Settings webViewSettings = webView.GetSettings();
-        webViewSettings.EnableDeveloperExtras = _enabledDeveloperTools;
-        webViewSettings.JavascriptCanAccessClipboard = true;
-        webViewSettings.EnableBackForwardNavigationGestures = false;
-        webViewSettings.MediaPlaybackRequiresUserGesture = false;
-        webViewSettings.HardwareAccelerationPolicy = HardwareAccelerationPolicy.Never; // https://github.com/DevToys-app/DevToys/issues/1234
-        webView.SetSettings(webViewSettings);
-
-        UserContentManager userContentManager = webView.GetUserContentManager();
-
-        // Handle messages.
-        UserContentManager.ScriptMessageReceivedSignal.Connect(
-            userContentManager,
-            HandleScriptMessageReceivedSignal,
-            after: false,
-            detail: DevToysInteropName);
-        if (!userContentManager.RegisterScriptMessageHandler(DevToysInteropName, null))
-        {
-            throw new Exception("Could not register script message handler");
-        }
-
-        // Add Blazor initialization script.
-        userContentManager.AddScript(
-            UserScript.New(
-                BlazorInitScript,
-                injectedFrames: UserContentInjectedFrames.AllFrames,
-                injectionTime: UserScriptInjectionTime.End,
-                allowList: null,
-                blockList: null));
-
-        // Register a "app" url scheme to handle Blazor resources
-        webView.WebContext.RegisterUriScheme(Scheme, HandleUriScheme);
-
-        return webView;
-    }
-
-    private void HandleScriptMessageReceivedSignal(
-        UserContentManager ucm,
-        UserContentManager.ScriptMessageReceivedSignalArgs signalArgs)
-    {
-        Value result = signalArgs.Value;
-        MessageReceived(AppOriginUri, result.ToString());
-    }
-
-    private void HandleUriScheme(URISchemeRequest request)
-    {
-        _appSchemeHandler.StartUrlSchemeTask(request);
-    }
 
     private void StartWebViewCoreIfPossible()
     {
-        if (Address == null || _webViewManager != null)
+        if (HostPage == null || _webViewManager != null)
         {
             return;
         }
@@ -292,6 +213,7 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
             BlazorWebViewInitialized?.Invoke(this, EventArgs.Empty);
         });
     }
+
     private static IFileProvider CreateFileProvider(string contentRootDir)
     {
         string contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
@@ -314,117 +236,4 @@ internal sealed partial class BlazorWebView : AvaloniaCefBrowser
     // [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
     // partial void LogStartingInitialNavigation(string startPath);
 
-    private sealed class AppSchemeHandler
-    {
-        private readonly BlazorWebView _blazorWebView;
-
-        internal AppSchemeHandler(BlazorWebView blazorWebView)
-        {
-            _blazorWebView = blazorWebView;
-        }
-
-        public void StartUrlSchemeTask(URISchemeRequest urlSchemeTask)
-        {
-            if (urlSchemeTask.GetScheme() != Scheme)
-            {
-                throw new Exception($"Invalid scheme '{urlSchemeTask.GetScheme()}'");
-            }
-
-            string uri = urlSchemeTask.GetUri();
-
-            byte[] responseBytes
-                = GetResponseBytes(
-                    uri,
-                    out string contentType,
-                    out int statusCode,
-                    out string statusMessage);
-
-            if (statusCode != 200)
-            {
-                return;
-            }
-
-            using var ms = new MemoryStream();
-            ms.Write(responseBytes.AsSpan());
-            nint streamPtr = MemoryInputStream.NewFromData(ref ms.GetBuffer()[0], (uint)ms.Length, _ => { });
-            using var inputStream = new InputStream(streamPtr, false);
-
-            var headers = MessageHeaders.New(MessageHeadersType.Response);
-            headers.SetContentLength(ms.Length);
-
-            // Disable local caching. This will prevent user scripts from executing correctly.
-            headers.Append("Cache-Control", "no-cache, max-age=0, must-revalidate, no-store");
-
-            var response = URISchemeResponse.New(inputStream, ms.Length);
-            response.SetHttpHeaders(headers);
-            response.SetContentType(contentType);
-            response.SetStatus((uint)statusCode, statusMessage);
-
-            urlSchemeTask.FinishWithResponse(response);
-        }
-
-        private byte[] GetResponseBytes(string? url, out string contentType, out int statusCode,
-            out string statusMessage)
-        {
-            bool allowFallbackOnHostPage = IsUriBaseOfPage(AppOriginUri, url);
-            url = RemovePossibleQueryString(url);
-
-            if (_blazorWebView._webViewManager!.TryGetResponseContentInternal(
-                    url,
-                    allowFallbackOnHostPage,
-                    out _,
-                    out statusMessage,
-                    out Stream content,
-                    out IDictionary<string, string> headers))
-            {
-                statusCode = 200;
-                using var ms = new MemoryStream();
-
-                content.CopyTo(ms);
-                content.Dispose();
-
-                contentType = headers["Content-Type"];
-
-                return ms.ToArray();
-            }
-
-            statusCode = 404;
-            contentType = string.Empty;
-            return [];
-        }
-
-        private static string RemovePossibleQueryString(string? url)
-        {
-            if (string.IsNullOrEmpty(url))
-            {
-                return string.Empty;
-            }
-
-            int indexOfQueryString = url.IndexOf('?', StringComparison.Ordinal);
-            return indexOfQueryString == -1
-                ? url
-                : url.Substring(0, indexOfQueryString);
-        }
-
-        private static bool IsUriBaseOfPage(Uri baseUri, string? uriString)
-        {
-            if (Path.HasExtension(uriString))
-            {
-                // If the path ends in a file extension, it's not referring to a page.
-                return false;
-            }
-
-            var uri = new Uri(uriString!);
-            return baseUri.IsBaseOf(uri);
-        }
-    }
-
-    // Workaround for protection level access
-    private class InputStream : Gio.InputStream
-    {
-        protected internal InputStream(IntPtr ptr, bool ownedRef)
-            : base(ptr, ownedRef)
-        {
-        }
-    }
 }

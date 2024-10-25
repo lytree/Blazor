@@ -17,7 +17,7 @@ class Program
     [STAThread]
     public static int Main(string[] args)
     {
-        var builder = BuildAvaloniaApp()
+        var builder = BuildAvaloniaApp();
         //if(args.Contains("--drm"))
         //{
         //    SilenceConsole();
@@ -27,20 +27,7 @@ class Program
         //    // return builder.StartLinuxDrm(args, "/dev/dri/card1");
         //    return builder.StartLinuxDrm(args, "/dev/dri/card1", 1D);
         //}
-        .AfterSetup(_ => CefRuntimeLoader.Initialize(new CefSettings()
-        {
-#if WINDOWLESS
-                          WindowlessRenderingEnabled = true
-#else
-            WindowlessRenderingEnabled = false
-#endif
-        }, customSchemes: new[] {
-                        new CustomScheme()
-                        {
-                            SchemeName = "app",
-                            SchemeHandlerFactory = new BlazorSchemeHandler()
-                        }
-                      }));
+        
 
         return builder.StartWithClassicDesktopLifetime(args);
     }
@@ -52,7 +39,7 @@ class Program
             .UsePlatformDetect()
         .With(new Win32PlatformOptions()
         {
-            // CompositionMode = new [] { Win32CompositionMode.WinUIComposition }
+            CompositionMode = [Win32CompositionMode.WinUIComposition]
         })
                       .AfterSetup(_ => CefRuntimeLoader.Initialize(new CefSettings()
                       {
@@ -62,13 +49,13 @@ class Program
                           WindowlessRenderingEnabled = false
 #endif
                       },
-                      customSchemes: new[] {
+                      customSchemes: [
                         new CustomScheme()
                         {
                             SchemeName = "app",
-                            SchemeHandlerFactory = new AppSchemeHandler()
+                            SchemeHandlerFactory = new AppSchemeHandlerFactory()
                         }
-                        }))
+                        ]))
             .WithInterFont()
             .LogToTrace();
 

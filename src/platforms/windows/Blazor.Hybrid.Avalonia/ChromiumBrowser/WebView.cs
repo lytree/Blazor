@@ -102,9 +102,10 @@ public partial class WebView : IDisposable {
     /// <param name="useSharedDomain">Shared domains means that the webview default domain will always be the same. When <paramref ref="useSharedDomain"/> is false a
     /// unique domain is used for every webview.</param>
     internal WebView(bool useSharedDomain) {
-        //if (IsInDesignMode) {
-        //    return;
-        //}
+        if (IsInDesignMode)
+        {
+            return;
+        }
 
         if (useSharedDomain) {
             CurrentDomainId = string.Empty;

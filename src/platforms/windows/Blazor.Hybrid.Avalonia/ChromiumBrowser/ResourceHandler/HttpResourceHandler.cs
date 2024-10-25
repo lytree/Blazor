@@ -6,7 +6,8 @@ using Xilium.CefGlue.Common.Handlers;
 
 namespace Blazor.Hybrid.Avalonia;
 
-internal class HttpResourceHandler : DefaultResourceHandler {
+internal class HttpResourceHandler : DefaultResourceHandler
+{
 
     private const string AccessControlAllowOriginHeaderKey = "Access-Control-Allow-Origin";
 
@@ -18,30 +19,38 @@ internal class HttpResourceHandler : DefaultResourceHandler {
         CefResourceType.Stylesheet
     };
 
-    protected override RequestHandlingFashion ProcessRequestAsync(CefRequest request, CefCallback callback) {
-        Task.Run(async () => {
-            try {
+    protected override RequestHandlingFashion ProcessRequestAsync(CefRequest request, CefCallback callback)
+    {
+        Task.Run(async () =>
+        {
+            try
+            {
                 var httpRequest = WebRequest.CreateHttp(request.Url);
                 var headers = request.GetHeaderMap();
-                foreach (var key in headers.AllKeys) {
+                foreach (var key in headers.AllKeys)
+                {
                     httpRequest.Headers.Add(key, headers[key]);
                 }
 
-                var response = (HttpWebResponse) await httpRequest.GetResponseAsync();
+                var response = (HttpWebResponse)await httpRequest.GetResponseAsync();
                 Response = response.GetResponseStream();
                 Headers = response.Headers;
 
                 MimeType = response.ContentType;
-                Status = (int) response.StatusCode;
+                Status = (int)response.StatusCode;
                 StatusText = response.StatusDescription;
 
                 // we have to smash any existing value here
                 Headers.Remove(AccessControlAllowOriginHeaderKey);
                 Headers.Add(AccessControlAllowOriginHeaderKey, "*");
 
-            } catch {
+            }
+            catch
+            {
                 // we should catch exceptions.. network errors cannot crash the app
-            } finally {
+            }
+            finally
+            {
                 callback.Continue();
             }
 
@@ -49,11 +58,13 @@ internal class HttpResourceHandler : DefaultResourceHandler {
         return RequestHandlingFashion.ContinueAsync;
     }
 
-    protected override bool Read(Stream outResponse, int bytesToRead, out int bytesRead, CefResourceReadCallback callback) {
+    protected override bool Read(Stream outResponse, int bytesToRead, out int bytesRead, CefResourceReadCallback callback)
+    {
         var buffer = new byte[bytesToRead];
         bytesRead = Response?.Read(buffer, 0, buffer.Length) ?? 0;
 
-        if (bytesRead == 0) {
+        if (bytesRead == 0)
+        {
             return false;
         }
 

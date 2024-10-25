@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Channels;
 using Blazor.Hybrid.Avalonia;
 using CommunityToolkit.Diagnostics;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Task = System.Threading.Tasks.Task;
-using Task = System.Threading.Tasks.Task;
 using Task = System.Threading.Tasks.Task;
 
 namespace Blazor.Hybrid.Avalonia;
@@ -22,7 +18,7 @@ namespace Blazor.Hybrid.Avalonia;
 /// </summary>
 public partial class BlazorWebViewManager : WebViewManager
 {
-    private readonly BlazorWebView _blazorWebViewHandler;
+    private readonly BlazorWebView _blazorMauiWebViewHandler;
     private readonly ILogger _logger;
     private readonly string _contentRootRelativeToAppRoot;
     private readonly Channel<string> _channel;
@@ -53,10 +49,9 @@ public partial class BlazorWebViewManager : WebViewManager
             hostPageRelativePath)
     {
         Guard.IsNotNull(blazorMauiWebViewHandler);
+
+        _logger = NullLogger.Instance;
         _blazorMauiWebViewHandler = blazorMauiWebViewHandler;
-        _blazorMauiWebViewHandler = blazorMauiWebViewHandler;
-        _webview = blazorMauiWebViewHandler.View;
-        _webview = blazorMauiWebViewHandler.View;
         _contentRootRelativeToAppRoot = contentRootRelativeToAppRoot;
 
         // https://github.com/DevToys-app/DevToys/issues/1194
@@ -119,10 +114,10 @@ public partial class BlazorWebViewManager : WebViewManager
         return base.DisposeAsyncCore();
     }
 
+    /// <inheritdoc />
+    protected override void NavigateCore(Uri absoluteUri)
+    {
         LogNavigatingToUri(absoluteUri);
-        LogNavigatingToUri(absoluteUri);
-        _webview.LoadUrl(absoluteUri.ToString());
-        _webview.LoadUrl(absoluteUri.ToString());
     }
 
     /// <inheritdoc />
@@ -146,13 +141,15 @@ public partial class BlazorWebViewManager : WebViewManager
         ChannelReader<string> reader = _channel.Reader;
         try
         {
-               
+            while (true)
             {
-                _webview.EvaluateScript(script).ForgetSafely();
-                _webview.EvaluateScript(script).ForgetSafely();
+                string script = await reader.ReadAsync();
+
             }
         }
         catch (ChannelClosedException) { }
     }
 
+    [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "Navigating to {uri}.")]
+    partial void LogNavigatingToUri(Uri uri);
 }

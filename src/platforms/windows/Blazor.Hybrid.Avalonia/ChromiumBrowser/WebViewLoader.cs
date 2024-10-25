@@ -42,7 +42,7 @@ internal static class WebViewLoader {
 
         var customSchemes = CustomSchemes.Select(s => new CustomScheme() {
             SchemeName = s,
-            SchemeHandlerFactory = new AppSchemeHandler()
+            SchemeHandlerFactory = new AppSchemeHandlerFactory()
         }).ToArray();
 
         settings.AddCommandLineSwitch("enable-experimental-web-platform-features", null);
