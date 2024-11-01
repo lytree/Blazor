@@ -116,6 +116,7 @@ public partial class BlazorWebViewManager : WebViewManager
     /// <inheritdoc />
     protected override void NavigateCore(Uri absoluteUri)
     {
+        _webview.Address=absoluteUri.ToString();
         LogNavigatingToUri(absoluteUri);
     }
 

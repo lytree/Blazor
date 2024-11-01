@@ -1,5 +1,6 @@
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xilium.CefGlue;
 using Xilium.CefGlue.Common.Handlers;
@@ -23,35 +24,43 @@ internal class HttpResourceHandler : DefaultResourceHandler
     {
         Task.Run(async () =>
         {
-            try
+
+            using (HttpClient client = new())
             {
-                var httpRequest = WebRequest.CreateHttp(request.Url);
-                var headers = request.GetHeaderMap();
-                foreach (var key in headers.AllKeys)
+                // 添加请求头
+                foreach (var header in Headers.AllKeys)
                 {
-                    httpRequest.Headers.Add(key, headers[key]);
+                    client.DefaultRequestHeaders.TryAddWithoutValidation(header, Headers.GetValues(header));
                 }
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(request.Url);
 
-                var response = (HttpWebResponse)await httpRequest.GetResponseAsync();
-                Response = response.GetResponseStream();
-                Headers = response.Headers;
+                    response.EnsureSuccessStatusCode(); // 如果响应不是成功状态，则抛出异常
+                                                        // 获取响应流
+                    Response = await response.Content.ReadAsStreamAsync();
+                    // 获取 MIME 类型
+                    MimeType = response.Content.Headers.ContentType?.ToString();
+                    // 获取状态码
+                    Status = (int)response.StatusCode;
 
-                MimeType = response.ContentType;
-                Status = (int)response.StatusCode;
-                StatusText = response.StatusDescription;
+                    // 获取状态描述
+                    StatusText = response.ReasonPhrase;
 
-                // we have to smash any existing value here
-                Headers.Remove(AccessControlAllowOriginHeaderKey);
-                Headers.Add(AccessControlAllowOriginHeaderKey, "*");
-
-            }
-            catch
-            {
-                // we should catch exceptions.. network errors cannot crash the app
-            }
-            finally
-            {
-                callback.Continue();
+                    // 获取响应头
+                    var responseHeaders = response.Headers;
+                    // 移除并添加 CORS 头
+                    response.Headers.Remove(AccessControlAllowOriginHeaderKey);
+                    response.Headers.TryAddWithoutValidation(AccessControlAllowOriginHeaderKey, "*");
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine($"\n请求错误: {e.Message}");
+                }
+                finally
+                {
+                    callback.Continue();
+                }
             }
 
         });

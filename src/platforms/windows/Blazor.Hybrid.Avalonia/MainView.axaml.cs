@@ -30,8 +30,8 @@ public partial class MainView : UserControl
         var serviceCollection = new ServiceCollection();
         browser = new BlazorWebView(serviceCollection.BuildServiceProvider(),true);
         browser.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(App) });
-        browser.Address = "app://0.0.0.0/index.html";
-  
+        browser.HostPage = "wwwroot/index.html";
+        OpenDevTools();
         browserWrapper.Child = browser;
     }
 

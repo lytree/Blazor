@@ -41,14 +41,10 @@ internal static class WebViewLoader {
             UserAgent = settings.UserAgent
         };
 
-        var customSchemes = CustomSchemes.Select(s => new CustomScheme() {
-            SchemeName = s,
-            SchemeHandlerFactory = new AppSchemeHandlerFactory()
-        }).ToArray();
 
         settings.AddCommandLineSwitch("enable-experimental-web-platform-features", null);
 
-        CefRuntimeLoader.Initialize(settings: cefSettings, flags: settings.CommandLineSwitches.ToArray(), customSchemes: customSchemes);
+        CefRuntimeLoader.Initialize(settings: cefSettings, flags: settings.CommandLineSwitches.ToArray(), customSchemes: []);
 
         AppDomain.CurrentDomain.ProcessExit += delegate { Cleanup(); };
     }

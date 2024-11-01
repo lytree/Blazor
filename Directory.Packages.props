@@ -7,7 +7,7 @@
         <CommunityToolkitVersion>8.3.2</CommunityToolkitVersion>
         <XUnit>2.5.0</XUnit>
         <GirCore>0.5.0</GirCore>
-        <AvaloniaVersion>11.1.4</AvaloniaVersion>
+        <AvaloniaVersion>11.2.0</AvaloniaVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="Dotnet.Bundle" Version="0.9.13" />

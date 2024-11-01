@@ -4,6 +4,9 @@ using Blazor.Shared.Core;
 using CommunityToolkit.Diagnostics;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Xilium.CefGlue;
+using Xilium.CefGlue.Common.Handlers;
+using Xilium.CefGlue.Common.Shared;
 using Exception = System.Exception;
 using Task = System.Threading.Tasks.Task;
 using Uri = System.Uri;
@@ -59,6 +62,7 @@ internal sealed partial class BlazorWebView : WebView, IDisposable
     private readonly IServiceProvider _serviceProvider;
     private readonly bool _enabledDeveloperTools;
 
+    private readonly AppSchemeHandler _appSchemeHandler;
     private BlazorWebViewManager? _webViewManager;
     private string? _hostPage;
 
@@ -71,8 +75,9 @@ internal sealed partial class BlazorWebView : WebView, IDisposable
     {
         Guard.IsNotNull(serviceProvider);
         _serviceProvider = serviceProvider;
-
+        _appSchemeHandler = new AppSchemeHandler(this);
         _enabledDeveloperTools = enableDeveloperTools;
+        CefRuntime.RegisterSchemeHandlerFactory(Scheme, AppHostAddress, new AppSchemeHandlerFactory(this));
         RootComponents.CollectionChanged += RootComponentsOnCollectionChanged;
     }
 
@@ -237,5 +242,108 @@ internal sealed partial class BlazorWebView : WebView, IDisposable
 
     // [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
     // partial void LogStartingInitialNavigation(string startPath);
+    private sealed class AppSchemeHandler : DefaultResourceHandler
+    {
+        private readonly BlazorWebView _blazorWebView;
 
+        internal AppSchemeHandler(BlazorWebView blazorWebView)
+        {
+            _blazorWebView = blazorWebView;
+        }
+
+        protected override RequestHandlingFashion ProcessRequestAsync(CefRequest request, CefCallback callback)
+        {
+            Task.Run(async () =>
+            {
+
+                string uri = request.Url;
+
+                byte[] responseBytes
+                    = GetResponseBytes(
+                        uri,
+                        out string contentType,
+                        out int statusCode,
+                        out string statusMessage);
+
+                Status = statusCode;
+                StatusText = statusMessage;
+                MimeType = contentType;
+               
+
+                using var ms = new MemoryStream();
+                ms.Write(responseBytes.AsSpan());
+                Response = ms;
+            });
+            return RequestHandlingFashion.ContinueAsync;
+        }
+
+        private byte[] GetResponseBytes(string? url, out string contentType, out int statusCode,
+            out string statusMessage)
+        {
+            bool allowFallbackOnHostPage = IsUriBaseOfPage(AppOriginUri, url);
+            url = RemovePossibleQueryString(url);
+
+            if (_blazorWebView._webViewManager!.TryGetResponseContentInternal(
+                    url,
+                    allowFallbackOnHostPage,
+                    out _,
+                    out statusMessage,
+                    out Stream content,
+                    out IDictionary<string, string> headers))
+            {
+                statusCode = 200;
+                using var ms = new MemoryStream();
+
+                content.CopyTo(ms);
+                content.Dispose();
+                contentType = headers["Content-Type"];
+
+                return ms.ToArray();
+            }
+
+            statusCode = 404;
+            contentType = string.Empty;
+            return [];
+        }
+
+        private static string RemovePossibleQueryString(string? url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return string.Empty;
+            }
+
+            int indexOfQueryString = url.IndexOf('?', StringComparison.Ordinal);
+            return indexOfQueryString == -1
+                ? url
+                : url.Substring(0, indexOfQueryString);
+        }
+
+        private static bool IsUriBaseOfPage(Uri baseUri, string? uriString)
+        {
+            if (Path.HasExtension(uriString))
+            {
+                // If the path ends in a file extension, it's not referring to a page.
+                return false;
+            }
+
+            var uri = new Uri(uriString!);
+            return baseUri.IsBaseOf(uri);
+        }
+    }
+    private sealed class AppSchemeHandlerFactory : CefSchemeHandlerFactory
+    {
+
+        private BlazorWebView _blazorWebView;
+
+        public AppSchemeHandlerFactory(BlazorWebView blazorWebView)
+        {
+            _blazorWebView = blazorWebView;
+        }
+
+        protected override CefResourceHandler Create(CefBrowser browser, CefFrame frame, string schemeName, CefRequest request)
+        {
+            return new AppSchemeHandler(_blazorWebView);
+        }
+    }
 }
