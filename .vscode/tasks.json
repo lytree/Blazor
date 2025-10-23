@@ -2,58 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build-wasm",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:TargetFramework=net8.0-browserwasm",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish-wasm",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:TargetFramework=net8.0-browserwasm",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "build-desktop",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:TargetFramework=net8.0-desktop",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish-desktop",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/src/platforms/uno/Blazor.Hybrid.Uno/Blazor.Hybrid.Uno.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:TargetFramework=net8.0-desktop",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "Build Blazor.Hybrid.GTK",
             "command": "dotnet",
             "type": "process",
@@ -62,30 +10,6 @@
                 "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.GTK/Blazor.Hybrid.GTK.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Build Blazor.Hybrid.Photino",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Photino/Blazor.Hybrid.Photino.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },{
-            "label": "Build Blazor.Hybrid.Avalonia",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.Avalonia/Blazor.Hybrid.Avalonia.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary",
-                "/p:Configuration=Debug"
             ],
             "problemMatcher": "$msCompile"
         }
