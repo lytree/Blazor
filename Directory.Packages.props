@@ -4,45 +4,44 @@
         <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     </PropertyGroup>
     <PropertyGroup>
-        <CommunityToolkitVersion>8.3.2</CommunityToolkitVersion>
+        <CommunityToolkitVersion>8.4.0</CommunityToolkitVersion>
         <XUnit>2.5.0</XUnit>
-        <GirCore>0.5.0</GirCore>
-        <AvaloniaVersion>11.2.0</AvaloniaVersion>
+        <GirCore>0.6.3</GirCore>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="Dotnet.Bundle" Version="0.9.13" />
         <PackageVersion Include="CommunityToolkit.Common" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Diagnostics" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitVersion)" />
-        <PackageVersion Include="coverlet.collector" Version="6.0.0" />
-        <PackageVersion Include="FluentAssertions" Version="6.12.1" />
+        <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+        <PackageVersion Include="FluentAssertions" Version="8.7.1" />
         <PackageVersion Include="FuzzySharp" Version="2.0.2" />
         <PackageVersion Include="GirCore.Adw-1" Version="$(GirCore)" />
         <PackageVersion Include="GirCore.Gtk-4.0" Version="$(GirCore)" />
         <PackageVersion Include="GirCore.WebKit-6.0" Version="$(GirCore)" />
-        <PackageVersion Include="Markdig" Version="0.37.0" />
-        <PackageVersion Include="Microsoft.AspNetCore.Components" Version="8.0.10" />
-        <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
-        <PackageVersion Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.8" />
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
-        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
-        <PackageVersion Include="Microsoft.Extensions.FileProviders.Abstractions" Version="8.0.0" />
+        <PackageVersion Include="Markdig" Version="0.43.0" />
+        <PackageVersion Include="Microsoft.AspNetCore.Components" Version="8.0.21" />
+        <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.21" />
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.21" />
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
+        <PackageVersion Include="Microsoft.Extensions.FileProviders.Abstractions" Version="8.0.10" />
         <PackageVersion Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.10" />
-        <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.1" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+        <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.10" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.10" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.10" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.10" />
         <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
         <PackageVersion Include="Microsoft.Windows.Compatibility" Version="8.0.10" />
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
         <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.3.2" />
         <PackageVersion Include="Moq" Version="4.18.4" />
-        <PackageVersion Include="Nuke.Common" Version="8.1.1" />
+        <PackageVersion Include="Nuke.Common" Version="9.0.4" />
         <PackageVersion Include="OneOf" Version="3.0.271" />
         <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.5" />
         <PackageVersion Include="System.Text.Json" Version="8.0.5" />
-        <PackageVersion Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
-        <PackageVersion Include="System.ComponentModel.Composition" Version="8.0.0" />
+        <PackageVersion Include="System.CommandLine" Version="2.0.0-rc.2.25502.107" />
+        <PackageVersion Include="System.ComponentModel.Composition" Version="9.0.10" />
         <PackageVersion Include="xunit" Version="$(XUnit)" />
         <PackageVersion Include="xunit.runner.visualstudio" Version="$(XUnit)" />
     </ItemGroup>
