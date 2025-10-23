@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Document/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.target" />
+    <File Path="Directory.Packages.props" />
+    <File Path="Environment.props" />
+  </Folder>
+  <Folder Name="/platforms/">
+    <Project Path="src/platforms/windows/Blazor.Hybrid.Winform/Blazor.Hybrid.Winform.csproj" />
+    <Project Path="src/platforms/windows/Blazor.Hybrid.WPF/Blazor.Hybrid.WPF.csproj" />
+  </Folder>
+  <Project Path="src/Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
+  <Project Path="src/shared/Blazor.Hybrid.Core/Blazor.Hybrid.Core.csproj" />
+</Solution>
