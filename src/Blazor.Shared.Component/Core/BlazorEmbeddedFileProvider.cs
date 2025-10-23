@@ -12,7 +12,7 @@ namespace Blazor.Shared.Core;
 public sealed class BlazorEmbeddedFileProvider : IFileProvider
 {
     private const string Content = "_content/";
-    private const string ContentDevToysBlazor = "_content/DevToys.Blazor";
+    private const string ContentDevToysBlazor = "_content/Blazor.Shared";
 
     private readonly EmbeddedFileProvider _embeddedFileProvider
         = new(typeof(BlazorEmbeddedFileProvider).Assembly, baseNamespace: string.Empty);

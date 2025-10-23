@@ -10,8 +10,9 @@ using CommunityToolkit.Diagnostics;
 using Blazor.Shared.Core;
 using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared;
+using System.Runtime.Versioning;
 namespace Blazor.Hybrid.Linux;
-
+[SupportedOSPlatform("linux")]
 internal class LinuxProgram
 {
     internal static ILogger? Logger;
@@ -27,9 +28,9 @@ internal class LinuxProgram
     {
         Application = Gtk.Application.New(null, ApplicationFlags.NonUnique);
 
-        GLib.Functions.SetPrgname("DevToys");
+        GLib.Functions.SetPrgname("Blazor");
         // Set the human-readable application name for app bar and task list.
-        GLib.Functions.SetApplicationName("DevToys");
+        GLib.Functions.SetApplicationName("Blazor");
 
         Application.OnActivate += OnApplicationActivate;
         Application.OnShutdown += OnApplicationShutdown;

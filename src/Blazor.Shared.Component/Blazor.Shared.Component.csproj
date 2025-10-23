@@ -24,6 +24,6 @@
         </Content>
     </ItemGroup>
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-        <Exec Command="npx  tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify" />
+        <Exec Command="tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify" />
     </Target>
 </Project>

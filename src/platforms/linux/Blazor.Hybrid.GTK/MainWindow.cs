@@ -9,8 +9,13 @@ using Gtk;
 using WebKit;
 using Settings = WebKit.Settings;
 using Blazor.Hybrid.Linux.GTK.BlazorWebView;
+using System.Runtime.Versioning;
+using Blazor.Hybrid.Linux.Core;
+using Blazor.Shared.Core;
 namespace Blazor.Hybrid.Linux;
 
+
+[SupportedOSPlatform("linux")]
 internal class MainWindow
 {
 #if DEBUG
@@ -38,9 +43,9 @@ internal class MainWindow
         _window.SetDefaultSize(1280, 800);
         _window.SetChild(_blazorGtkWebView.View);
 
-        // var windowService = (WindowService)serviceProvider.GetService<IWindowService>()!;
+        var windowService = (WindowService)serviceProvider.GetService<IWindowService>()!;
         // ((ThemeListener)_themeListener).SetMainWindow(_window, windowService);
-        // windowService.SetMainWindow(_window);
+        windowService.SetMainWindow(_window);
         // ((FileStorage)_fileStorage).MainWindow = _window;
         // ((FontProvider)_fontProvider).MainWindow = _window;
 

@@ -15,14 +15,16 @@ using Module = WebKit.Module;
 using Settings = WebKit.Settings;
 using Task = System.Threading.Tasks.Task;
 using Uri = System.Uri;
+using System.Runtime.Versioning;
 
 namespace Blazor.Hybrid.Linux;
 
+[SupportedOSPlatform("linux")]
 internal sealed partial class BlazorWebView : IDisposable
 {
     private const string DevToysInteropName = "devtoyswebinterop";
     private const string Scheme = "app";
-    internal const string AppHostAddress = "0.0.0.0";
+    internal const string AppHostAddress = "localhost";
     internal static readonly Uri AppOriginUri = new($"{Scheme}://{AppHostAddress}/");
 
     private const string BlazorInitScript
@@ -354,8 +356,8 @@ internal sealed partial class BlazorWebView : IDisposable
 
             using var ms = new MemoryStream();
             ms.Write(responseBytes.AsSpan());
-            nint streamPtr = MemoryInputStream.NewFromData(ref ms.GetBuffer()[0], (uint)ms.Length, _ => { });
-            using var inputStream = new InputStream(streamPtr, false);
+            nint streamPtr = MemoryInputStream.NewFromData(ref ms.GetBuffer()[0], (nint)ms.Length, _ => { });
+            var inputStream = new Gio.InputStream(new Gio.Internal.InputStreamHandle(streamPtr, false));
 
             var headers = MessageHeaders.New(MessageHeadersType.Response);
             headers.SetContentLength(ms.Length);
@@ -424,15 +426,6 @@ internal sealed partial class BlazorWebView : IDisposable
 
             var uri = new Uri(uriString!);
             return baseUri.IsBaseOf(uri);
-        }
-    }
-
-    // Workaround for protection level access
-    private class InputStream : Gio.InputStream
-    {
-        protected internal InputStream(IntPtr ptr, bool ownedRef)
-            : base(ptr, ownedRef)
-        {
         }
     }
 }

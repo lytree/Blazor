@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Runtime.Versioning;
+using System.Text.Encodings.Web;
 using System.Threading.Channels;
 using CommunityToolkit.Diagnostics;
 using Microsoft.AspNetCore.Components;
@@ -16,6 +17,7 @@ namespace Blazor.Hybrid.Linux;
 /// An implementation of <see cref="WebViewManager"/> that uses the <see cref="WKWebView"/> browser control
 /// to render web content.
 /// </summary>
+[SupportedOSPlatform("linux")]
 public partial class BlazorWebViewManager : WebViewManager
 {
     private readonly BlazorWebView _blazorMauiWebViewHandler;

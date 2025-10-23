@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.Versioning;
+using Microsoft.Extensions.DependencyInjection;
 namespace Blazor.Hybrid.Linux;
 
+
+[SupportedOSPlatform("linux")]
 internal class Program
 {
     private static LinuxProgram? linuxProgram;
