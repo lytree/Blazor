@@ -12,6 +12,8 @@ using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 using System.Runtime.Versioning;
 using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared.Core;
+using DevToys.Linux.Core;
+using System.ComponentModel.Composition;
 namespace Blazor.Hybrid.Linux;
 
 
@@ -23,7 +25,10 @@ internal class MainWindow
 #else
     private const bool EnableDeveloperTools = false;
 #endif
-
+    [Import]
+    private IFileStorage _fileStorage = default!;
+    [Import]
+    private IFontProvider _fontProvider = default!;
     private readonly BlazorWebView _blazorGtkWebView;
     private readonly Window _window;
 
@@ -46,8 +51,8 @@ internal class MainWindow
         var windowService = (WindowService)serviceProvider.GetService<IWindowService>()!;
         // ((ThemeListener)_themeListener).SetMainWindow(_window, windowService);
         windowService.SetMainWindow(_window);
-        // ((FileStorage)_fileStorage).MainWindow = _window;
-        // ((FontProvider)_fontProvider).MainWindow = _window;
+        ((FileStorage)_fileStorage).MainWindow = _window;
+        ((FontProvider)_fontProvider).MainWindow = _window;
 
         // Navigate to our Blazor webpage.
         _blazorGtkWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(App) });
