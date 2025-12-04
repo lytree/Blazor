@@ -1,0 +1,20 @@
+@namespace Blazor.Shared.Components
+@inherits StyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <ContextMenu IsEnabled="IsActuallyEnabled"
+                 Items="_contextMenuItems"
+                 OnContextMenuOpening=@OnContextMenuOpeningAsync>
+        <li class="list-box-item @(FinalCssClasses)"
+            style="@(Style)"
+            role="listitem"
+            tabindex="0"
+            @ref=Element
+            @attributes="AdditionalAttributes"
+            @onclick="OnClickAsync"
+            @onkeydown="@OnKeyDownAsync"
+            @onkeydown:stopPropagation="@IsActuallyEnabled">
+            @ChildContent
+        </li>
+    </ContextMenu>
+</CascadingValue>

@@ -1,0 +1,46 @@
+﻿@namespace Blazor.Shared.Layout
+@inherits StyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible"
+               Class="@($"expander {FinalCssClasses}")">
+        <Card data-expanded="@IsExpanded.ToString().ToLower()"
+              aria-label="Toggle Expander"
+              aria-expanded="@IsExpanded.ToString()"
+              tabindex="0"
+              Class="expander-card"
+              IconGlyph=@IconGlyph
+              IconFontFamily=@IconFontFamily
+              Title=@Title
+              Description=@Description
+              @onclick="@OnClick"
+              @onkeydown="@OnKeyDown">
+            <Control>
+                @Control
+                <div class="expander-expand-button">
+                    <FontIcon Glyph="@('\uf2a6')" Height="12" Width="12" />
+                </div>
+            </Control>
+        </Card>
+        <div class="expander-content-anchor" aria-expanded="@IsExpanded.ToString().ToLower()">
+            <div class="expander-content">
+                <CascadingValue Value="this" IsFixed="true">
+                    @(ChildContent)
+                </CascadingValue>
+            </div>
+        </div>
+    </Container>
+</CascadingValue>

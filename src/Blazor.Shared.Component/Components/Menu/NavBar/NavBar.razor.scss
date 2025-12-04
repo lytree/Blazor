@@ -1,0 +1,173 @@
+@use "../../../Assets/sass/devtoys" as *;
+
+$sidebar-hidden-width: 0px;
+$sidebar-collapsed-width: 49px;
+$sidebar-expanded-width: 320px;
+$sidebar-expanded-overlay-zindex: 10000;
+
+:root {
+  --sidebar-top-bar-height-hard: 48px;
+  --sidebar-top-bar-height: var(--sidebar-top-bar-height-hard);
+  --sidebar-margin-top: 0px;
+}
+
+div[data-theme='macos-dark-theme'], div[data-theme='macos-light-theme'] {
+  --sidebar-top-bar-height: 0px;
+  --sidebar-margin-top: var(--sidebar-top-bar-height-hard);
+}
+
+div[data-compactmode] {
+  div[data-theme='macos-dark-theme'], div[data-theme='macos-light-theme'] {
+    --sidebar-top-bar-height: var(--sidebar-top-bar-height-hard);
+  }
+}
+
+.nav-bar-root {
+    pointer-events: auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: var(--sidebar-top-bar-height) calc(100vh - var(--sidebar-top-bar-height));
+    gap: 0px 0px;
+    grid-template-areas:
+        "header header"
+        "sidebar content";
+
+    &.hidden {
+        background: var(--navigation-view-content-background);
+
+        main {
+            background: transparent;
+            border: 0px solid;
+            border-color: transparent;
+            border-top-left-radius: 0px;
+        }
+    }
+
+    .nav-bar-button-icon {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .nav-bar-header {
+        grid-area: header;
+        height: var(--sidebar-top-bar-height-hard);
+        z-index: calc($sidebar-expanded-overlay-zindex + 1);
+        pointer-events: none;
+    }
+
+    nav {
+        grid-area: sidebar;
+        width: $sidebar-expanded-width;
+        max-width: $sidebar-expanded-width;
+        margin-top: var(--sidebar-margin-top);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        gap: 0px 0px;
+        grid-template-areas:
+            "sidebar-header"
+            "sidebar-body"
+            "sidebar-footer";
+
+        &.transition {
+            @include transition( left 0.2s ease-in-out, width 0.2s ease-in-out, max-width 0.2s ease-in-out, box-shadow 0.2s ease-in-out );
+        }
+
+        &.hidden {
+            width: $sidebar-hidden-width;
+            max-width: $sidebar-hidden-width;
+            overflow-x: hidden;
+        }
+
+        &.collapsed {
+            width: $sidebar-collapsed-width;
+            max-width: $sidebar-collapsed-width;
+            overflow-x: hidden;
+        }
+
+        &.expanded-overlay {
+            z-index: $sidebar-expanded-overlay-zindex;
+            position: absolute;
+            padding-top: var(--sidebar-top-bar-height);
+            height: 100%;
+            width: $sidebar-expanded-width;
+            max-width: $sidebar-expanded-width;
+            border-top-right-radius: var(--overlay-corner-radius);
+            border-bottom-right-radius: var(--overlay-corner-radius);
+            border: 1px solid;
+            border-color: var(--navigation-view-flyout-border-color);
+            background-color: var(--navigation-view-flyout-background-color);
+            -webkit-backdrop-filter: var(--navigation-view-flyout-backdrop-filter);
+            backdrop-filter: var(--navigation-view-flyout-backdrop-filter);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.26);
+        }
+
+        .sidebar-header {
+            grid-area: sidebar-header;
+            display: block;
+            width: 100%;
+        }
+
+        .sidebar-body {
+            grid-area: sidebar-body;
+            height: 100%; // Will change dynamically at runtime.
+        }
+
+        .sidebar-footer {
+            grid-area: sidebar-footer;
+            padding-bottom: 4px;
+
+            .custom-footer {
+                padding-left: 4px;
+                padding-right: 4px;
+            }
+        }
+
+        .sidebar-items {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    main {
+        grid-area: content;
+        background: var(--navigation-view-content-background);
+        border: var(--navigation-view-content-grid-border-thickness);
+        border-color: var(--navigation-view-content-grid-border);
+        border-top-left-radius: var(--overlay-corner-radius);
+        position: relative;
+    }
+
+    &.expanded-overlay {
+        &:not(.hidden) {
+            main {
+                margin-left: $sidebar-collapsed-width;
+            }
+        }
+    }
+}
+
+// Compact mode
+div[data-compactmode] {
+    .nav-bar-root {
+        .sidebar-header {
+            .text-box {
+                min-block-size: 32px;
+                padding-inline: 10px;
+            }
+        }
+    }
+}
+
+// Use less animations
+div[data-uselessanimations] {
+    .nav-bar-root {
+        nav {
+            &.transition {
+                @include transition( left 0s linear, width 0s linear, max-width 0s linear, box-shadow 0s linear);
+            }
+        }
+    }
+}

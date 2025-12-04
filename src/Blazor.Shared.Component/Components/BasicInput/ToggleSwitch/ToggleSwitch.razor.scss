@@ -1,0 +1,118 @@
+@use "../../../Assets/sass/devtoys" as *;
+
+$control-fast-duration: 167ms;
+$control-fast-out-slow-in-easing: cubic-bezier(0, 0, 0, 1);
+
+.toggle-switch {
+    @include flex($inline: true, $align: center);
+    @include typography-body;
+    position: relative;
+    margin: 0;
+    border: var(--toggle-switch-outer-border-stroke-thickness) solid var(--toggle-switch-stroke-off);
+    border-radius: 20px;
+    outline: none;
+    background-color: var(--toggle-switch-fill-off);
+    appearance: none;
+    inline-size: var(--toggle-switch-width);
+    block-size: var(--toggle-switch-height);
+    pointer-events: auto;
+
+    &::before {
+        content: "";
+        position: absolute;
+        border-radius: var(--toggle-switch-knob-radius);
+        background-color: var(--toggle-switch-knob-fill-off);
+        transition: $control-fast-duration ease-in-out transform, $control-fast-duration $control-fast-out-slow-in-easing height, $control-fast-duration $control-fast-out-slow-in-easing width, $control-fast-duration $control-fast-out-slow-in-easing margin, $control-fast-duration linear background;
+        inset-inline-start: var(--toggle-switch-knob-offset);
+        inline-size: var(--toggle-switch-knob-width);
+        block-size: var(--toggle-switch-knob-height);
+    }
+
+    &:hover {
+        border-color: var(--toggle-switch-stroke-off-pointer-over);
+        background-color: var(--toggle-switch-fill-off-pointer-over);
+
+        &::before {
+            inline-size: var(--toggle-switch-knob-width-pointer-over);
+            block-size: var(--toggle-switch-knob-height-pointer-over);
+        }
+    }
+
+    &:active {
+        border-color: var(--toggle-switch-stroke-off-pressed);
+        background-color: var(--toggle-switch-fill-off-pressed);
+
+        &::before {
+            inline-size: var(--toggle-switch-knob-width-pointer-over);
+            block-size: var(--toggle-switch-knob-height-pointer-over);
+        }
+    }
+
+    &:disabled {
+        border-color: var(--toggle-switch-stroke-off-disabled);
+        background-color: var(--toggle-switch-fill-off-disabled);
+
+        &::before {
+            margin: 0 !important;
+            background-color: var(--toggle-switch-knob-fill-off-disabled);
+            box-shadow: none;
+            inline-size: var(--toggle-switch-knob-width);
+            block-size: var(--toggle-switch-knob-height);
+        }
+
+        + span {
+            color: var(--toggle-switch-foreground-disabled) !important;
+        }
+    }
+
+    &:checked {
+        border: var(--toggle-switch-on-stroke-thickness) solid var(--toggle-switch-stroke-on);
+        background-color: var(--toggle-switch-fill-on);
+
+        &::before {
+            background-color: var(--toggle-switch-knob-fill-on);
+            box-shadow: 0 0 0 1px solid var(--toggle-switch-knob-stroke-on);
+            transform: translateX(var(--toggle-switch-knob-active-translation));
+        }
+
+        &:hover {
+            border-color: var(--toggle-switch-stroke-on-pointer-over);
+            background-color: var(--toggle-switch-fill-on-pointer-over);
+
+            &::before {
+                margin-inline-start: var(--toggle-switch-knob-zoom-pointer-over);
+            }
+        }
+
+        &:active {
+            border-color: var(--toggle-switch-stroke-on-pressed);
+            background-color: var(--toggle-switch-fill-on-pressed);
+
+            &::before {
+                margin-inline-start: var(--toggle-switch-knob-zoom-pointer-over);
+            }
+        }
+
+        &:disabled {
+            border-color: var(--toggle-switch-stroke-on-disabled);
+            background-color: var(--toggle-switch-fill-on-disabled);
+
+            &::before {
+                box-shadow: none;
+                background-color: var(--toggle-switch-knob-fill-on-disabled);
+            }
+        }
+    }
+
+    &-container {
+        @include flex($align: center);
+        @include typography-body;
+        color: var(--toggle-switch-foreground) !important;
+        user-select: none;
+        min-block-size: 32px;
+
+        > span {
+            padding-inline-end: 8px;
+        }
+    }
+}

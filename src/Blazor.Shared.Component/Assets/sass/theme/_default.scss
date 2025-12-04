@@ -1,0 +1,89 @@
+@import 'windows/dark';
+@import 'windows/light';
+@import 'macos/dark';
+@import 'macos/light';
+@import 'linux/dark';
+@import 'linux/light';
+
+* {
+    /* Font Families */
+    --font-family-fallback:
+        -apple-system, /* San Francisco in Safari (on Mac OS X and iOS); Neue Helvetica and Lucida Grande on older versions of Mac OS X. */
+        BlinkMacSystemFont, /* Equivalent of -apple-system, for Chrome on Mac OS X. */
+        "Segoe UI", /* Windows (Vista+) and Windows Phone. */
+        "Cantarell", /* GNOME-based Linux desktops, not preinstalled in the out-of-the-box Ubuntu experience. */
+        "Ubuntu", /* All versions of Ubuntu. */
+        "Noto Sans", /* Fallback, DE-neutral system font for Linux, also the default for KDE and XDG (standard sans-serif replacing the old DejaVu Sans). */
+        "Roboto", /* Android (Ice Cream Sandwich (4.0)+) and Chrome OS. */
+        system-ui, /* Default UI font on a given platform. */
+        'Helvetica Neue', Helvetica, Arial, sans-serif; /* Fallback */
+    --font-family-text: "Segoe UI Variable Text", "Seoge UI Variable Static Text", var(--font-family-fallback);
+    --font-family-small: "Segoe UI Variable Small", "Seoge UI Variable Static Small", var(--font-family-fallback);
+    --font-family-display: "Segoe UI Variable Display", "Seoge UI Variable Static Display", var(--font-family-fallback);
+
+    /* Font Size */
+    --font-size-caption: 12px;
+    --font-size-body: 14px;
+    --font-size-body-large: 18px;
+    --font-size-subtitle: 20px;
+    --font-size-title: 28px;
+    --font-size-title-large: 40px;
+    --font-size-display: 68px;
+
+    /* Monaco Editor diff view vertical splitter width */
+    --vscode-sash-size: 16px;
+
+    /* Focus Stroke */
+    --focus-stroke:
+        inset 0 0 0 1px var(--focus-stroke-inner),
+        0 0 0 2px var(--focus-stroke-outer);
+
+    &:focus-visible {
+        box-shadow: var(--focus-stroke);
+        outline: none;
+    }
+}
+
+/* Themes */
+div[data-theme='windows-dark-theme'] {
+    @include windows-dark;
+}
+
+div[data-theme='windows-light-theme'] {
+    @include windows-light;
+}
+
+div[data-theme='macos-dark-theme'] {
+    @include macos-dark;
+}
+
+div[data-theme='macos-light-theme'] {
+    @include macos-light;
+}
+
+div[data-theme='linux-dark-theme'] {
+    @include linux-dark;
+}
+
+div[data-theme='linux-light-theme'] {
+    @include linux-light;
+}
+
+div {
+    color: currentColor;
+}
+
+*, .main-layout {
+    /* Default foreground */
+    color: var(--text-fill-color-primary);
+}
+
+.theme-transition,
+.theme-transition *,
+.theme-transition *:before,
+.theme-transition *:after {
+    transition-property: color, background-color;
+    transition-timing-function: ease-out;
+    transition-duration: 0ms;
+    transition-delay: 0 !important;
+}

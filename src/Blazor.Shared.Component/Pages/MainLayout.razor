@@ -1,0 +1,12 @@
+﻿@namespace Blazor.Shared.Pages
+@inherits LayoutComponentBase
+
+<div class="main-layout @(Class)"
+     data-theme="@ThemeName"
+     data-compactmode="@IsCompactMode"
+     data-usercompactmode="@UserIsCompactModePreference"
+     data-uselessanimations="@UseLessAnimations">
+    @* @Body *@
+    <Index></Index>
+</div>
+@* <FluentDesignTheme StorageName="theme" @bind-Mode="@Mode" /> *@

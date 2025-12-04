@@ -1,0 +1,10 @@
+@namespace Blazor.Shared.Layout
+@inherits JSStyledComponentBase
+
+<div @ref="Element"
+     class="@FinalCssClasses"
+     style="@Style"
+     tabindex="-1"
+     @onkeydown="@OnKeyDown">
+    @ChildContent
+</div>

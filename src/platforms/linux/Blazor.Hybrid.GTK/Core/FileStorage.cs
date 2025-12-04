@@ -1,8 +1,11 @@
 using System.ComponentModel.Composition;
+using Blazor.Hybrid.Core;
+using Blazor.Hybrid.Linux.Strings.Other;
 using Blazor.Shared.Core;
+using CommunityToolkit.Diagnostics;
 using Gtk;
 
-namespace DevToys.Linux.Core;
+namespace Blazor.Hybrid.Linux;
 
 [Export(typeof(IFileStorage))]
 internal sealed class FileStorage : IFileStorage
@@ -18,7 +21,7 @@ internal sealed class FileStorage : IFileStorage
             relativeOrAbsoluteFilePath = Path.Combine(AppCacheDirectory, relativeOrAbsoluteFilePath);
         }
 
-        return File.Exists(relativeOrAbsoluteFilePath);
+        return System.IO.File.Exists(relativeOrAbsoluteFilePath);
     }
 
     public FileStream OpenReadFile(string relativeOrAbsoluteFilePath)
@@ -28,7 +31,7 @@ internal sealed class FileStorage : IFileStorage
             relativeOrAbsoluteFilePath = Path.Combine(AppCacheDirectory, relativeOrAbsoluteFilePath);
         }
 
-        if (!File.Exists(relativeOrAbsoluteFilePath))
+        if (!System.IO.File.Exists(relativeOrAbsoluteFilePath))
         {
             throw new FileNotFoundException("Unable to find the indicated file.", relativeOrAbsoluteFilePath);
         }
@@ -43,9 +46,9 @@ internal sealed class FileStorage : IFileStorage
             relativeOrAbsoluteFilePath = Path.Combine(AppCacheDirectory, relativeOrAbsoluteFilePath);
         }
 
-        if (File.Exists(relativeOrAbsoluteFilePath) && replaceIfExist)
+        if (System.IO.File.Exists(relativeOrAbsoluteFilePath) && replaceIfExist)
         {
-            File.Delete(relativeOrAbsoluteFilePath);
+            System.IO.File.Delete(relativeOrAbsoluteFilePath);
         }
 
         string parentDirectory = Path.GetDirectoryName(relativeOrAbsoluteFilePath)!;
@@ -54,7 +57,7 @@ internal sealed class FileStorage : IFileStorage
             Directory.CreateDirectory(parentDirectory);
         }
 
-        return File.OpenWrite(relativeOrAbsoluteFilePath);
+        return System.IO.File.OpenWrite(relativeOrAbsoluteFilePath);
     }
 
     public async ValueTask<string?> PickFolderAsync()
@@ -233,9 +236,9 @@ internal sealed class FileStorage : IFileStorage
                     var file = new Gio.FileHelper(new GObject.Internal.ObjectHandle(fileValue, true));
                     string? filePath = file.GetPath();
 
-                    if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+                    if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
                     {
-                        fileResult.Add(SandboxedFileReader.FromFileInfo(new FileInfo(filePath)));
+                        fileResult.Add(SandboxedFileReader.FromFileInfo(new System.IO.FileInfo(filePath)));
                     }
                 }
             }
@@ -304,4 +307,5 @@ internal sealed class FileStorage : IFileStorage
 
         return filters;
     }
+
 }

@@ -1,0 +1,33 @@
+@namespace Blazor.Shared.Components
+
+@inherits JSStyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        <button id=@Id
+                role="button"
+                class="@(FinalCssClasses)"
+                style="@(Style)"
+                tabindex="0"
+                title="@ToolTip"
+                @ref=Element
+                @attributes="AdditionalAttributes"
+                @onclick:stopPropagation="@IsActuallyEnabled"
+                @onkeydown:stopPropagation="@IsActuallyEnabled">
+            @ChildContent
+        </button>
+    </Container>
+</CascadingValue>

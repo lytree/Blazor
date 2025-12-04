@@ -1,6 +1,6 @@
 
 
-namespace DevToys.Linux.Core;
+namespace Blazor.Hybrid.Linux;
 
 
 
@@ -28,6 +28,6 @@ internal static class Constants
             applicationDataRootFolder = Path.Combine(userHomeFolderPath, ".local", "share");
         }
 
-        return Path.Combine(applicationDataRootFolder, AppHelper.IsPreviewVersion.Value ? "devtoys-preview" : "devtoys");
+        return Path.Combine(applicationDataRootFolder, "blazor-tool");
     }
 }

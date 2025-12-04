@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using DevToys.Api;
-using DevToys.Blazor.Components;
+using Blazor.Shared.Components;
 using DevToys.Core.Settings;
 using Microsoft.Win32;
 

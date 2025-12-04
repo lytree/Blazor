@@ -1,0 +1,12 @@
+@namespace Blazor.Shared.Layout
+@inherits StyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <div class="@(FinalCssClasses)"
+         style="@(FinalStyles)"
+         @attributes="AdditionalAttributes">
+        <div style="@(FinalInnerStyles)">
+            @ChildContent
+         </div>
+    </div>
+</CascadingValue>

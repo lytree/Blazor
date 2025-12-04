@@ -1,0 +1,77 @@
+@namespace Blazor.Shared.Components
+@typeparam TElement
+@inherits SelectBase<TElement>
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        <ScrollViewer Orientation="UIOrientation.Vertical"
+                      IsEnabled="@IsActuallyEnabled"
+                      Class="@FinalCssClasses"
+                      Style="@Style"
+                      UseNativeScrollBar="@UseNativeScrollBar"
+                      @attributes="@AdditionalAttributes">
+            <ul @ref="Element"
+                role="@Role"
+                class="list-box"
+                tabindex="0"
+                @onkeydown="OnKeyDown">
+
+                @if (Virtualize)
+                {
+                    <Virtualize Items="@Items" Context="item">
+                        @RenderItem(item)
+                    </Virtualize>
+                }
+                else if (Items is not null)
+                {
+                    foreach (var item in Items)
+                    {
+                        @RenderItem(item);
+                    }
+                }
+
+            </ul>
+        </ScrollViewer>
+    </Container>
+</CascadingValue>
+
+@code {
+    private RenderFragment<TElement> RenderItem { get; set; } = default!;
+
+    protected override Task OnInitializedAsync()
+    {
+        RenderItem = (item) => __builder =>
+        {
+            @if (!OverrideDefaultItemTemplate)
+            {
+                <ListBoxItem OnSelected="OnItemClick"
+                             IsSelected="object.ReferenceEquals(item, SelectedItem)"
+                             Item="item">
+                    @ItemTemplate(item)
+                </ListBoxItem>
+            }
+            else
+            {
+                <div class="@((object.ReferenceEquals(item, SelectedItem) ? "selected" : string.Empty))"
+                     @onclick="@(() => OnItemClick(item))">
+                    @ItemTemplate(item)
+                </div>
+            }
+        };
+
+        return base.OnInitializedAsync();
+    }
+}

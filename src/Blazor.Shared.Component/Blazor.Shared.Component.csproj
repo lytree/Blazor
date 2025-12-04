@@ -1,29 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <PropertyGroup>
-        <TargetFrameworks>net8.0</TargetFrameworks>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Blazor.Shared</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Blazor.Shared</RootNamespace>
+  </PropertyGroup>
 
 
-    <ItemGroup>
-        <SupportedPlatform Include="browser" />
-        <PackageReference Include="CommunityToolkit.Common" />
-        <PackageReference Include="CommunityToolkit.Diagnostics"  />
-        <PackageReference Include="System.ComponentModel.Composition" />
-        <PackageReference Include="OneOf" />
-        <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
-        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded"  />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Update="wwwroot\**">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-        <Exec Command="tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify" />
-    </Target>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+    <PackageReference Include="CommunityToolkit.Common" />
+    <PackageReference Include="CommunityToolkit.Diagnostics" />
+    <PackageReference Include="System.ComponentModel.Composition" />
+    <PackageReference Include="OneOf" />
+    <PackageReference Include="Markdig" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Target ran on `dotnet restore -p:RestoreNpm=true` -->
+  <Target Name="NodeJsRestoreTarget" AfterTargets="_GenerateRestoreProjectSpec" Condition="$(RestoreNpm) == 'true'">
+    <!-- Verify that Node.JS is installed. -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+
+    <!-- Restore Node.JS dependencies. -->
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
+  </Target>
+
+  <!-- Build all the SCSS and TS whenever the SCSS and TS files are newer than the generated CSS and JS files. -->
+  <ItemGroup>
+    <SCSSFiles Include="**\*.scss" />
+    <TSFiles Include="**\*.ts" />
+    <CSSFiles Include="**\*.g.css" />
+    <JSFiles Include="**\*.g.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../shared/Blazor.Hybrid.Core/Blazor.Hybrid.Core.csproj" />
+  </ItemGroup>
+  <Target Name="GulpPrecompileTarget" AfterTargets="CompileTypeScriptWithTSConfig" Inputs="@(SCSSFiles);@(TSFiles)" Outputs="@(CSSFiles);@(JSFiles)">
+    <Message Importance="high" Text="Generating CSS and JavaScript..." />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="node_modules/.bin/gulp devtoysJavaScript" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="node_modules/.bin/gulp devtoysSass" />
+  </Target>
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Interop;
-using DevToys.Blazor.Core.Services;
+using Blazor.Shared.Core;
 using DevToys.Windows.Controls;
 using DevToys.Windows.Core.Helpers;
 

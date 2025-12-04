@@ -1,0 +1,18 @@
+* {
+    text-rendering: geometricPrecision;
+}
+
+@mixin typography-body {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+
+    font: {
+        family: var(--font-family-text);
+        size: var(--font-size-body);
+        optical-sizing: none;
+        weight: var(--text-weight-normal);
+    }
+
+    line-height: 20px;
+}

@@ -1,7 +1,7 @@
 
 using System.ComponentModel.Composition;
 using CommunityToolkit.Diagnostics;
-
+namespace Blazor.Hybrid.Linux;
 [Export(typeof(IFontProvider))]
 internal sealed partial class FontProvider : IFontProvider
 {
@@ -21,9 +21,9 @@ internal sealed partial class FontProvider : IFontProvider
                 fonts.Add(fontFamily.GetName()!);
             }
 
-            return fonts.Order().ToArray();
+            return [.. fonts.Order()];
         }
 
-        return Array.Empty<string>();
+        return [];
     }
 }

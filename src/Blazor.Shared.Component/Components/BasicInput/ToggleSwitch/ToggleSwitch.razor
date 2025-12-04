@@ -1,0 +1,40 @@
+﻿@namespace Blazor.Shared.Components
+
+@inherits JSStyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        <label
+            id=@Id
+            role="button"
+            class="toggle-switch-container @(IsActuallyEnabled ? string.Empty : "disabled")"
+            style="@(Style)"
+            @onclick:stopPropagation="@IsActuallyEnabled"
+            @ref=Element>
+            <TextBlock Text="@Text" NoWrap="true" />
+            <input
+                type="checkbox"
+                tabindex="0"
+                class="toggle-switch @(FinalCssClasses)"
+                checked="@IsOn"
+                disabled="@(!IsActuallyEnabled)"
+                @onclick:preventDefault="@(!IsActuallyEnabled)"
+                @onkeydown:stopPropagation="@IsActuallyEnabled"
+                @onchange="OnChange"
+                @attributes="AdditionalAttributes" />
+        </label>
+    </Container>
+</CascadingValue>

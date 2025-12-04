@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Diagnostics;
 using Blazor.Shared.Core;
-using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared;
 using System.Runtime.Versioning;
 using System.ComponentModel.Composition;
+using Microsoft.Extensions.Logging.Abstractions;
 namespace Blazor.Hybrid.Linux;
 
 [SupportedOSPlatform("linux")]
 internal class LinuxProgram
 {
-    internal static ILogger? Logger;
+    internal static ILogger? Logger = NullLoggerFactory.Instance.CreateLogger<LinuxProgram>();
     //private static MefComposer? MefComposer;
 
     private readonly WindowService _windowService = new();

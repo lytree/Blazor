@@ -1,0 +1,116 @@
+@use "../../../Assets/sass/devtoys" as *;
+
+.expander {
+    pointer-events: auto;
+
+    .card {
+        &[data-expanded='true'] {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+            .expander-expand-button {
+                .font-icon {
+                    transform: rotate(180deg);
+                    @include transition(transform .2s ease-in-out);
+                }
+            }
+        }
+
+        &.expander-card {
+            @include transition(border-bottom-left-radius .2s ease-in-out, border-bottom-right-radius .2s ease-in-out);
+
+            .expander-expand-button {
+                display: grid;
+                height: 32px;
+                width: 32px;
+                border-radius: var(--control-corner-radius);
+                border-color: var(--subtle-fill-transparent);
+                background-color: var(--subtle-fill-transparent);
+                color: var(--text-fill-color-primary);
+
+                .font-icon {
+                    @include transition(transform .2s ease-in-out);
+                }
+            }
+
+            &:hover {
+                .expander-expand-button {
+                    border-color: var(--subtle-fill-transparent);
+                    background-color: var(--subtle-fill-secondary);
+                    color: var(--text-fill-color-primary);
+                }
+            }
+
+            &:active {
+                .expander-expand-button {
+                    border-color: var(--subtle-fill-transparent);
+                    background-color: var(--subtle-fill-tertiary);
+                    color: var(--text-fill-color-primary);
+                }
+            }
+
+            &:focus-visible {
+                box-shadow: none;
+
+                .expander-expand-button {
+                    box-shadow: var(--focus-stroke);
+                }
+            }
+        }
+    }
+
+    .expander-content-anchor {
+        max-height: 0;
+        position: relative;
+        overflow: hidden;
+        @include transition(0ms linear 250ms max-height);
+
+        .expander-content {
+            @include typography-body;
+            display: block;
+            min-height: 72px;
+            margin-top: 0;
+            border-radius: var(--control-corner-radius);
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border: var(--card-border-thickness);
+            border-top-width: 0px;
+            border-color: var(--card-border);
+            background-clip: padding-box;
+            background-color: var(--card-background-color-secondary);
+            @include transition(transform 250ms cubic-bezier(1, 1, 0, 1));
+            transform: translateY(-100%);
+
+            .expander-card {
+                background-color: transparent;
+            }
+        }
+
+        &[aria-expanded='true'] {
+            max-block-size: 6.02e23vmax;
+            transition: none;
+
+            .expander-content {
+                transform: none;
+                @include transition(250ms cubic-bezier(0, 0, 0, 1) transform);
+            }
+        }
+
+        &[aria-expanded='false'] {
+            .expander-content {
+                display: none;
+            }
+        }
+    }
+}
+
+// Compact mode
+div[data-compactmode] {
+    .expander {
+        .expander-content-anchor {
+            .expander-content{
+                min-height: 48px;
+            }
+        }
+    }
+}

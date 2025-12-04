@@ -10,9 +10,7 @@ using WebKit;
 using Settings = WebKit.Settings;
 using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 using System.Runtime.Versioning;
-using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared.Core;
-using DevToys.Linux.Core;
 using System.ComponentModel.Composition;
 namespace Blazor.Hybrid.Linux;
 

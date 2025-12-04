@@ -1,0 +1,220 @@
+﻿@page "/"
+
+@namespace Blazor.Shared.Pages
+@using Blazor.Shared.Components
+@inherits MefComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    @if (SettingsProvider.GetSetting(PredefinedSettings.IsFirstStart))
+    {
+        <FirstStartDialog @ref=_firstStartDialog />
+    }
+
+    <WhatsNewDialog @ref=_whatsNewDialog />
+
+    @if (UIDialogService.IsDialogOpened)
+    {
+        <Dialog IsOpen="@UIDialogService.IsDialogOpened"
+                Dismissible="@UIDialogService.IsDismissible"
+                OnDismissed="@(() => UIDialogService.OnCloseDialogRequested())">
+            <Content>
+                @UIDialogService.DialogContent
+            </Content>
+            <Footer>
+                @UIDialogService.FooterContent
+            </Footer>
+        </Dialog>
+    }
+
+    <!-- Provider for popover -->
+    <PopoverProvider />
+
+    <!-- Overlay that covers the whole window for context menus -->
+    <Overlay ZIndex="80000"
+             Visible="ContextMenuService.IsContextMenuOpened"
+             OnClick="ContextMenuService.OnCloseContextMenuRequested" />
+
+    <!-- Navigation View -->
+    <NavBar @ref=_navBar
+            TElement="INotifyPropertyChanged"
+            TSearchElement="GuiToolViewItem"
+            MenuItemsSource="@ViewModel.HeaderAndBodyToolViewItems"
+            FooterMenuItemsSource="@ViewModel.FooterToolViewItems"
+            CanGoBack="@ViewModel.CanGoBack"
+            @bind-SelectedItem="ViewModel.SelectedMenuItem"
+            OnBackButtonClicked="OnBackButtonClicked"
+            OnHiddenStateChanged="OnHiddenStateChanged"
+            OnBuildingContextMenu="OnBuildingContextMenuAsync"
+            SearchBarPlaceholder="@MainWindow.Search"
+            SearchQueryChanged="OnSearchQueryChanged"
+            SearchQuerySubmitted="OnSearchQuerySubmitted"
+            SearchResultItems="ViewModel.SearchResults"
+            @onmouseup="@OnMouseUp">
+        <!-- Header -->
+        <HeaderLeft>
+            @{
+                string toolDisplayName = string.Empty;
+                if (ViewModel.SelectedMenuItem is GuiToolViewItem guiToolViewItem)
+                {
+                    toolDisplayName = guiToolViewItem.ToolInstance.LongOrShortDisplayTitle;
+                }
+                else if (ViewModel.SelectedMenuItem is GroupViewItem groupViewItem)
+                {
+                    toolDisplayName = groupViewItem.DisplayTitle;
+                }
+
+                TitleBarInfoProvider.TitleWithToolName = string.Format(MainWindow.WindowTitleWithToolName, toolDisplayName);
+
+                @if (WindowService.IsCompactOverlayMode)
+                {
+                    TitleBarInfoProvider.Title = string.Format(MainWindow.WindowTitleWithToolName, toolDisplayName);
+                    if (OperatingSystem.IsWindows())
+                    {
+                        <TextBlock Text="@TitleBarInfoProvider.Title"
+                                   Style="margin-left: 16px;"
+                                   IsEnabled="@WindowHasFocus" />
+                    }
+                }
+                else
+                {
+                    TitleBarInfoProvider.Title = MainWindow.WindowTitle;
+                    if (OperatingSystem.IsWindows())
+                    {
+                        <TextBlock Text="@TitleBarInfoProvider.Title"
+                                   IsEnabled="@WindowHasFocus" />
+                    }
+                }
+            }
+        </HeaderLeft>
+        <HeaderRight>
+            <StackPanel MarginRight="@TitleBarInfoProvider.TitleBarWindowStateButtonsWidth"
+                        VerticalAlignment="UIVerticalAlignment.Top"
+                        Orientation="UIOrientation.Horizontal"
+                        Spacing="6">
+                @{
+                    bool compactOverlayModeAllowed
+                    = ViewModel.SelectedMenuItem is GuiToolViewItem guiToolViewItem
+                    && !guiToolViewItem.ToolInstance.NoCompactOverlaySupport;
+                }
+                <Button Appearance="ButtonAppearance.Stealth"
+                        Height="32"
+                        IsEnabled="@compactOverlayModeAllowed"
+                        IsVisible="@WindowService.IsCompactOverlayModeSupportedByPlatform"
+                        ToolTip="@(WindowService.IsCompactOverlayMode ? MainWindow.PictureInPictureExpand : MainWindow.PictureInPictureContract)"
+                        Class="compact-overlay-button"
+                        @onclick="@OnToggleCompactOverlayModeButtonClick">
+                    <FontIcon Glyph="@(WindowService.IsCompactOverlayMode ? '\uF42C' : '\uF364')"
+                              Rotation="@(WindowService.IsCompactOverlayMode ? -90 : 180)" />
+                </Button>
+            </StackPanel>
+        </HeaderRight>
+
+        <!-- Search box's result item design -->
+        <SearchResultItemTemplate Context="item">
+            <div class="sidebar-searchbar-result-item">
+                <div class="sidebar-searchbar-result-item-icon">
+                    <FontIcon FontFamily="@item.ToolInstance.IconFontName" Glyph="@item.ToolInstance.IconGlyph" />
+                </div>
+                <div class="sidebar-searchbar-result-item-text">
+                    <TextBlock NoWrap="true" Text="@item.ToolInstance.LongOrShortDisplayTitle" HighlightedSpans="@item.MatchedSpans" />
+                </div>
+            </div>
+        </SearchResultItemTemplate>
+
+        <!-- Item design -->
+        <NavBarItemIconTemplate Context="item">
+            @{
+                var iconGlyph = '\0';
+                var iconFontFamily = string.Empty;
+                if (item is GuiToolViewItem guiToolViewItem)
+                {
+                    iconGlyph = guiToolViewItem.ToolInstance.IconGlyph;
+                    iconFontFamily = guiToolViewItem.ToolInstance.IconFontName;
+                }
+                else if (item is GroupViewItem groupViewItem)
+                {
+                    iconGlyph = groupViewItem.IconGlyph;
+                    iconFontFamily = groupViewItem.IconFontName;
+                }
+
+                <FontIcon FontFamily="@iconFontFamily" Glyph="@iconGlyph" />
+            }
+        </NavBarItemIconTemplate>
+
+        <NavBarItemTitleTemplate Context="item">
+            @{
+                var title = string.Empty;
+                if (item is GuiToolViewItem guiToolViewItem)
+                {
+                    title = guiToolViewItem.MenuDisplayTitle;
+                }
+                else if (item is GroupViewItem groupViewItem)
+                {
+                    title = groupViewItem.DisplayTitle;
+                }
+
+                <div style="display: flex;">
+                    <TextBlock NoWrap="true"
+                               Text="@title"
+                               Style="flex-grow: 1 !important; flex-basis: auto !important; align-self:center;" />
+                    @if (item is GuiToolViewItem guiToolViewItem2 && guiToolViewItem2.IsRecommended)
+                    {
+                        <img src="_content/DevToys.Blazor/wwwroot/img/idea.svg"
+                             height="16"
+                             width="16"
+                             style="flex-basis: auto; align-self:center;" />
+                    }
+                    <img />
+                </div>
+            }
+        </NavBarItemTitleTemplate>
+
+        <Footer>
+            @if (ViewModel.UpdateAvailableForExtension)
+            {
+                <Button Appearance="ButtonAppearance.Hyperlink"
+                        Class="sidebar-footer-button"
+                        @onclick="OnUpdateAvailableForExtensionButtonClick">
+                    @if (_navBar.IsCollapsedMode)
+                    {
+                        <FontIcon Glyph="@('\uF150')" Height="16" Width="16" />
+                    }
+                    else
+                    {
+                        <TextBlock Text="@MainWindow.UpdateAvailableForExtension" NoWrap="true" />
+                    }
+                </Button>
+            }
+            @if (ViewModel.UpdateAvailable)
+            {
+                <Button Appearance="ButtonAppearance.Hyperlink"
+                        Class="sidebar-footer-button"
+                        @onclick="OnUpdateAvailableButtonClick">
+                    @if (_navBar.IsCollapsedMode)
+                    {
+                        <FontIcon Glyph="@('\uF150')" Height="16" Width="16" />
+                    }
+                    else
+                    {
+                        <TextBlock Text="@MainWindow.UpdateAvailable" NoWrap="true" />
+                    }
+                </Button>
+            }
+        </Footer>
+
+        <!-- Content of the NavBar-->
+        <Content>
+            @if (!IsTransitioning)
+            {
+                if (ViewModel.SelectedMenuItem is GuiToolViewItem guiToolViewItem)
+                {
+                    <ToolPage @ref=_contentPage GuiToolViewItem="@guiToolViewItem" />
+                }
+                else if (ViewModel.SelectedMenuItem is GroupViewItem groupToolViewItem)
+                {
+                    <ToolGroup @ref=_contentPage GroupViewItem="@groupToolViewItem" />
+                }
+            }
+        </Content>
+    </NavBar>
+</CascadingValue>

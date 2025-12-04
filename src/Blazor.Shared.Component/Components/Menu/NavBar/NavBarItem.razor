@@ -1,0 +1,69 @@
+@namespace Blazor.Shared.Layout
+@using DevToys.Core;
+
+@inherits StyledComponentBase
+@typeparam TElement
+@typeparam TSearchElement
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    @if (Item is ISeparator)
+    {
+        <li id="@Id" class="sidebar-item-separator"></li>
+    }
+    else if (Item is IGroup || Item is IItem)
+    {
+        var group = Item as IGroup;
+        bool isGroupWithChildren = group is not null && group.ChildrenItems is not null;
+
+        <ListBoxItem id="@Id"
+                     Item="Item"
+                     IsSelected="Item == OwnerNavBar.SelectedItem"
+                     Class="@($"sidebar-item {FinalCssClasses}")"
+                     OnBuildingContextMenu=@OnBuildingContextMenuAsync
+                     OnSelected=@OnItemSelectedAsync>
+            <div class="sidebar-item-icon">
+                @IconTemplate(Item)
+            </div>
+            <div class="sidebar-item-text">
+                @TitleTemplate(Item)
+            </div>
+            @if (isGroupWithChildren)
+            {
+                <div @onclick:stopPropagation="true">
+                    <Button Appearance="ButtonAppearance.Stealth"
+                            Class="sidebar-expand-group-button"
+                            HorizontalAlignment="UIHorizontalAlignment.Right"
+                            Width="32"
+                            aria-expanded="@(IsExpanded.ToString().ToLowerInvariant())"
+                            data-expanded="@(IsExpanded.ToString().ToLowerInvariant())"
+                            @onclick="OnToggleExpandClick">
+                        <FontIcon Glyph="@('\uf2a6')" Height="12" Width="12" />
+                    </Button>
+                </div>
+            }
+        </ListBoxItem>
+
+        @if (isGroupWithChildren && IsExpanded)
+        {
+            <ul class="sidebar-items children" role="listbox">
+                @foreach (var childItem in group!.ChildrenItems!)
+                {
+                    <NavBarItem Item="childItem as TElement"
+                                OwnerNavBar="OwnerNavBar"
+                                TElement="TElement"
+                                TSearchElement="TSearchElement"
+                                TitleTemplate="TitleTemplate"
+                                IconTemplate="IconTemplate"
+                                Children="childItem is IGroup childItemGroup ? childItemGroup.ChildrenItems : null"
+                                Class="sidebar-child-item"
+                                OnSelected="OnItemSelectedAsync"
+                                OnBuildingContextMenu="OnBuildingContextMenuAsync"/>
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        ThrowHelper.ThrowInvalidDataException($"{nameof(NavBarItem<TElement, TSearchElement>)}.{nameof(Item)} is expected to implement '{nameof(IItem)}', '{nameof(IGroup)}' or '{nameof(ISeparator)}'");
+    }
+</CascadingValue>

@@ -1,0 +1,54 @@
+@use "../../../Assets/sass/devtoys" as *;
+
+.card {
+    @include flex($direction: row, $align: center, $justify: between, $gap: 12px);
+    @include typography-body;
+    color: var(--card-foreground);
+    border: var(--card-border-thickness);
+    border-color: var(--card-border);
+    border-radius: var(--control-corner-radius);
+    background-clip: padding-box;
+    background-color: var(--card-background-color);
+    min-height: 72px;
+    padding-block: 16px;
+    padding-inline: 11px;
+    pointer-events: auto;
+
+    .card-header {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        gap: 20px;
+        grid-template-areas: "icon context";
+        margin-left: 4px;
+
+        .card-icon {
+            grid-area: icon;
+        }
+
+        .card-context {
+            grid-area: context;
+            @include flex($direction: column, $align: left);
+
+            .card-description {
+                color: var(--card-foreground-description);
+            }
+        }
+    }
+
+    .card-control {
+        display: inline-flex;
+        gap: 16px;
+
+        &.child-of-expander {
+            margin-right: calc(32px + 4px);
+        }
+    }
+}
+
+// Compact mode
+div[data-compactmode] {
+    .card {
+        min-height: 48px;
+        padding-block: 4px;
+    }
+}
