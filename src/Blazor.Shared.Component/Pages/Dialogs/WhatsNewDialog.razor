@@ -7,7 +7,7 @@
     <Content>
         <StackPanel Orientation="UIOrientation.Vertical" Spacing="16">
             <TextBlock Appearance="@TextBlockAppearance.Title"
-                Text="@(string.Format(DevToys.Localization.Strings.WhatsNewDialog.WhatsNewDialog.Title, Version))" />
+                Text="@(string.Format(Blazor.Localization.Strings.WhatsNewDialog.WhatsNewDialog.Title, Version))" />
             <div class="changelog">
                 @((MarkupString)ReleaseNotesHtml)
             </div>

@@ -1,0 +1,76 @@
+@namespace Blazor.Shared.Components
+@using Blazor.Shared.Core
+@inherits JSStyledComponentBase
+@typeparam TKey
+@typeparam TElement
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        <ScrollViewer @ref=_scrollViewer
+                      Orientation="UIOrientation.Vertical"
+                      IsEnabled="@IsActuallyEnabled"
+                      Class="@(FinalCssClasses)"
+                      style="@(Style)"
+                      @attributes="@AdditionalAttributes">
+                @if (Header is not null)
+                {
+                    <div class="header">@Header</div>
+                }
+
+                @if (ItemsSource is not null)
+                {
+                    Guard.IsNotNull(ItemTemplate);
+
+                    foreach (IGrouping<TKey, TElement> group in ItemsSource)
+                    {
+                        <section class="grid-view-group">
+                            <header class="grid-view-group-header">
+                                @if (GroupHeaderTemplate is null)
+                                {
+                                    @group.Key?.ToString()
+                                }
+                                else
+                                {
+                                    @GroupHeaderTemplate(group.Key)
+                                }
+                            </header>
+
+                            <ul class="grid-view-items-container">
+                                @foreach (TElement item in group)
+                                {
+                                    <li class="grid-view-item"
+                                        style="min-width: @ItemMinWidth.ToPx()">
+                                        <div class="grid-view-item-hover-filter"
+                                             tabindex="0"
+                                             @onclick="() => OnItemClickAsync(item)"
+                                             @onkeydown="(KeyboardEventArgs ev) => OnKeyDownAsync(ev, item)"
+                                             @onkeydown:stopPropagation="@IsActuallyEnabled">
+                                            @ItemTemplate(item)
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+                    }
+                }
+
+                @if (Footer is not null)
+                {
+                    <div class="footer">@Footer</div>
+                }
+        </ScrollViewer>
+    </Container>
+</CascadingValue>

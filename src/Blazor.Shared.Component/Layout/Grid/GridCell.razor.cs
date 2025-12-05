@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Shared.Layout;
 

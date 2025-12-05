@@ -1,4 +1,4 @@
-﻿namespace Blazor.Shared.Layout;
+﻿namespace Blazor.Shared.Components;
 
 [Flags]
 internal enum NavBarSidebarStates

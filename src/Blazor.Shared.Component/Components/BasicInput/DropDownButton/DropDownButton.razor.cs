@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using Blazor.Hybrid.Core;
 using Blazor.Shared.Core;
 using Blazor.Shared.Layout;
 using Microsoft.AspNetCore.Components;

@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using Blazor.Shared.Components;
 using Blazor.Shared.Core;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
-namespace Blazor.Shared.Layout;
+namespace Blazor.Shared.Components;
 
 public partial class NavBar<TElement, TSearchElement>
     : JSStyledComponentBase

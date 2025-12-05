@@ -1,0 +1,114 @@
+.text-block {
+    color: currentColor;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    user-select: none;
+    white-space: pre-wrap;
+    -webkit-user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    mark {
+        background-color: var(--text-box-selection-highlight-color);
+        color: var(--text-box-selection-color);
+    }
+
+    &.type- {
+        &subtitle,
+        &title,
+        &title-large,
+        &display {
+            font: {
+                family: var(--font-family-display);
+                weight: var(--text-weight-bold);
+            }
+        }
+
+        &body,
+        &body-strong,
+        &body-large {
+            font-family: var(--font-family-text);
+        }
+
+        &caption {
+            line-height: 16px;
+                        color: var(--text-fill-color-secondary);
+
+            font: {
+                size: var(--font-size-caption);
+                weight: var(--text-weight-normal);
+                family: var(--font-family-small);
+            }
+        }
+
+        &body,
+        &body-strong,
+        &body-large {
+            line-height: 20px;
+            
+            font: {
+                weight: var(--text-weight-normal);
+                size: var(--font-size-body);
+            }
+        }
+
+        &body-strong {
+            font-weight: var(--text-weight-bolder);
+        }
+
+        &body-large {
+            font-size: var(--font-size-body-large);
+            line-height: 24px;
+        }
+
+        &subtitle {
+            font-size: var(--font-size-subtitle);
+            line-height: 28px;
+        }
+
+        &title {
+            font-size: var(--font-size-title);
+            line-height: 36px;
+        }
+
+        &title-large {
+            font-size: var(--font-size-title-large);
+            line-height: 52px;
+        }
+
+        &display {
+            font-size: var(--font-size-display);
+            line-height: 92px;
+        }
+    }
+
+    &.no-wrap {
+        white-space: pre;
+    }
+
+    &.trim {
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    &.hide {
+        display: none !important;
+    }
+
+    &.disabled {
+        color: var(--text-fill-color-disabled);
+    }
+
+    &.horizontal-center {
+        text-align: center;
+    }
+
+    &.vertical-center {
+        top: 50%;
+        bottom: 50%;
+        position: relative;
+    }
+}

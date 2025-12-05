@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Blazor.Shared.Components;
 
 namespace Blazor.Shared.Core;
 

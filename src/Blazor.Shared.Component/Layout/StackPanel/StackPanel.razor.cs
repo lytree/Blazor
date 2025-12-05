@@ -1,4 +1,8 @@
-﻿namespace Blazor.Shared.Layout;
+﻿using Blazor.Shared.Components;
+using Blazor.Shared.Core;
+using Microsoft.AspNetCore.Components;
+
+namespace Blazor.Shared.Layout;
 
 public partial class StackPanel : StyledComponentBase
 {

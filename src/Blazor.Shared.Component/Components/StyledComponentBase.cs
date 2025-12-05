@@ -1,4 +1,5 @@
 ﻿using Blazor.Hybrid.Core;
+using Blazor.Shared.Core;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Shared.Components;

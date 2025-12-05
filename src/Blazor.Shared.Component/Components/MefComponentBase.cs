@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Blazor.Hybrid.Core;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Shared.Components;

@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>عن</value>
+  </data>
+  <data name="AccessibleName" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>المظهر</value>
+  </data>
+  <data name="AppTheme" xml:space="preserve">
+    <value>سمة البرنامَج</value>
+  </data>
+  <data name="AppThemeDescription" xml:space="preserve">
+    <value>حدد أي سمة البرنامَج للعرض</value>
+  </data>
+  <data name="Behaviors" xml:space="preserve">
+    <value>السلوكيات</value>
+  </data>
+  <data name="CheckForUpdate" xml:space="preserve">
+    <value>تحقق من وجود تحديث</value>
+  </data>
+  <data name="CheckForUpdateDescription" xml:space="preserve">
+    <value>التحقق تلقائياً من وجود تحديثات عند بدء تشغيل DevToys</value>
+  </data>
+  <data name="CompactMode" xml:space="preserve">
+    <value>تباعد مدمج</value>
+  </data>
+  <data name="CompactModeDescription" xml:space="preserve">
+    <value>قلل المسافة بين عناصر الشاشة</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>داكن</value>
+  </data>
+  <data name="DefaultLanguage" xml:space="preserve">
+    <value>نفس النظام</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>عدل منظر و مشعر DevToys</value>
+  </data>
+  <data name="DevToysMac" xml:space="preserve">
+    <value>{0} لبدأ لتطوير DevToysMac</value>
+    <comment>{0} will be replaced by a name</comment>
+  </data>
+  <data name="Editing" xml:space="preserve">
+    <value>تحرير</value>
+  </data>
+  <data name="EndOfLinePreference" xml:space="preserve">
+    <value>حرف نهاية الصف</value>
+  </data>
+  <data name="EndOfLinePreferenceAutomatic" xml:space="preserve">
+    <value>نفس نهاية الصف كما المدخل (تلقائياً)</value>
+  </data>
+  <data name="EndOfLinePreferenceCRLF" xml:space="preserve">
+    <value>إرجاع الحمل و خلاصة الصف (\r\n) (ويندوز)</value>
+  </data>
+  <data name="EndOfLinePreferenceLF" xml:space="preserve">
+    <value>خلاصة الصف (\n) (Unix)</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>خط النص</value>
+  </data>
+  <data name="HelpTranslating" xml:space="preserve">
+    <value>ساعدنا في تَرْجَمَة DevToys!</value>
+  </data>
+  <data name="HighlightCurrentLine" xml:space="preserve">
+    <value>عَلِّن صف الحالي</value>
+  </data>
+  <data name="HighlightCurrentLineDescription" xml:space="preserve">
+    <value>غيّر لون خلفية الصف الحالي لتكون واضحة أكثر</value>
+  </data>
+  <data name="HighlightCurrentLineStateDescriptionWhenOn" xml:space="preserve">
+    <value>عَلِّن صف الحالي</value>
+  </data>
+  <data name="IconDesigner" xml:space="preserve">
+    <value>{0} لتصميم أيقونة البرنامَج</value>
+    <comment>{0} will be replaced by a name</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>البرنامَج يحتاج إلى إعادة تشغيل عند إختيار لغة أخرى</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>فاتح</value>
+  </data>
+  <data name="LineNumbers" xml:space="preserve">
+    <value>أرقام الصف</value>
+  </data>
+  <data name="LineNumbersDescription" xml:space="preserve">
+    <value>إظهار أرقام الصف في محرر النص</value>
+  </data>
+  <data name="LineNumbersStateDescriptionWhenOn" xml:space="preserve">
+    <value>أظهر أرقام الصف</value>
+  </data>
+  <data name="OpenLogs" xml:space="preserve">
+    <value>فتح السجلات</value>
+  </data>
+  <data name="PasteClearsText" xml:space="preserve">
+    <value>غيّر النص عند اللصق</value>
+  </data>
+  <data name="PasteClearsTextDescription" xml:space="preserve">
+    <value>عند الضغط على زر اللصق, أمح النص قبل اللصق بدل الإلحاق إلى محتوى محرر النص الموجود.</value>
+  </data>
+  <data name="PasteClearsTextStateDescriptionWhenOn" xml:space="preserve">
+    <value>غيّر النص عند اللصق</value>
+  </data>
+  <data name="RecentTools" xml:space="preserve">
+    <value>أظهر أحدث الأدوات المستخدمة</value>
+  </data>
+  <data name="RecentToolsDescription" xml:space="preserve">
+    <value>إظهر أحدث ثلاث أدوات مستخدمة في القائمة. سيصبح التغيير ساري المفعول بعد إعادة تشغيل التطبيق.</value>
+  </data>
+  <data name="RenderWhitespace" xml:space="preserve">
+    <value>جَبِّس فضاء أبيض</value>
+  </data>
+  <data name="RenderWhitespaceStateDescriptionWhenOn" xml:space="preserve">
+    <value>أظهر فضاء ابيض</value>
+  </data>
+  <data name="ShortDisplayTitle" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="SmartDetection" xml:space="preserve">
+    <value>الكشف الذكي</value>
+  </data>
+  <data name="SmartDetectionDescription" xml:space="preserve">
+    <value>أكشف على أفضل أداة على أساس محتوى الحافظة تلقائيا</value>
+  </data>
+  <data name="SmartDetectionPaste" xml:space="preserve">
+    <value>ألصق محتوى الحافظة عند اختيار أداة موصى به تِلْقائيًا</value>
+  </data>
+  <data name="SpecialThanks" xml:space="preserve">
+    <value>شكر جزيل إلى</value>
+  </data>
+  <data name="TextEditor" xml:space="preserve">
+    <value>محرر النص</value>
+  </data>
+  <data name="TextEditorPreview" xml:space="preserve">
+    <value>معاينة</value>
+  </data>
+  <data name="UsefulLinks" xml:space="preserve">
+    <value>روابط مفيدة</value>
+  </data>
+  <data name="UsefulLinksLicense" xml:space="preserve">
+    <value>الترخيص</value>
+  </data>
+  <data name="UsefulLinksPrivacyPolicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="UsefulLinksReportProblem" xml:space="preserve">
+    <value>الإبلاغ عن مشكلة</value>
+  </data>
+  <data name="UsefulLinksSourceCode" xml:space="preserve">
+    <value>مصدر الشيفرة</value>
+  </data>
+  <data name="UsefulLinksThirdPartyLicenses" xml:space="preserve">
+    <value>تراخيص الطرف الثالث</value>
+  </data>
+  <data name="UseSystemSettings" xml:space="preserve">
+    <value>أستخدم إعدادات النظام</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>نسخة {0}</value>
+  </data>
+  <data name="WordWrap" xml:space="preserve">
+    <value>كلمة التفاف</value>
+  </data>
+  <data name="WordWrapStateDescriptionWhenOn" xml:space="preserve">
+    <value>كلمة التفاف</value>
+  </data>
+</root>

@@ -1,4 +1,6 @@
-﻿namespace Blazor.Shared.Layout;
+﻿using Blazor.Shared.Core;
+
+namespace Blazor.Shared.Components;
 
 internal sealed class NavBarState
 {

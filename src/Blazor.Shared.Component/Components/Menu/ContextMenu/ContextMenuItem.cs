@@ -1,4 +1,6 @@
-﻿namespace Blazor.Shared.Layout;
+﻿using Blazor.Shared.Components;
+
+namespace Blazor.Shared.Layout;
 
 public sealed class ContextMenuItem : DropDownListItem
 {

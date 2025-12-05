@@ -1,0 +1,193 @@
+@use "../../../Assets/sass/devtoys" as *;
+
+.text-box {
+    @include typography-body;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    cursor: unset;
+    margin: 0;
+    flex: 1 1 auto;
+    inline-size: 100%;
+    min-block-size: 30px;
+    padding-inline: 10px;
+    border-radius: var(--control-corner-radius);
+    color: var(--text-box-foreground);
+    background-color: transparent;
+    pointer-events: auto;
+
+    &:focus-visible {
+        box-shadow: none;
+    }
+
+    &::placeholder {
+        @include typography-body;
+        user-select: none;
+        -webkit-user-select: none;
+        color: var(--text-box-placeholder-foreground);
+    }
+
+    &::selection {
+        background: var(--text-box-selection-highlight-color);
+        color: var(--text-box-selection-color);
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+
+    &[type=number] {
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    &[type=number]::-webkit-inner-spin-button,
+    &[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    &[type=search] {
+        -webkit-appearance: none;
+    }
+
+    &::-ms-reveal {
+        display: none;
+    }
+
+    &.disabled {
+        color: var(--text-fill-color-disabled);
+
+        &::placeholder {
+            color: var(--text-box-placeholder-foreground-disabled);
+        }
+    }
+
+    &-with-header {
+        display: block;
+        position: relative;
+
+        .text-box-header {
+            margin-bottom: 4px;
+        }
+    }
+
+    &-container {
+        @include flex($align: center);
+        cursor: text;
+        position: relative;
+        border-radius: var(--control-corner-radius);
+        background-clip: padding-box;
+        background-color: var(--text-box-background);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--text-box-border);
+
+        &:hover {
+            color: var(--text-box-foreground-pointer-over);
+            background-color: var(--text-box-background-pointer-over);
+            border-color: var(--text-box-border-pointer-over);
+
+            .text-box::placeholder {
+                color: var(--text-box-placeholder-foreground-pointer-over);
+            }
+        }
+
+        &.disabled {
+            cursor: default;
+            color: var(--text-box-foreground-disabled);
+            background-color: var(--text-box-background-disabled);
+            border-color: var(--text-box-border-disabled);
+
+            .text-box-underline {
+                display: none;
+            }
+
+            .text-box::placeholder {
+                color: var(--text-box-placeholder-foreground-disabled);
+            }
+        }
+
+        &:focus-within, &.is-context-menu-opened {
+            color: var(--text-box-foreground-focused);
+            background-color: var(--text-box-background-focused);
+            border-color: var(--text-box-border-focused);
+
+            .text-box::placeholder {
+                color: var(--text-box-placeholder-foreground-focused);
+            }
+
+            .text-box-underline::after {
+                border-bottom: var(--text-box-underline-border-thickness-focused) solid var(--accent-default);
+            }
+
+            .text-box-clear-button {
+                display: flex;
+            }
+        }
+    }
+
+    &-underline {
+        position: absolute;
+        inset-inline-start: -1px;
+        inset-block-start: -1px;
+        inline-size: calc(100% + var(--text-box-underline-border-thickness-focused));
+        block-size: calc(100% + var(--text-box-underline-border-thickness-focused));
+        pointer-events: none;
+        border-radius: var(--control-corner-radius);
+        overflow: hidden;
+
+        &::after {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            inset-block-end: 0;
+            inset-inline-start: 0;
+            inline-size: 100%;
+            block-size: 100%;
+            border-bottom: var(--text-box-underline-border-thickness) solid var(--control-strong-stroke-default);
+        }
+    }
+
+    &-buttons {
+        @include flex($align: center);
+        cursor: default;
+        flex: 0 0 auto;
+
+        button {
+            margin-inline-start: 6px;
+            height: 22px;
+            min-block-size: 22px;
+            width: 22px;
+            padding: 0;
+
+            &:first-of-type {
+                margin-inline-start: 0;
+            }
+
+            &:last-of-type {
+                margin-inline-end: 4px;
+            }
+        }
+
+        .font-icon {
+            height: 18px;
+            width: 20px;
+        }
+
+        .text-box-clear-button {
+            display: none;
+        }
+    }
+}
+
+// Compact mode
+div[data-compactmode] {
+    .text-box {
+        min-block-size: 24px;
+        padding-inline: 6px 2px;
+    }
+}

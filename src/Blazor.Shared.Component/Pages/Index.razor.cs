@@ -1,10 +1,15 @@
 ﻿using System.Reflection;
+using Blazor.Core.Web;
+using Blazor.Hybrid.Core;
+using Blazor.Shared.BuiltInTools.ExtensionsManager;
 using Blazor.Shared.Components;
+using Blazor.Shared.Core;
 using Blazor.Shared.Layout;
 using Blazor.Shared.Pages.Dialogs;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace DevToys.Blazor.Pages;
+namespace Blazor.Shared.Pages;
 
 public partial class Index : MefComponentBase
 {
@@ -39,9 +44,6 @@ public partial class Index : MefComponentBase
 
     [Import]
     internal ISettingsProvider SettingsProvider { get; set; } = default!;
-
-    [Import]
-    internal CommandLineLauncherService CommandLineLauncherService { get; set; } = default!;
 
     [Import]
     internal IWebClientService WebClientService { get; set; } = default!;
@@ -205,7 +207,7 @@ public partial class Index : MefComponentBase
 
                 void OnOpenInNewWindowContextMenuItemClick()
                 {
-                    CommandLineLauncherService.LaunchTool(item.ToolInstance.InternalComponentName);
+                    // CommandLineLauncherService.LaunchTool(item.ToolInstance.InternalComponentName);
                 }
             }
         }
@@ -226,14 +228,14 @@ public partial class Index : MefComponentBase
 
     private void OnUpdateAvailableButtonClick()
     {
-        OSHelper.OpenFileInShell("https://github.com/DevToys-app/DevToys/releases");
+        // OSHelper.OpenFileInShell("https://github.com/DevToys-app/DevToys/releases");
     }
 
     private void OnUpdateAvailableForExtensionButtonClick()
     {
-        GuiToolInstance? extensionManagerTool = GuiToolProvider.GetToolFromInternalName(ExtensionsManagerGuiTool.ExtensionManagerToolName);
-        Guard.IsNotNull(extensionManagerTool);
-        ViewModel.SelectedMenuItem = ViewModel.GetBestMenuItemToSelect(extensionManagerTool);
+        // GuiToolInstance? extensionManagerTool = GuiToolProvider.GetToolFromInternalName(ExtensionsManagerGuiTool.ExtensionManagerToolName);
+        // Guard.IsNotNull(extensionManagerTool);
+        // ViewModel.SelectedMenuItem = ViewModel.GetBestMenuItemToSelect(extensionManagerTool);
     }
 
     private async Task<bool> ShowFirstStartAndOrWhatsNewDialogsAsync()

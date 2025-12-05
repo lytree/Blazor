@@ -1,12 +1,14 @@
 ﻿using System.Text;
-using DevToys.Core.Tools.Metadata;
+using Blazor.Hybrid.Core;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.JSInterop;
 
 namespace Blazor.Shared.Core;
 
 public sealed partial class FontService
 {
-    private readonly ILogger _logger;
+    private readonly ILogger _logger = NullLoggerFactory.Instance.CreateLogger<FontService>();
     private readonly IJSRuntime _jsRuntime;
 
 #pragma warning disable IDE0044 // Add readonly modifier
@@ -16,7 +18,7 @@ public sealed partial class FontService
 
     public FontService(IMefProvider mefProvider, IJSRuntime jsRuntime)
     {
-        _logger = this.Log();
+        // _logger = this.Log();
         _jsRuntime = jsRuntime;
         mefProvider.SatisfyImports(this);
     }

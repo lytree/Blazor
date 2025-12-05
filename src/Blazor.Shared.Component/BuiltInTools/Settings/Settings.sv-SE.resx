@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="AccessibleName" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Utseende</value>
+  </data>
+  <data name="AppTheme" xml:space="preserve">
+    <value>Apptema</value>
+  </data>
+  <data name="AppThemeDescription" xml:space="preserve">
+    <value>Välj vilket apptema som ska visas</value>
+  </data>
+  <data name="Behaviors" xml:space="preserve">
+    <value>Beteenden</value>
+  </data>
+  <data name="CheckForUpdate" xml:space="preserve">
+    <value>Sök efter uppdatering</value>
+  </data>
+  <data name="CheckForUpdateDescription" xml:space="preserve">
+    <value>Sök automatiskt efter uppdateringar när DevToys startar</value>
+  </data>
+  <data name="CompactMode" xml:space="preserve">
+    <value>Kompakt layout</value>
+  </data>
+  <data name="CompactModeDescription" xml:space="preserve">
+    <value>Minska mellanrummet mellan UI-element</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Mörkt</value>
+  </data>
+  <data name="DefaultLanguage" xml:space="preserve">
+    <value>Samma som systemet</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Anpassa DevToys utseende och känsla</value>
+  </data>
+  <data name="DevToysMac" xml:space="preserve">
+    <value>{0} för att starta DevToysMac-utvecklingen</value>
+    <comment>{0} will be replaced by a name</comment>
+  </data>
+  <data name="Editing" xml:space="preserve">
+    <value>Redigering</value>
+  </data>
+  <data name="EndOfLinePreference" xml:space="preserve">
+    <value>Tecken för radbrytning</value>
+  </data>
+  <data name="EndOfLinePreferenceAutomatic" xml:space="preserve">
+    <value>Samma radbrytning som vid indata (automatisk)</value>
+  </data>
+  <data name="EndOfLinePreferenceCRLF" xml:space="preserve">
+    <value>Windows style: både Carriage Return och Line Feed (CR+LF, \r\n)</value>
+  </data>
+  <data name="EndOfLinePreferenceLF" xml:space="preserve">
+    <value>Unix style, endast Line Feed (LF, \n)</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Typsnitt</value>
+  </data>
+  <data name="HelpTranslating" xml:space="preserve">
+    <value>Hjälp oss att översätta DevToys!</value>
+  </data>
+  <data name="HighlightCurrentLine" xml:space="preserve">
+    <value>Markera nuvarande rad</value>
+  </data>
+  <data name="HighlightCurrentLineDescription" xml:space="preserve">
+    <value>Ändra bakgrundsfärgen på den aktuella raden så den är mer synlig</value>
+  </data>
+  <data name="HighlightCurrentLineStateDescriptionWhenOn" xml:space="preserve">
+    <value>Higlight the current line</value>
+  </data>
+  <data name="IconDesigner" xml:space="preserve">
+    <value>{0} för design av app-ikonen</value>
+    <comment>{0} will be replaced by a name</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Appen måste startas om när man väljer ett annat språk</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Ljust</value>
+  </data>
+  <data name="LineNumbers" xml:space="preserve">
+    <value>Radnummer</value>
+  </data>
+  <data name="LineNumbersDescription" xml:space="preserve">
+    <value>Visa radnummer i textredigeraren</value>
+  </data>
+  <data name="LineNumbersStateDescriptionWhenOn" xml:space="preserve">
+    <value>Visa radnummer</value>
+  </data>
+  <data name="OpenLogs" xml:space="preserve">
+    <value>Öppna loggar</value>
+  </data>
+  <data name="PasteClearsText" xml:space="preserve">
+    <value>Ersätt text när du klistrar in</value>
+  </data>
+  <data name="PasteClearsTextDescription" xml:space="preserve">
+    <value>När du klickar på knappen Klistra in, rensa texten innan du klistrar in i stället för att lägga till det befintliga innehållet i textredigeraren.</value>
+  </data>
+  <data name="PasteClearsTextStateDescriptionWhenOn" xml:space="preserve">
+    <value>Ersätt text när du klistrar in</value>
+  </data>
+  <data name="RecentTools" xml:space="preserve">
+    <value>Show most recent used tools</value>
+  </data>
+  <data name="RecentToolsDescription" xml:space="preserve">
+    <value>Display the last 3 used tools in the menu. The change will take effect after restarting the app.</value>
+  </data>
+  <data name="RenderWhitespace" xml:space="preserve">
+    <value>Rendera whitespace</value>
+  </data>
+  <data name="RenderWhitespaceStateDescriptionWhenOn" xml:space="preserve">
+    <value>Visa blanksteg</value>
+  </data>
+  <data name="ShortDisplayTitle" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
+  <data name="SmartDetection" xml:space="preserve">
+    <value>Smart detektering</value>
+  </data>
+  <data name="SmartDetectionDescription" xml:space="preserve">
+    <value>Identifiera automatiskt det bästa verktyget baserat på urklippets innehåll</value>
+  </data>
+  <data name="SmartDetectionPaste" xml:space="preserve">
+    <value>Klistra in urklipp automatiskt när du väljer ett rekommenderat verktyg</value>
+  </data>
+  <data name="SpecialThanks" xml:space="preserve">
+    <value>Ett särskilt tack till</value>
+  </data>
+  <data name="TextEditor" xml:space="preserve">
+    <value>Textredigerare</value>
+  </data>
+  <data name="TextEditorPreview" xml:space="preserve">
+    <value>Förhandsgranskning</value>
+  </data>
+  <data name="UsefulLinks" xml:space="preserve">
+    <value>Användbara länkar</value>
+  </data>
+  <data name="UsefulLinksLicense" xml:space="preserve">
+    <value>Licens</value>
+  </data>
+  <data name="UsefulLinksPrivacyPolicy" xml:space="preserve">
+    <value>Integritetspolicy</value>
+  </data>
+  <data name="UsefulLinksReportProblem" xml:space="preserve">
+    <value>Rapportera ett problem</value>
+  </data>
+  <data name="UsefulLinksSourceCode" xml:space="preserve">
+    <value>Källkod</value>
+  </data>
+  <data name="UsefulLinksThirdPartyLicenses" xml:space="preserve">
+    <value>Tredjepartslicenser</value>
+  </data>
+  <data name="UseSystemSettings" xml:space="preserve">
+    <value>Använd systeminställningar</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="WordWrap" xml:space="preserve">
+    <value>Bryt långa rader</value>
+  </data>
+  <data name="WordWrapStateDescriptionWhenOn" xml:space="preserve">
+    <value>Radbrytning</value>
+  </data>
+</root>

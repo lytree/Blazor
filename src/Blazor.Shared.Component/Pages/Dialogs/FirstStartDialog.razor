@@ -28,12 +28,12 @@
         <StackPanel Orientation="UIOrientation.Horizontal"
                     HorizontalAlignment="UIHorizontalAlignment.Right"
                     Spacing="16">
-            <CheckBox Text="@DevToys.Localization.Strings.FirstStartDialog.FirstStartDialog.UnderstandAndAgree"
+            <CheckBox Text="@Blazor.Localization.Strings.FirstStartDialog.FirstStartDialog.UnderstandAndAgree"
                       IsCheckedChanged="IsAgreeCheckBoxCheckedChanged"/>
             <Button @ref=_continueButton
                     Appearance="@ButtonAppearance.Accent"
                     @onclick="@OnContinueButtonClick">
-                    @DevToys.Localization.Strings.FirstStartDialog.FirstStartDialog.Continue
+                    @Blazor.Localization.Strings.FirstStartDialog.FirstStartDialog.Continue
             </Button>
         </StackPanel>
     </Footer>

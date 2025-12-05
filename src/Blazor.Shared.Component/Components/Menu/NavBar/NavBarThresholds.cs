@@ -1,4 +1,4 @@
-﻿namespace Blazor.Shared.Layout;
+﻿namespace Blazor.Shared.Components;
 
 public static class NavBarThresholds
 {

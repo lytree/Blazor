@@ -1,0 +1,32 @@
+﻿@namespace Blazor.Shared.Components
+@inherits StyledComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="null"
+               Height="null"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        @if (!string.IsNullOrWhiteSpace(FontFamily))
+        {
+            <i id=@Id
+               class="font-icon @(FinalCssClasses)"
+               style="@StyleValue"
+               @ref=Element
+               @attributes="AdditionalAttributes"
+               data-glyph='@(char.ConvertFromUtf32(Glyph))'
+               aria-hidden="true"
+               role="presentation">
+            </i>
+        }
+    </Container>
+</CascadingValue>

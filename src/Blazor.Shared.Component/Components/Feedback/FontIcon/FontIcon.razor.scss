@@ -1,0 +1,10 @@
+.font-icon {
+    display: block;
+    color: inherit;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &::before {
+        content: attr(data-glyph)
+    }
+}

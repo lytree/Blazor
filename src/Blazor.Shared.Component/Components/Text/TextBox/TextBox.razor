@@ -1,0 +1,105 @@
+@namespace Blazor.Shared.Components
+@inherits MefComponentBase
+
+<CascadingValue Name="ParentIsEnabled" Value="@IsActuallyEnabled">
+    <Container HorizontalAlignment="@HorizontalAlignment"
+               VerticalAlignment="@VerticalAlignment"
+               Width="@Width"
+               Height="@Height"
+               MarginLeft="@MarginLeft"
+               MarginRight="@MarginRight"
+               MarginTop="@MarginTop"
+               MarginBottom="@MarginBottom"
+               PaddingLeft="@PaddingLeft"
+               PaddingRight="@PaddingRight"
+               PaddingTop="@PaddingTop"
+               PaddingBottom="@PaddingBottom"
+               IsEnabled="@IsActuallyEnabled"
+               IsVisible="@IsVisible">
+        <div id=@Id
+             class="text-box-with-header @(FinalCssClasses)"
+             style="@(Style)"
+             @attributes="AdditionalAttributes">
+
+            @if (!string.IsNullOrWhiteSpace(Header))
+            {
+                <TextBlock Appearance="TextBlockAppearance.Body" Class="text-box-header" Text="@Header" />
+            }
+
+            <div class="text-box-container @(IsActuallyEnabled ? string.Empty : "disabled") @(_isContextMenuOpened ? "is-context-menu-opened" : string.Empty)"
+                 @ref=Element>
+
+                <ContextMenu IsEnabled="IsActuallyEnabled"
+                             OnContextMenuOpening="OnContextMenuOpening"
+                             OnContextMenuOpened="OnContextMenuOpened"
+                             OnContextMenuClosed="OnContextMenuClosedAsync"
+                             Items="_contextMenuItems">
+                    <InputText @ref="_input"
+                               class="@($"text-box {(IsActuallyEnabled ? string.Empty : "disabled")}")"
+                               placeholder="@Placeholder"
+                               disabled="@(!IsActuallyEnabled)"
+                               readonly="@(IsReadOnly)"
+                               type="@(_internalType.ToString().ToLowerInvariant())"
+                               min="@Min.ToString("F0")"
+                               max="@Max.ToString("F0")"
+                               step="@Step"
+                               style="@($"font-family: {FontFamily};")"
+                               @bind-Value="@Text"
+                               @oninput="@InputTextChangedAsync" />
+                </ContextMenu>
+
+                <div class="text-box-underline" />
+                <div class="text-box-buttons">
+                    @if (IsActuallyEnabled && !IsReadOnly)
+                    {
+                        if (!string.IsNullOrEmpty(Text))
+                        {
+                            if (Type == TextBoxTypes.Password)
+                            {
+                                <Button Appearance="ButtonAppearance.Stealth"
+                                        HorizontalAlignment="UIHorizontalAlignment.Right"
+                                        title="@Blazor.Localization.Strings.TextBox.TextBox.RevealPassword"
+                                        aria-label="@Blazor.Localization.Strings.TextBox.TextBox.RevealPassword"
+                                        @onmousedown="OnRevealPasswordMouseDown"
+                                        @onmouseup="OnRevealPasswordMouseUp">
+                                    <FontIcon Glyph="@('\uE5F2')" />
+                                </Button>
+                            }
+                            else
+                            {
+                                <Button Appearance="ButtonAppearance.Stealth"
+                                        Class="text-box-clear-button"
+                                        HorizontalAlignment="UIHorizontalAlignment.Right"
+                                        title="@Blazor.Localization.Strings.TextBox.TextBox.Clear"
+                                        aria-label="@Blazor.Localization.Strings.TextBox.TextBox.Clear"
+                                        @onclick="OnClearClick">
+                                    <FontIcon Glyph="@('\uF369')" />
+                                </Button>
+                            }
+                        }
+
+                        if (Type == TextBoxTypes.Number)
+                        {
+                            <Button Appearance="ButtonAppearance.Stealth"
+                                    HorizontalAlignment="UIHorizontalAlignment.Right"
+                                    title="@Blazor.Localization.Strings.TextBox.TextBox.Increase"
+                                    aria-label="@Blazor.Localization.Strings.TextBox.TextBox.Increase"
+                                    @onclick="OnIncreaseClickAsync">
+                                <FontIcon Glyph="@('\uF2B6')" />
+                            </Button>
+                            <Button Appearance="ButtonAppearance.Stealth"
+                                    HorizontalAlignment="UIHorizontalAlignment.Right"
+                                    title="@Blazor.Localization.Strings.TextBox.TextBox.Decrease"
+                                    aria-label="@Blazor.Localization.Strings.TextBox.TextBox.Decrease"
+                                    @onclick="OnDecreaseClickAsync">
+                                <FontIcon Glyph="@('\uF2A3')" />
+                            </Button>
+                        }
+                    }
+
+                    @Buttons
+                </div>
+            </div>
+        </div>
+    </Container>
+</CascadingValue>

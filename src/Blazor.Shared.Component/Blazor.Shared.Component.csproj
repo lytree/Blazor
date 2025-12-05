@@ -12,12 +12,16 @@
     <SupportedPlatform Include="browser" />
     <PackageReference Include="CommunityToolkit.Common" />
     <PackageReference Include="CommunityToolkit.Diagnostics" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.ComponentModel.Composition" />
     <PackageReference Include="OneOf" />
     <PackageReference Include="Markdig" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+
+
+    <PackageReference Include="NuGet.Packaging" VersionOverride ="7.0.1"/>
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\**">

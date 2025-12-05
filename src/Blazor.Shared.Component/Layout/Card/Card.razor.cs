@@ -1,4 +1,7 @@
-﻿namespace Blazor.Shared.Layout;
+﻿using Blazor.Shared.Components;
+using Microsoft.AspNetCore.Components;
+
+namespace Blazor.Shared.Layout;
 
 public partial class Card : StyledComponentBase
 {

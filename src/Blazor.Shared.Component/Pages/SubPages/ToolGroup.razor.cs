@@ -1,17 +1,13 @@
-﻿using DevToys.Business.ViewModels;
-using DevToys.Core.Tools;
-using DevToys.Core.Tools.ViewItems;
+﻿
 using Blazor.Shared.Components;
+using Blazor.Shared.Core;
+using Microsoft.AspNetCore.Components;
 using System.Reflection;
-using DevToys.Business.Services;
-using DevToys.Core;
 
-namespace DevToys.Blazor.Pages.SubPages;
+namespace Blazor.Shared.Pages.SubPages;
 
 public partial class ToolGroup : MefComponentBase, IFocusable
 {
-    private GridView<string, GuiToolInstance>? _gridView = default!;
-
     internal static readonly Lazy<string> DisplayVersionNumber = new(() =>
     {
         var assemblyInformationalVersion
@@ -29,11 +25,6 @@ public partial class ToolGroup : MefComponentBase, IFocusable
     [Import]
     internal ToolGroupPageViewModel ViewModel { get; set; } = default!;
 
-    [Import]
-    internal CommandLineLauncherService CommandLineLauncherService { get; set; } = default!;
-
-    [Parameter]
-    public GroupViewItem? GroupViewItem { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -79,7 +70,7 @@ public partial class ToolGroup : MefComponentBase, IFocusable
 #pragma warning disable CA1822 // Mark members as static
     private void OnSuggestToolIdeaClick()
     {
-        OSHelper.OpenFileInShell("https://github.com/veler/DevToys/issues/new/choose");
+        // OSHelper.OpenFileInShell("https://github.com/veler/DevToys/issues/new/choose");
     }
 #pragma warning restore CA1822 // Mark members as static
 }
