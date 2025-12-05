@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Blazor.Hybrid.Core;
+using Blazor.Hybrid.Core.Metadata;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.JSInterop;

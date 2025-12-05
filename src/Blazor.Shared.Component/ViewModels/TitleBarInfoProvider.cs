@@ -1,4 +1,7 @@
 
+using Blazor.Localization.Strings.MainWindow;
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Blazor.Shared.Components;
 
 [Export]

@@ -8,6 +8,10 @@ namespace Blazor.Shared.Pages.SubPages;
 
 public partial class ToolGroup : MefComponentBase, IFocusable
 {
+
+
+    private GridView<string, GuiToolInstance>? _gridView = default!;
+
     internal static readonly Lazy<string> DisplayVersionNumber = new(() =>
     {
         var assemblyInformationalVersion

@@ -53,12 +53,12 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
     /// Gets a hierarchical list containing all the tools available, ordered, to display in the top and body menu.
     /// This includes "All tools" menu item, recents and favorites.
     /// </summary>
-    internal ReadOnlyObservableCollection<INotifyPropertyChanged?> HeaderAndBodyToolViewItems => _guiToolProvider.HeaderAndBodyToolViewItems;
+    internal ReadOnlyObservableCollection<INotifyPropertyChanged?> HeaderAndBodyToolViewItems => ReadOnlyObservableCollection<INotifyPropertyChanged?>.Empty;
 
     /// <summary>
     /// Gets a flat list containing all the footer tools available, ordered.
     /// </summary>
-    internal ReadOnlyObservableCollection<INotifyPropertyChanged?> FooterToolViewItems => _guiToolProvider.FooterToolViewItems;
+    internal ReadOnlyObservableCollection<INotifyPropertyChanged?> FooterToolViewItems => ReadOnlyObservableCollection<INotifyPropertyChanged?>.Empty;
 
     // Can't use CommunityToolkit.MVVM due to https://github.com/dotnet/roslyn/issues/57239#issuecomment-1437895948
     /// <summary>
@@ -89,47 +89,47 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
                 SetProperty(ref _selectedMenuItem, value);
             }
 
-            var guiToolViewItem = value as GuiToolViewItem;
-            if (guiToolViewItem is not null)
-            {
-                _smartDetectionService.ActiveToolInstance = guiToolViewItem.ToolInstance;
-            }
-            else
-            {
-                _smartDetectionService.ActiveToolInstance = null;
-            }
+            // var guiToolViewItem = value as GuiToolViewItem;
+            // if (guiToolViewItem is not null)
+            // {
+            //     _smartDetectionService.ActiveToolInstance = guiToolViewItem.ToolInstance;
+            // }
+            // else
+            // {
+            //     _smartDetectionService.ActiveToolInstance = null;
+            // }
 
             OnPropertyChanged(nameof(IsSelectedMenuItemATool));
             SelectedMenuItemChanged?.Invoke(this, EventArgs.Empty);
 
-            guiToolViewItem?.RaiseGotSelected();
+            // guiToolViewItem?.RaiseGotSelected();
 
-            // If we selected a tool (not a group)
-            if (guiToolViewItem is not null)
-            {
-                // Try to pass Smart Detection data, if the selected tool fits the detected data.
-                if (_passSmartDetectedDataToNextSelectedToolIsAllowed)
-                {
-                    _passSmartDetectedDataToNextSelectedToolIsAllowed = false;
-                    if (_oldSmartDetectedTools is not null)
-                    {
-                        SmartDetectedTool? smartDetectedTool
-                            = _oldSmartDetectedTools.FirstOrDefault(tool => tool.ToolInstance == guiToolViewItem.ToolInstance);
-                        if (smartDetectedTool is not null)
-                        {
-                            // Send the data to the tool.
-                            guiToolViewItem.ToolInstance.PassSmartDetectedData(smartDetectedTool.DataTypeName, smartDetectedTool.ParsedData);
-                        }
-                    }
-                }
-            }
+            // // If we selected a tool (not a group)
+            // if (guiToolViewItem is not null)
+            // {
+            //     // Try to pass Smart Detection data, if the selected tool fits the detected data.
+            //     if (_passSmartDetectedDataToNextSelectedToolIsAllowed)
+            //     {
+            //         _passSmartDetectedDataToNextSelectedToolIsAllowed = false;
+            //         if (_oldSmartDetectedTools is not null)
+            //         {
+            //             SmartDetectedTool? smartDetectedTool
+            //                 = _oldSmartDetectedTools.FirstOrDefault(tool => tool.ToolInstance == guiToolViewItem.ToolInstance);
+            //             if (smartDetectedTool is not null)
+            //             {
+            //                 // Send the data to the tool.
+            //                 guiToolViewItem.ToolInstance.PassSmartDetectedData(smartDetectedTool.DataTypeName, smartDetectedTool.ParsedData);
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 
     /// <summary>
     /// Gets whether the <see cref="SelectedMenuItem"/> is a tool or not.
     /// </summary>
-    internal bool IsSelectedMenuItemATool => SelectedMenuItem is GuiToolViewItem;
+    internal bool IsSelectedMenuItemATool => true;
 
     /// <summary>
     /// Gets whether the user can navigate back to the previous <see cref="SelectedMenuItem"/>.
@@ -146,7 +146,7 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
     /// Gets or sets the list of search results from the <see cref="SearchQuery"/>.
     /// </summary>
     [ObservableProperty]
-    private ObservableCollection<GuiToolViewItem> _searchResults = new();
+    private ObservableCollection<string> _searchResults = new();
 
     /// <summary>
     /// Gets or sets whether an update for the app is available online.
@@ -217,55 +217,55 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
             // If the clipboard content has changed since the last time
             if (!cancellationToken.IsCancellationRequested && !AreOldAndNewClipboardDataEqual(_oldRawClipboardData, rawClipboardData))
             {
-                // Reset recommended tools.
-                _guiToolProvider.ForEachToolViewItem(toolViewItem => toolViewItem.IsRecommended = false);
+                // // Reset recommended tools.
+                // _guiToolProvider.ForEachToolViewItem(toolViewItem => toolViewItem.IsRecommended = false);
 
-                // Detect tools to recommend.
-                IReadOnlyList<SmartDetectedTool> detectedTools
-                    = await _smartDetectionService.DetectAsync(rawClipboardData, strict: true, cancellationToken)
-                        .ConfigureAwait(true);
+                // // Detect tools to recommend.
+                // IReadOnlyList<SmartDetectedTool> detectedTools
+                //     = await _smartDetectionService.DetectAsync(rawClipboardData, strict: true, cancellationToken)
+                //         .ConfigureAwait(true);
 
-                GuiToolViewItem? firstToolViewItem = null;
+                // GuiToolViewItem? firstToolViewItem = null;
 
-                // For each recommended tool, set IsRecommended.
-                for (int i = 0; i < detectedTools.Count; i++)
-                {
-                    SmartDetectedTool detectedTool = detectedTools[i];
-                    IEnumerable<GuiToolViewItem> toolViewItems = _guiToolProvider.GetViewItemFromTool(detectedTool.ToolInstance);
-                    GuiToolViewItem? toolViewItem = toolViewItems.FirstOrDefault();
-                    if (toolViewItem != null)
-                    {
-                        if (i == 0)
-                        {
-                            firstToolViewItem = toolViewItem;
-                        }
-                        toolViewItem.IsRecommended = true;
-                    }
-                }
+                // // For each recommended tool, set IsRecommended.
+                // for (int i = 0; i < detectedTools.Count; i++)
+                // {
+                //     SmartDetectedTool detectedTool = detectedTools[i];
+                //     IEnumerable<GuiToolViewItem> toolViewItems = _guiToolProvider.GetViewItemFromTool(detectedTool.ToolInstance);
+                //     GuiToolViewItem? toolViewItem = toolViewItems.FirstOrDefault();
+                //     if (toolViewItem != null)
+                //     {
+                //         if (i == 0)
+                //         {
+                //             firstToolViewItem = toolViewItem;
+                //         }
+                //         toolViewItem.IsRecommended = true;
+                //     }
+                // }
 
-                // If user's setting allow us to jump to a tool automatically and paste the data automatically
-                if (_settingsProvider.GetSetting(PredefinedSettings.SmartDetectionPaste))
-                {
-                    // If one unique tool got found
-                    // And that the current selected menu item is a group, or that the user didn't selected another menu item since the smart detection started
-                    if (detectedTools.Count == 1 && (SelectedMenuItem == selectedMenuBeforeSmartDetection || SelectedMenuItem is GroupViewItem && firstToolViewItem is not null))
-                    {
-                        // Then let's navigate immediately to it and set the detected data as an input.
-                        SelectedMenuItem = firstToolViewItem;
+                // // If user's setting allow us to jump to a tool automatically and paste the data automatically
+                // if (_settingsProvider.GetSetting(PredefinedSettings.SmartDetectionPaste))
+                // {
+                //     // If one unique tool got found
+                //     // And that the current selected menu item is a group, or that the user didn't selected another menu item since the smart detection started
+                //     if (detectedTools.Count == 1 && (SelectedMenuItem == selectedMenuBeforeSmartDetection || SelectedMenuItem is GroupViewItem && firstToolViewItem is not null))
+                //     {
+                //         // Then let's navigate immediately to it and set the detected data as an input.
+                //         SelectedMenuItem = firstToolViewItem;
 
-                        // Send the data to the tool.
-                        detectedTools[0].ToolInstance.PassSmartDetectedData(detectedTools[0].DataTypeName, detectedTools[0].ParsedData);
-                    }
-                    else if (detectedTools.Count > 1)
-                    {
-                        // Next time user navigates to a tool, if this one has been detected by Smart Detection,
-                        // we will pass data to it.
-                        _passSmartDetectedDataToNextSelectedToolIsAllowed = true;
-                    }
-                }
+                //         // Send the data to the tool.
+                //         detectedTools[0].ToolInstance.PassSmartDetectedData(detectedTools[0].DataTypeName, detectedTools[0].ParsedData);
+                //     }
+                //     else if (detectedTools.Count > 1)
+                //     {
+                //         // Next time user navigates to a tool, if this one has been detected by Smart Detection,
+                //         // we will pass data to it.
+                //         _passSmartDetectedDataToNextSelectedToolIsAllowed = true;
+                //     }
+                // }
 
-                _oldSmartDetectedTools = detectedTools;
-                _oldRawClipboardData = rawClipboardData;
+                // _oldSmartDetectedTools = detectedTools;
+                // _oldRawClipboardData = rawClipboardData;
             }
         }
         catch (OperationCanceledException)
@@ -280,32 +280,32 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
 
     internal INotifyPropertyChanged GetBestMenuItemToSelect(object currentSelectedMenuItem)
     {
-        Guard.IsNotEmpty((IReadOnlyList<INotifyPropertyChanged>)HeaderAndBodyToolViewItems);
-        Guard.IsNotNull(currentSelectedMenuItem);
+        // Guard.IsNotEmpty((IReadOnlyList<INotifyPropertyChanged>)HeaderAndBodyToolViewItems);
+        // Guard.IsNotNull(currentSelectedMenuItem);
 
-        if (currentSelectedMenuItem is GroupViewItem groupViewItem)
-        {
-            return groupViewItem;
-        }
+        // if (currentSelectedMenuItem is GroupViewItem groupViewItem)
+        // {
+        //     return groupViewItem;
+        // }
 
-        GuiToolInstance? guiToolInstance = null;
-        if (currentSelectedMenuItem is GuiToolViewItem guiToolViewItem)
-        {
-            guiToolInstance = guiToolViewItem.ToolInstance;
-        }
-        else if (currentSelectedMenuItem is GuiToolInstance instance)
-        {
-            guiToolInstance = instance;
-        }
+        // GuiToolInstance? guiToolInstance = null;
+        // if (currentSelectedMenuItem is GuiToolViewItem guiToolViewItem)
+        // {
+        //     guiToolInstance = guiToolViewItem.ToolInstance;
+        // }
+        // else if (currentSelectedMenuItem is GuiToolInstance instance)
+        // {
+        //     guiToolInstance = instance;
+        // }
 
-        if (guiToolInstance is not null)
-        {
-            GuiToolViewItem? itemToSelect = _guiToolProvider.GetViewItemFromTool(guiToolInstance).FirstOrDefault();
-            if (itemToSelect is not null)
-            {
-                return itemToSelect;
-            }
-        }
+        // if (guiToolInstance is not null)
+        // {
+        //     GuiToolViewItem? itemToSelect = _guiToolProvider.GetViewItemFromTool(guiToolInstance).FirstOrDefault();
+        //     if (itemToSelect is not null)
+        //     {
+        //         return itemToSelect;
+        //     }
+        // }
 
         INotifyPropertyChanged? firstItem = HeaderAndBodyToolViewItems[0];
         Guard.IsNotNull(firstItem);
@@ -318,7 +318,7 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
     [RelayCommand]
     private void SearchBoxTextChanged()
     {
-        _guiToolProvider.SearchTools(SearchQuery, SearchResults);
+        // _guiToolProvider.SearchTools(SearchQuery, SearchResults);
     }
 
     /// <summary>
@@ -328,43 +328,43 @@ internal sealed partial class MainWindowViewModel : ObservableRecipient
     [RelayCommand]
     private void SearchBoxQuerySubmitted(object? chosenSuggestion)
     {
-        var selectedSearchResultItem = chosenSuggestion as GuiToolViewItem;
-        if (selectedSearchResultItem is null && SearchResults.Count > 0)
-        {
-            selectedSearchResultItem = SearchResults[0];
-        }
+        // var selectedSearchResultItem = chosenSuggestion as GuiToolViewItem;
+        // if (selectedSearchResultItem is null && SearchResults.Count > 0)
+        // {
+        //     selectedSearchResultItem = SearchResults[0];
+        // }
 
-        if (selectedSearchResultItem is null || selectedSearchResultItem == GuiToolProvider.NoResultFoundItem)
-        {
-            return;
-        }
+        // if (selectedSearchResultItem is null || selectedSearchResultItem == GuiToolProvider.NoResultFoundItem)
+        // {
+        //     return;
+        // }
 
-        // Select the actual menu item in the navigation view. This will trigger the navigation.
-        SelectedMenuItem = GetBestMenuItemToSelect(selectedSearchResultItem);
+        // // Select the actual menu item in the navigation view. This will trigger the navigation.
+        // SelectedMenuItem = GetBestMenuItemToSelect(selectedSearchResultItem);
     }
 
     private void OnChangeSelectedMenuItemMessageReceived(MainWindowViewModel vm, ChangeSelectedMenuItemMessage message)
     {
-        // Select the actual menu item in the navigation view. This will trigger the navigation.
-        SelectedMenuItem = GetBestMenuItemToSelect(message.Value);
+        // // Select the actual menu item in the navigation view. This will trigger the navigation.
+        // SelectedMenuItem = GetBestMenuItemToSelect(message.Value);
 
-        // If this is not null, it means that the user has selected a tool that has been detected by Smart Detection.
-        if (message.SmartDetectionInfo is not null)
-        {
-            // Send the data to the tool.
-            message.Value.PassSmartDetectedData(message.SmartDetectionInfo.DataTypeName, message.SmartDetectionInfo.ParsedData);
-        }
+        // // If this is not null, it means that the user has selected a tool that has been detected by Smart Detection.
+        // if (message.SmartDetectionInfo is not null)
+        // {
+        //     // Send the data to the tool.
+        //     message.Value.PassSmartDetectedData(message.SmartDetectionInfo.DataTypeName, message.SmartDetectionInfo.ParsedData);
+        // }
     }
 
     private async Task CheckForUpdateAsync()
     {
-        using CancellationTokenSource cancellationTokenSource = new();
-        cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(5));
-        CancellationToken token = cancellationTokenSource.Token;
+        // using CancellationTokenSource cancellationTokenSource = new();
+        // cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(5));
+        // CancellationToken token = cancellationTokenSource.Token;
 
-        CheckForExtensionUpdateRequested?.Invoke(this, EventArgs.Empty);
+        // CheckForExtensionUpdateRequested?.Invoke(this, EventArgs.Empty);
 
-        UpdateAvailable = await AppHelper.CheckForUpdateAsync(_webClientService, _versionService, token);
+        // UpdateAvailable = await AppHelper.CheckForUpdateAsync(_webClientService, _versionService, token);
     }
 
     private static bool AreOldAndNewClipboardDataEqual(object? oldData, object? newData)

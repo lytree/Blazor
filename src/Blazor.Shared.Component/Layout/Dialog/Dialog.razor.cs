@@ -1,4 +1,5 @@
-﻿using Blazor.Shared.Core;
+﻿using Blazor.Shared.Components;
+using Blazor.Shared.Core;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Shared.Layout;

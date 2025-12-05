@@ -33,8 +33,8 @@ public partial class Index : MefComponentBase
     [Import]
     internal MainWindowViewModel ViewModel { get; set; } = default!;
 
-    [Import]
-    internal GuiToolProvider GuiToolProvider { get; set; } = default!;
+    // [Import]
+    // internal GuiToolProvider GuiToolProvider { get; set; } = default!;
 
     [Import]
     internal TitleBarInfoProvider TitleBarInfoProvider { get; set; } = default!;
