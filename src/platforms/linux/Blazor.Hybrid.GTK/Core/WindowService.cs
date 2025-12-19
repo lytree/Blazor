@@ -2,7 +2,8 @@
 
 using Blazor.Shared.Core;
 using static GObject.Object;
-namespace Blazor.Hybrid.Linux.Core;
+
+namespace Blazor.Hybrid.Linux;
 internal sealed class WindowService : IWindowService
 {
     private Gtk.Window? _window;

@@ -1,16 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Gtk;
-using WebKit;
-using Settings = WebKit.Settings;
 using Blazor.Hybrid.Linux.GTK.BlazorWebView;
 using System.Runtime.Versioning;
-using Blazor.Hybrid.Linux.Core;
 using Blazor.Shared.Core;
 namespace Blazor.Hybrid.Linux;
 

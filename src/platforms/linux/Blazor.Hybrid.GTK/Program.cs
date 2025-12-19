@@ -11,7 +11,7 @@ internal class Program
     private static int Main(string[] args)
     {
         linuxProgram = new LinuxProgram();
-        linuxProgram.Application.Run(0, null);
+        linuxProgram.Application.Run(null);
 
         return 0;
     }

@@ -6,7 +6,7 @@
     <PropertyGroup>
         <CommunityToolkitVersion>8.4.0</CommunityToolkitVersion>
         <XUnit>2.5.0</XUnit>
-        <GirCore>0.6.3</GirCore>
+        <GirCore>0.7.0</GirCore>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="Dotnet.Bundle" Version="0.9.13" />

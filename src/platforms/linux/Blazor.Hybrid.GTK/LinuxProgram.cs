@@ -1,15 +1,7 @@
 ﻿using Gio;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
 using Blazor.Shared.Core;
-using Blazor.Hybrid.Linux.Core;
-using Blazor.Shared;
 using System.Runtime.Versioning;
 namespace Blazor.Hybrid.Linux;
 [SupportedOSPlatform("linux")]

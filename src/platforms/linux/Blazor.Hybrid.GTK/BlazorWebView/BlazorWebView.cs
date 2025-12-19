@@ -357,7 +357,7 @@ internal sealed partial class BlazorWebView : IDisposable
             using var ms = new MemoryStream();
             ms.Write(responseBytes.AsSpan());
             nint streamPtr = MemoryInputStream.NewFromData(ref ms.GetBuffer()[0], (nint)ms.Length, _ => { });
-            var inputStream = new Gio.InputStream(new Gio.Internal.InputStreamHandle(streamPtr, false));
+            var inputStream = new Gio.InputStream(new InputStreamHandle(streamPtr, false));
 
             var headers = MessageHeaders.New(MessageHeadersType.Response);
             headers.SetContentLength(ms.Length);
