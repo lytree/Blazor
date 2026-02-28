@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>DevToys</title>
+    <base href="/" />
+    <script src="_content/Blazor.Shared.Component/wwwroot/js/require.js" type="text/javascript"></script>
+    <script src="_content/Blazor.Shared.Component/wwwroot/js/Blazor.Hybrid.js" type="text/javascript"></script>
+    <script src="_content/Blazor.Shared.Component/wwwroot/js/Blazor.Hybrid.g.js" type="text/javascript"></script>
+    <script src="_content/Blazor.Shared.Component/wwwroot/js/simplebar-modified.js" type="text/javascript"></script>
+
+    <link href="_content/Blazor.Shared.Component/wwwroot/css/app.css" rel="stylesheet" />
+    <link href="_content/Blazor.Shared.Component/wwwroot/css/Blazor.Hybrid.g.css" rel="stylesheet" />
+
+    <link href="Blazor.Hybrid.styles.css" rel="stylesheet" />
+
+    <script
+        src="_content/Microsoft.FluentUI.AspNetCore.Components/Microsoft.FluentUI.AspNetCore.Components.lib.module.js"
+        type="module" async></script>
+    <script src="_content/Microsoft.FluentUI.AspNetCore.Components/js/loading-theme.js" type="text/javascript"></script>
+    <loading-theme storage-name="theme"></loading-theme>
+</head>
+
+<body>
+
+    <div class="status-bar-safe-area"></div>
+    <div id="app">
+        <div id="splash-screen-container">
+            <img id="splash-screen-image" src="_content/Blazor.Hybrid.Blazor/wwwroot/img/splash-screen.svg" width="256"
+                height="256" alt="Loading..." />
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_content/Blazor.Hybrid.Blazor/wwwroot/lib/monaco-editor/min/vs/loader.js"></script>
+    <script src="_content/Blazor.Hybrid.Blazor/wwwroot/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+
+    <script src="_framework/blazor.webview.js"></script>
+
+</body>
+
+</html>

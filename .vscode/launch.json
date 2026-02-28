@@ -1,5 +1,5 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
+    // 使用 IntelliSense 了解相关属性。
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
@@ -10,14 +10,14 @@
             "request": "launch",
             "preLaunchTask": "Build Blazor.Hybrid.GTK",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.GTK/bin/Debug/net8.0/Blazor.Hybrid.GTK",
+            "program": "${workspaceFolder}/src/platforms/Blazor.Hybrid.GTK/bin/Debug/net8.0/Blazor.Hybrid.GTK",
             "args": [],
             // "cwd": "${workspaceFolder}/CsharpTest",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "integratedTerminal",
             "stopAtEntry": false,
             "env": {
-                "DISPLAY": "10.100.50.123:0.0"
+                "DISPLAY": "10.100.50.123:10.0"
             }
         }
     ]

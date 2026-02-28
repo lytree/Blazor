@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blazor.Shared.Core;
-
+﻿namespace Blazor.Shared.Core;
 
 /// <summary>
 /// Provides a platform agnostic way to interact with the file system of the operating system the app is running on.

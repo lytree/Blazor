@@ -1,13 +1,7 @@
-﻿using CommunityToolkit.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using CommunityToolkit.Diagnostics;
 
 namespace Blazor.Shared.Core;
-
 
 /// <summary>
 /// Represents a read-only access to a file on the file system.
@@ -36,6 +30,7 @@ public abstract class SandboxedFileReader : IDisposable
     /// <returns>A new instance of the <see cref="SandboxedFileReader"/> class.</returns>
     public static SandboxedFileReader FromFileInfo(FileInfo fileInfo)
     {
+        Guard.IsNotNull(fileInfo);
         return new SimpleSandboxedFileReader(fileInfo);
     }
 

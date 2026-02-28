@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/platforms/linux/Blazor.Hybrid.GTK/Blazor.Hybrid.GTK.csproj",
+                "${workspaceFolder}/src/platforms/Blazor.Hybrid.GTK/Blazor.Hybrid.GTK.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
