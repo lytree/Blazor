@@ -1,4 +1,4 @@
-﻿namespace Blazor.Hybrid.Shared;
+﻿namespace Blazor.Shared.Theme;
 
 /// <summary>
 /// Provides information about the application theme.

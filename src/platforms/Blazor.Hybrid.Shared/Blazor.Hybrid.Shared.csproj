@@ -8,14 +8,12 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Common" />
     <PackageReference Include="CommunityToolkit.Diagnostics" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.AspNetCore.Components" />
     <PackageReference Include="OneOf" />
     <PackageReference Include="System.ComponentModel.Composition" />
     <PackageReference Include="SixLabors.ImageSharp" />
 
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="../../Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
   </ItemGroup>
 </Project>

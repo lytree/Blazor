@@ -1,4 +1,4 @@
-﻿
+
 using Blazor.Hybrid.Linux.Strings.Other;
 using Blazor.Hybrid.Shared;
 using Blazor.Shared.Core;
@@ -136,7 +136,7 @@ internal sealed class FileStorage : IFileStorage
         fileChooser.SelectMultiple = false;
 
         // Create filters
-        IReadOnlyList<FileFilter> filters = GenerateFilter(fileTypes);
+        List<FileFilter> filters = GenerateFilter(fileTypes);
         for (int i = 0; i < filters.Count; i++)
         {
             fileChooser.AddFilter(filters[i]);
@@ -161,7 +161,7 @@ internal sealed class FileStorage : IFileStorage
                 if (fileCount == 1)
                 {
                     nint fileValue = fileListModel.GetItem(0);
-                    var file = new Gio.FileHelper(new GObject.Internal.ObjectHandle(fileValue, true));
+                    var file = Gio.FileHelper.NewFromPointer(fileValue, true);
                     string? filePath = file.GetPath();
 
                     if (!string.IsNullOrEmpty(filePath))
@@ -232,7 +232,7 @@ internal sealed class FileStorage : IFileStorage
                 for (uint i = 0; i < fileCount; i++)
                 {
                     nint fileValue = fileListModel.GetItem(i);
-                    var file = new Gio.FileHelper(new GObject.Internal.ObjectHandle(fileValue, true));
+                    var file = Gio.FileHelper.NewFromPointer(fileValue, true);
                     string? filePath = file.GetPath();
 
                     if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
@@ -241,7 +241,7 @@ internal sealed class FileStorage : IFileStorage
                     }
                 }
             }
-            taskCompletionSource.SetResult(fileResult.ToArray());
+            taskCompletionSource.SetResult([.. fileResult]);
         };
 
         // Show the dialog.
@@ -255,13 +255,13 @@ internal sealed class FileStorage : IFileStorage
                 return files;
             }
 
-            return new[] { files[0] };
+            return [files[0]];
         }
 
-        return Array.Empty<SandboxedFileReader>();
+        return [];
     }
 
-    private static IReadOnlyList<FileFilter> GenerateFilter(string[] fileTypes)
+    private static List<FileFilter> GenerateFilter(string[] fileTypes)
     {
         var filters = new List<FileFilter>();
         var allFileTypesDescription = new List<string>();

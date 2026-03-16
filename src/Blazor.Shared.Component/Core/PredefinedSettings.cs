@@ -1,8 +1,7 @@
-﻿using Blazor.Hybrid.Shared;
-using Blazor.Shared.Core;
-using SixLabors.ImageSharp;
+﻿
+using Blazor.Shared.Theme;
 
-namespace Blazor.Hybrid.Shared;
+namespace Blazor.Shared.Core;
 
 public static class PredefinedSettings
 {
@@ -185,16 +184,6 @@ public static class PredefinedSettings
             defaultValue: true);
 
     /// <summary>
-    /// The size and position of the main window.
-    /// </summary>
-    public static readonly SettingDefinition<Rectangle?> MainWindowBounds
-        = new(
-            name: nameof(MainWindowBounds),
-            defaultValue: null,
-            serialize: SerializeRectangle,
-            deserialize: DeserializeRectangle);
-
-    /// <summary>
     /// Whether the main window should be maximized.
     /// </summary>
     public static readonly SettingDefinition<bool> MainWindowMaximized
@@ -202,34 +191,4 @@ public static class PredefinedSettings
             name: nameof(MainWindowMaximized),
             defaultValue: false);
 
-    internal static string SerializeRectangle(Rectangle? rectangle)
-    {
-        if (rectangle is null)
-        {
-            return string.Empty;
-        }
-
-        return $"{rectangle.Value.X},{rectangle.Value.Y},{rectangle.Value.Width},{rectangle.Value.Height}";
-    }
-
-    internal static Rectangle? DeserializeRectangle(string serializedRectangle)
-    {
-        if (string.IsNullOrEmpty(serializedRectangle))
-        {
-            return null;
-        }
-
-        string[] parts = serializedRectangle.Split(',');
-        if (parts.Length != 4)
-        {
-            throw new ArgumentException("Invalid serialized rectangle format.");
-        }
-
-        int x = int.Parse(parts[0]);
-        int y = int.Parse(parts[1]);
-        int width = int.Parse(parts[2]);
-        int height = int.Parse(parts[3]);
-
-        return new Rectangle(x, y, width, height);
-    }
 }

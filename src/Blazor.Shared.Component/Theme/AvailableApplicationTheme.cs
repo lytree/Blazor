@@ -1,4 +1,4 @@
-﻿namespace Blazor.Hybrid.Shared;
+﻿namespace Blazor.Shared.Theme;
 
 /// <summary>
 /// Specifies a UI theme that should be used for individual UIElement parts of an app UI.

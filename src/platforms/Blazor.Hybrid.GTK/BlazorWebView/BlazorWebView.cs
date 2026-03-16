@@ -16,6 +16,7 @@ using Settings = WebKit.Settings;
 using Task = System.Threading.Tasks.Task;
 using Uri = System.Uri;
 using System.Runtime.Versioning;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Blazor.Hybrid.Linux;
 
@@ -65,7 +66,7 @@ internal sealed partial class BlazorWebView : IDisposable
             })();
             """;
 
-    private readonly ILogger _logger;
+    private readonly ILogger<BlazorWebView> _logger;
     private readonly IServiceProvider _serviceProvider;
     private readonly AppSchemeHandler _appSchemeHandler;
     private readonly bool _enabledDeveloperTools;
@@ -85,6 +86,8 @@ internal sealed partial class BlazorWebView : IDisposable
         _appSchemeHandler = new AppSchemeHandler(this);
 
         _enabledDeveloperTools = enableDeveloperTools;
+
+        _logger = serviceProvider.GetRequiredService<ILogger<BlazorWebView>>();
         View = CreateWebView();
 
         View.OnContextMenu += BlazorGtkWebViewOnContextMenu;
@@ -190,7 +193,7 @@ internal sealed partial class BlazorWebView : IDisposable
 
     private WebView CreateWebView()
     {
-        var webView = new WebView();
+        var webView = WebView.NewWithProperties([]);
 
         try
         {
@@ -268,7 +271,7 @@ internal sealed partial class BlazorWebView : IDisposable
         string contentRootDir = Path.GetDirectoryName(HostPage!) ?? string.Empty;
         string hostPageRelativePath = Path.GetRelativePath(contentRootDir, HostPage!);
 
-        // LogCreatingFileProvider(contentRootDir, hostPageRelativePath);
+        LogCreatingFileProvider(contentRootDir, hostPageRelativePath);
 
         IFileProvider fileProvider = CreateFileProvider(contentRootDir);
 
@@ -285,14 +288,14 @@ internal sealed partial class BlazorWebView : IDisposable
 
         foreach (RootComponent rootComponent in RootComponents)
         {
-            // LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
-            //     rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
+            LogAddingRootComponent(rootComponent.ComponentType?.FullName ?? string.Empty,
+                rootComponent.Selector ?? string.Empty, rootComponent.Parameters?.Count ?? 0);
 
             // Since the page isn't loaded yet, this will always complete synchronously
             _ = rootComponent.AddToWebViewManagerAsync(_webViewManager);
         }
 
-        // LogStartingInitialNavigation(StartPath);
+        LogStartingInitialNavigation(StartPath);
         _webViewManager.Navigate(StartPath);
 
         Task.Run(async () =>
@@ -311,18 +314,18 @@ internal sealed partial class BlazorWebView : IDisposable
         return new CompositeFileProvider(physicalProvider, embeddedProvider);
     }
 
-    // [LoggerMessage(EventId = 0, Level = LogLevel.Debug,
-    //     Message =
-    //         "Creating file provider at content root '{contentRootDir}', using host page relative path '{hostPageRelativePath}'.")]
-    // partial void LogCreatingFileProvider(string contentRootDir, string hostPageRelativePath);
+    [LoggerMessage(EventId = 0, Level = LogLevel.Debug,
+        Message =
+            "Creating file provider at content root '{contentRootDir}', using host page relative path '{hostPageRelativePath}'.")]
+    partial void LogCreatingFileProvider(string contentRootDir, string hostPageRelativePath);
 
-    // [LoggerMessage(EventId = 1, Level = LogLevel.Debug,
-    //     Message =
-    //         "Adding root component '{componentTypeName}' with selector '{componentSelector}'. Number of parameters: {parameterCount}")]
-    // partial void LogAddingRootComponent(string componentTypeName, string componentSelector, int parameterCount);
+    [LoggerMessage(EventId = 1, Level = LogLevel.Debug,
+        Message =
+            "Adding root component '{componentTypeName}' with selector '{componentSelector}'. Number of parameters: {parameterCount}")]
+    partial void LogAddingRootComponent(string componentTypeName, string componentSelector, int parameterCount);
 
-    // [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
-    // partial void LogStartingInitialNavigation(string startPath);
+    [LoggerMessage(EventId = 2, Level = LogLevel.Debug, Message = "Starting initial navigation to '{startPath}'.")]
+    partial void LogStartingInitialNavigation(string startPath);
 
     private sealed class AppSchemeHandler
     {
@@ -357,7 +360,7 @@ internal sealed partial class BlazorWebView : IDisposable
             using var ms = new MemoryStream();
             ms.Write(responseBytes.AsSpan());
             nint streamPtr = MemoryInputStream.NewFromData(ref ms.GetBuffer()[0], (nint)ms.Length, _ => { });
-            var inputStream = new Gio.InputStream(new InputStreamHandle(streamPtr, false));
+            var inputStream = Gio.InputStream.NewFromPointer(streamPtr, false);
 
             var headers = MessageHeaders.New(MessageHeadersType.Response);
             headers.SetContentLength(ms.Length);
@@ -413,7 +416,7 @@ internal sealed partial class BlazorWebView : IDisposable
             int indexOfQueryString = url.IndexOf('?', StringComparison.Ordinal);
             return indexOfQueryString == -1
                 ? url
-                : url.Substring(0, indexOfQueryString);
+                : url[..indexOfQueryString];
         }
 
         private static bool IsUriBaseOfPage(Uri baseUri, string? uriString)

@@ -1,7 +1,6 @@
 ﻿
-
-using Blazor.Hybrid.Shared;
 using Blazor.Shared.Core;
+using Blazor.Shared.Theme;
 using Gio;
 using GLib;
 using Microsoft.Extensions.Logging;
@@ -28,7 +27,7 @@ internal sealed partial class ThemeListener : IThemeListener
 
         // Listen for operating system settings.
         _gtkSettings = Gtk.Settings.GetDefault()!;
-        _gtkSettings.Notify += System_RequestedThemeChanged;
+        _gtkSettings.OnNotify += System_RequestedThemeChanged;
 
         UpdateSystemSettingsAndApplyTheme();
 
@@ -106,7 +105,7 @@ internal sealed partial class ThemeListener : IThemeListener
         }
     }
 
-    private void System_RequestedThemeChanged(Object? sender, NotifySignalArgs e)
+    private void System_RequestedThemeChanged(object? sender, NotifySignalArgs e)
     {
         if (!_ignoreOperatingSystemSettingChanged)
         {

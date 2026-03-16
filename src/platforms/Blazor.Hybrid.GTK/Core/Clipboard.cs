@@ -73,7 +73,7 @@ internal sealed partial class Clipboard : IClipboard
                     }
                 }
 
-                return files.ToArray();
+                return [.. files];
             }
         }
         catch (Exception ex)
@@ -107,7 +107,7 @@ internal sealed partial class Clipboard : IClipboard
             var tcs = new TaskCompletionSource<Image<Rgba32>?>();
             try
             {
-                var callbackHandler = new Gio.AsyncResultHelper(clipboard.Handle);
+                var callbackHandler = Gio.AsyncResultHelper.NewFromPointer(clipboard.Handle.DangerousGetHandle(), false);
 
                 var texture = clipboard.ReadTextureFinish(callbackHandler);
                 if (texture is not null)
@@ -136,7 +136,7 @@ internal sealed partial class Clipboard : IClipboard
         return null;
     }
 
-    public async Task SetClipboardImageAsync(SixLabors.ImageSharp.Image? image)
+    public async Task SetClipboardImageAsync(Image? image)
     {
         Gdk.Clipboard clipboard = Gdk.Display.GetDefault()!.GetClipboard();
 

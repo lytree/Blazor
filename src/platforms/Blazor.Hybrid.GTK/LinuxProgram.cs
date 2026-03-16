@@ -3,7 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Blazor.Shared.Core;
 using System.Runtime.Versioning;
+using Blazor.Shared.Theme;
+using Blazor.Hybrid.Shared;
+using Blazor.Hybrid.Core.Settings;
 namespace Blazor.Hybrid.Linux;
+
 [SupportedOSPlatform("linux")]
 internal class LinuxProgram
 {
@@ -42,7 +46,7 @@ internal class LinuxProgram
         };
 
         //// Clear older temp files.
-        //Helper.ClearTempFiles(Constants.AppTempFolder);
+        FileHelper.ClearTempFiles(Constants.AppTempFolder);
 
         //// Initialize extension installation folder, and uninstall extensions that are planned for being removed.
         //string[] pluginFolders
@@ -108,18 +112,21 @@ internal class LinuxProgram
         //_serviceCollection.AddSingleton(provider => MefComposer!.Provider);
         _serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
         //_serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
-        //_serviceCollection.AddScoped<PopoverService, PopoverService>();
+        // _serviceCollection.AddScoped<PopoverService, PopoverService>();
         _serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
         //_serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
-        //_serviceCollection.AddScoped<UIDialogService, UIDialogService>();
-        //_serviceCollection.AddScoped<FontService, FontService>();
+        // _serviceCollection.AddScoped<UIDialogService, UIDialogService>();
+        // _serviceCollection.AddScoped<FontService, FontService>();
         //_serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
-
+        _serviceCollection.AddSingleton<ISettingsProvider, SettingsProvider>();
+        _serviceCollection.AddSingleton<ISettingsStorage, SettingsStorage>();
+        _serviceCollection.AddSingleton<IThemeListener, ThemeListener>();
+        _serviceCollection.AddSingleton<IFileStorage, FileStorage>();
+        _serviceCollection.AddSingleton<IFontProvider, FontProvider>();
+        _serviceCollection.AddSingleton<TitleBarInfoProvider>();
         ServiceProvider serviceProvider = _serviceCollection.BuildServiceProvider();
 
         ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        //LoggingExtensions.LoggerFactory = loggerFactory;
-        //Logger = this.Log();
 
         return serviceProvider;
     }

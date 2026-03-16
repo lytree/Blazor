@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Blazor.Hybrid.Shared;
+namespace Blazor.Shared.Threading;
 
 /// <summary>
 /// An awaiter returned from <see cref="GetAwaiter()"/>.

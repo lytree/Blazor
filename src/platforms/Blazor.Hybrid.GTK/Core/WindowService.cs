@@ -1,4 +1,6 @@
 using Blazor.Shared.Core;
+using CommunityToolkit.Diagnostics;
+using static GObject.Object;
 
 namespace Blazor.Hybrid.Linux;
 
@@ -36,7 +38,7 @@ internal sealed class WindowService : IWindowService
         _window.OnCloseRequest += Window_OnCloseRequest;
     }
 
-    private void Window_OnNotify(Object? sender, NotifySignalArgs e)
+    private void Window_OnNotify(object? sender, NotifySignalArgs e)
     {
         Guard.IsNotNull(_window);
 

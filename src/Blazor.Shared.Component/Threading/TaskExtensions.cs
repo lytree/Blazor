@@ -1,4 +1,4 @@
-﻿namespace Blazor.Hybrid.Shared;
+﻿namespace Blazor.Shared.Threading;
 
 /// <summary>
 /// Provides a set of helper method to play around with threads.

@@ -1,34 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Common" />
-        <PackageReference Include="CommunityToolkit.Diagnostics" />
-        <PackageReference Include="GirCore.Gtk-4.0" />
-        <PackageReference Include="GirCore.WebKit-6.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" />
-        <PackageReference Include="Lytree.Framework" VersionOverride="1.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Common" />
+    <PackageReference Include="CommunityToolkit.Diagnostics" />
+    <PackageReference Include="GirCore.Gtk-4.0" />
+    <PackageReference Include="GirCore.WebKit-6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Content Update="wwwroot\**">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Components\" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="../../Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
-      <ProjectReference Include="../Blazor.Hybrid.Shared/Blazor.Hybrid.Shared.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
+    <ProjectReference Include="../Blazor.Hybrid.Shared/Blazor.Hybrid.Shared.csproj" />
+  </ItemGroup>
 </Project>

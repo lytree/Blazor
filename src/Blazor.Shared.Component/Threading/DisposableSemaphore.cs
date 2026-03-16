@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Blazor.Hybrid.Shared;
+namespace Blazor.Shared.Threading;
 
 /// <summary>
 /// Represents a semaphore that free other threads when disposing the result of the <see cref="WaitAsync(CancellationToken)"/> method.

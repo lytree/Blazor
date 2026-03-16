@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using CommunityToolkit.Diagnostics;
 
-namespace Blazor.Hybrid.Shared;
+namespace Blazor.Shared.Threading;
 
 /// <summary>
 /// Represents an asynchronous lazy initialization.
