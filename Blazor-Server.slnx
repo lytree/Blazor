@@ -9,6 +9,6 @@
     <Project Path="src/platforms/Blazor.Hybrid.Server/Blazor.Hybrid.Server.csproj" />
     <Project Path="src/platforms/Blazor.Hybrid.Shared/Blazor.Hybrid.Shared.csproj" />
   </Folder>
-  <Project Path="src/Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
+  <Project Path="src/Blazor.Component.Shared/Blazor.Component.Shared.csproj" />
 
 </Solution>

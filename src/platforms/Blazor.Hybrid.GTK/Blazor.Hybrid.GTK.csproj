@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Blazor.Shared.Component/Blazor.Shared.Component.csproj" />
+    <ProjectReference Include="../../Blazor.Component.Shared/Blazor.Component.Shared.csproj" />
     <ProjectReference Include="../Blazor.Hybrid.Shared/Blazor.Hybrid.Shared.csproj" />
   </ItemGroup>
 </Project>

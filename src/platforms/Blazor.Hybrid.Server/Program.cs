@@ -1,4 +1,5 @@
-﻿using Blazor.Hybrid.Server.Components;
+﻿
+using Blazor.Hybrid.Server.Components;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);

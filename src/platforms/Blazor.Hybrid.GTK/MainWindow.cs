@@ -56,7 +56,7 @@ internal class MainWindow
         ((FontProvider)_fontProvider).MainWindow = _window;
 
         // Navigate to our Blazor webpage.
-        _blazorGtkWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(App) });
+        _blazorGtkWebView.RootComponents.Add(new RootComponent { Selector = "#app", ComponentType = typeof(Routes) });
         _blazorGtkWebView.HostPage = "wwwroot/index.html";
 
         _window.Show();
