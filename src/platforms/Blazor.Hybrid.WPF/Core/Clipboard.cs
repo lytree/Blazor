@@ -1,10 +1,12 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Blazor.Hybrid.Api;
+using Blazor.Hybrid.Shared;
 using Blazor.Hybrid.Windows.Core.Helpers;
 using Blazor.Hybrid.Windows.Helpers;
+using Blazor.Shared.Core;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -14,15 +16,15 @@ using Image = System.Drawing.Image;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export(typeof(Api.IClipboard))]
-internal sealed partial class Clipboard : Api.IClipboard
+
+internal sealed partial class Clipboard : IClipboard
 {
     private readonly ILogger _logger;
 
-    [ImportingConstructor]
-    public Clipboard()
+
+    public Clipboard(ILogger<IClipboard> logger)
     {
-        _logger = this.Log();
+        _logger = logger;
     }
 
     public Task<object?> GetClipboardDataAsync()

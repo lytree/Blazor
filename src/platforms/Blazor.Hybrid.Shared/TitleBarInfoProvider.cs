@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+namespace Blazor.Hybrid.Shared;
 
 public sealed partial class TitleBarInfoProvider : ObservableObject
 {

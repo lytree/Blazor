@@ -1,9 +1,11 @@
-﻿using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using CommunityToolkit.Diagnostics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 using Rectangle = System.Drawing.Rectangle;

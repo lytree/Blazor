@@ -1,11 +1,13 @@
-﻿using System.Runtime.Versioning;
+using System.Diagnostics;
+using System.Runtime.Versioning;
 using System.Windows;
+using CommunityToolkit.Diagnostics;
 using Windows.Win32;
 using Windows.Win32.System.Threading;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export]
+
 public sealed class EfficiencyModeService
 {
     private readonly HashSet<Window> _activeWindows = new();

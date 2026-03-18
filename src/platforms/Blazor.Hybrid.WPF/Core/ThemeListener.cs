@@ -1,12 +1,12 @@
-﻿using System.Windows;
-using Blazor.Hybrid.Api;
-using Blazor.Hybrid.Blazor.Components;
+using System.Windows;
 using Blazor.Hybrid.Core.Settings;
+using Blazor.Shared.Core;
+using Blazor.Shared.Theme;
+using CommunityToolkit.Diagnostics;
 using Microsoft.Win32;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export(typeof(IThemeListener))]
 internal sealed class ThemeListener : IThemeListener
 {
     private const string WindowsThemeRegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
@@ -16,7 +16,7 @@ internal sealed class ThemeListener : IThemeListener
 
     private Window? _window;
 
-    [ImportingConstructor]
+
     public ThemeListener(ISettingsProvider settingsProvider)
     {
         // Listen for app settings
@@ -33,7 +33,7 @@ internal sealed class ThemeListener : IThemeListener
 
     public AvailableApplicationTheme CurrentSystemTheme { get; private set; }
 
-    public AvailableApplicationTheme CurrentAppTheme => _settingsProvider.GetSetting(Blazor.Hybrid.Core.Settings.PredefinedSettings.Theme);
+    public AvailableApplicationTheme CurrentAppTheme => _settingsProvider.GetSetting(PredefinedSettings.Theme);
 
     public ApplicationTheme ActualAppTheme { get; private set; }
 
@@ -92,7 +92,7 @@ internal sealed class ThemeListener : IThemeListener
 
     private void SettingsProvider_SettingChanged(object? sender, SettingChangedEventArgs e)
     {
-        if (string.Equals(Blazor.Hybrid.Core.Settings.PredefinedSettings.Theme.Name, e.SettingName, StringComparison.Ordinal))
+        if (string.Equals(PredefinedSettings.Theme.Name, e.SettingName, StringComparison.Ordinal))
         {
             ApplyDesiredColorTheme();
         }

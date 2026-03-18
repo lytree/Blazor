@@ -1,15 +1,14 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
-using Blazor.Hybrid.Api;
-using Blazor.Hybrid.Core;
+using System.Windows.Forms;
 using Blazor.Hybrid.Windows.Helpers;
 using Blazor.Hybrid.Windows.Strings.Other;
+using Blazor.Shared.Core;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export(typeof(IFileStorage))]
 internal sealed class FileStorage : IFileStorage
 {
     public string AppCacheDirectory => Constants.AppCacheDirectory;

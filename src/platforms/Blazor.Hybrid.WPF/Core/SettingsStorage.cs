@@ -1,11 +1,11 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.IO;
-using Blazor.Hybrid.Api;
 using Blazor.Hybrid.Core.Settings;
+using Blazor.Shared.Core;
+using Blazor.Shared.Threading;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export(typeof(ISettingsStorage))]
 internal sealed class SettingsStorage : ISettingsStorage
 {
     private const string SettingsFileName = "settings.ini";
@@ -13,7 +13,6 @@ internal sealed class SettingsStorage : ISettingsStorage
     private readonly IFileStorage _fileStorage;
     private readonly Lazy<ConcurrentDictionary<string, string>> _settings;
 
-    [ImportingConstructor]
     public SettingsStorage(IFileStorage fileStorage)
     {
         _fileStorage = fileStorage;

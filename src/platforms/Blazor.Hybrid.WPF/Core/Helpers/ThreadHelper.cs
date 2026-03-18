@@ -1,5 +1,6 @@
-﻿using System.Windows.Threading;
-using Blazor.Hybrid.Api;
+using System.Windows.Threading;
+using Blazor.Shared.Threading;
+using CommunityToolkit.Diagnostics;
 using Application = System.Windows.Application;
 
 namespace Blazor.Hybrid.Windows.Helpers;

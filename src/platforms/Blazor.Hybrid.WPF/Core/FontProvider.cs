@@ -1,10 +1,9 @@
-﻿using System.Windows.Media;
-using Blazor.Hybrid.Api;
+using System.Windows.Media;
+using Blazor.Hybrid.Shared;
 using Microsoft.Extensions.Logging;
 
 namespace Blazor.Hybrid.Windows.Core;
 
-[Export(typeof(IFontProvider))]
 internal sealed partial class FontProvider : IFontProvider
 {
     private readonly Lazy<string[]> _fontFamilies
@@ -12,10 +11,10 @@ internal sealed partial class FontProvider : IFontProvider
 
     private readonly ILogger _logger;
 
-    [ImportingConstructor]
-    public FontProvider()
+
+    public FontProvider(ILogger<IFontProvider> logger)
     {
-        _logger = this.Log();
+        _logger = logger;
     }
 
     public string[] GetFontFamilies()

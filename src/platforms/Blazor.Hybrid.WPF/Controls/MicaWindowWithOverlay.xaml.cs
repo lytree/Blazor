@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -7,10 +7,11 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shell;
-using Blazor.Hybrid.Api;
 using Blazor.Hybrid.Windows.Core;
 using Blazor.Hybrid.Windows.Core.Helpers;
 using Blazor.Hybrid.Windows.Native;
+using Blazor.Shared.Theme;
+using CommunityToolkit.Diagnostics;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Dwm;
@@ -40,7 +41,7 @@ public abstract partial class MicaWindowWithOverlay : Window
     {
         _resourceDictionary = new ResourceDictionary
         {
-            Source = new Uri("/DevToys;component/Controls/MicaWindowWithOverlay.xaml", UriKind.RelativeOrAbsolute)
+            Source = new Uri("/Blazor.Hybrid.WPF;component/Controls/MicaWindowWithOverlay.xaml", UriKind.RelativeOrAbsolute)
         };
 
         Style = _resourceDictionary["MicaWindowWithOverlayStyle"] as Style;
@@ -460,13 +461,13 @@ public abstract partial class MicaWindowWithOverlay : Window
         string themeResourceDictionaryToRemovePath;
         if (_themeListener.ActualAppTheme == ApplicationTheme.Dark)
         {
-            themeResourceDictionaryPath = "/DevToys;component/Themes/Dark.xaml";
-            themeResourceDictionaryToRemovePath = "/DevToys;component/Themes/Light.xaml";
+            themeResourceDictionaryPath = "/Blazor.Hybrid.WPF;component/Themes/Dark.xaml";
+            themeResourceDictionaryToRemovePath = "/Blazor.Hybrid.WPF;component/Themes/Light.xaml";
         }
         else
         {
-            themeResourceDictionaryPath = "/DevToys;component/Themes/Light.xaml";
-            themeResourceDictionaryToRemovePath = "/DevToys;component/Themes/Dark.xaml";
+            themeResourceDictionaryPath = "/Blazor.Hybrid.WPF;component/Themes/Light.xaml";
+            themeResourceDictionaryToRemovePath = "/Blazor.Hybrid.WPF;component/Themes/Dark.xaml";
         }
 
         var resourceDictionary = new ResourceDictionary

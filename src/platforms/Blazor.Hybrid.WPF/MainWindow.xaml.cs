@@ -1,25 +1,23 @@
-﻿using System.IO;
+
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
+using System.Web.Services.Description;
 using System.Windows.Interop;
-using Blazor.Hybrid.Api;
-using Blazor.Hybrid.Blazor.BuiltInTools;
-using Blazor.Hybrid.Blazor.BuiltInTools.ExtensionsManager;
-using Blazor.Hybrid.Blazor.Core.Languages;
-using Blazor.Hybrid.Blazor.Core.Services;
-using Blazor.Hybrid.Business.Services;
-using Blazor.Hybrid.Business.ViewModels;
-using Blazor.Hybrid.Core;
-using Blazor.Hybrid.Core.Logging;
-using Blazor.Hybrid.Core.Mef;
-using Blazor.Hybrid.Core.Tools;
+using Blazor.Hybrid.Core.Settings;
+using Blazor.Hybrid.Shared;
 using Blazor.Hybrid.Windows.Controls;
 using Blazor.Hybrid.Windows.Core;
 using Blazor.Hybrid.Windows.Core.Helpers;
+using Blazor.Shared.Core;
+using Blazor.Shared.Theme;
+using CommunityToolkit.Diagnostics;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.FluentUI.AspNetCore.Components;
-using PredefinedSettings = Blazor.Hybrid.Core.Settings.PredefinedSettings;
+using SixLabors.ImageSharp;
+using ServiceCollection = Microsoft.Extensions.DependencyInjection.ServiceCollection;
 
 namespace Blazor.Hybrid.Windows;
 
@@ -30,7 +28,6 @@ public partial class MainWindow : MicaWindowWithOverlay
 {
     private static MainWindow? mainWindowInstance;
 
-    private readonly MefComposer _mefComposer;
     private readonly ServiceProvider _serviceProvider;
     private readonly DateTime _uiLoadingTime;
     private readonly ISettingsProvider _settingsProvider;
@@ -52,52 +49,52 @@ public partial class MainWindow : MicaWindowWithOverlay
         FileHelper.ClearTempFiles(Constants.AppTempFolder);
 
         // Initialize extension installation folder, and uninstall extensions that are planned for being removed.
-        string[] pluginFolders
-            = new[]
-            {
-                Path.Combine(AppContext.BaseDirectory!, "Plugins"),
-                Constants.PluginInstallationFolder
-            };
-        ExtensionInstallationManager.PreferredExtensionInstallationFolder = Constants.PluginInstallationFolder;
-        ExtensionInstallationManager.ExtensionInstallationFolders = pluginFolders;
-        ExtensionInstallationManager.UninstallExtensionsScheduledForRemoval();
+        //string[] pluginFolders
+        //    = new[]
+        //    {
+        //        Path.Combine(AppContext.BaseDirectory!, "Plugins"),
+        //        Constants.PluginInstallationFolder
+        //    };
+        //ExtensionInstallationManager.PreferredExtensionInstallationFolder = Constants.PluginInstallationFolder;
+        //ExtensionInstallationManager.ExtensionInstallationFolders = pluginFolders;
+        //ExtensionInstallationManager.UninstallExtensionsScheduledForRemoval();
 
         // Initialize MEF.
-        _mefComposer
-            = new MefComposer(
-                assemblies: new[] {
-                    typeof(MainWindowViewModel).Assembly,
-                    typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly,
-                    //Assembly.Load("Blazor.Hybrid.Tools"),
-                    //Assembly.Load("Windit.Data")
-                },
-                pluginFolders);
+        //_mefComposer
+        //= new MefComposer(
+        //    assemblies: new[] {
+        //        typeof(MainWindowViewModel).Assembly,
+        //        typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly,
+        //        //Assembly.Load("Blazor.Hybrid.Tools"),
+        //        //Assembly.Load("Windit.Data")
+        //    },
+        //    pluginFolders);
 
         LogInitialization((DateTime.Now - startTime).TotalMilliseconds);
         LogAppStarting();
 
         _uiLoadingTime = DateTime.Now;
-        _settingsProvider = _mefComposer.Provider.Import<ISettingsProvider>();
+        _settingsProvider = _serviceProvider.GetRequiredService<ISettingsProvider>();
 
         // Set the user-defined language.
-        string? languageIdentifier = _settingsProvider.GetSetting(PredefinedSettings.Language);
-        LanguageDefinition languageDefinition
-            = LanguageManager.Instance.AvailableLanguages.FirstOrDefault(l => string.Equals(l.InternalName, languageIdentifier))
-            ?? LanguageManager.Instance.AvailableLanguages[0];
-        LanguageManager.Instance.SetCurrentCulture(languageDefinition);
+        //string? languageIdentifier = _settingsProvider.GetSetting(PredefinedSettings.Language);
+        //LanguageDefinition languageDefinition
+        //    = LanguageManager.Instance.AvailableLanguages.FirstOrDefault(l => string.Equals(l.InternalName, languageIdentifier))
+        //    ?? LanguageManager.Instance.AvailableLanguages[0];
+        //LanguageManager.Instance.SetCurrentCulture(languageDefinition);
 
         // Load the UI.
         Resources.Add("services", _serviceProvider);
         InitializeComponent();
 
-        _efficiencyModeService = _mefComposer.Provider.Import<EfficiencyModeService>();
-        _themeListener = _mefComposer.Provider.Import<IThemeListener>();
-        DataContext = _mefComposer.Provider.Import<TitleBarInfoProvider>();
+        _efficiencyModeService = _serviceProvider.GetRequiredService<EfficiencyModeService>();
+        _themeListener = _serviceProvider.GetRequiredService<IThemeListener>();
+        DataContext = _serviceProvider.GetRequiredService<TitleBarInfoProvider>();
 
         blazorWebView.BlazorWebViewInitializing += BlazorWebView_BlazorWebViewInitializing;
         blazorWebView.BlazorWebViewInitialized += BlazorWebView_BlazorWebViewInitialized;
 
-        SetPositionAndSize();
+        //SetPositionAndSize();
     }
 
     private void MainWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -111,10 +108,10 @@ public partial class MainWindow : MicaWindowWithOverlay
 
     private void MainWindow_Closing(object sender, CancelEventArgs e)
     {
-        SavePositionAndSize();
+        //SavePositionAndSize();
 
         // Dispose every disposable tool instance.
-        _mefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
+        //_mefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
 
         // Clear older temp files.
         FileHelper.ClearTempFiles(Constants.AppTempFolder);
@@ -173,27 +170,33 @@ public partial class MainWindow : MicaWindowWithOverlay
 #endif
 
             // To save logs on local hard drive.
-            builder.AddFile(new FileStorage());
+            //builder.Add(new FileStorage());
 
             builder.AddFilter("Microsoft", LogLevel.Warning);
             builder.AddFilter("System", LogLevel.Warning);
         });
-        serviceCollection.AddFluentUIComponents();
-        serviceCollection.AddSingleton(provider => _mefComposer.Provider);
+        //serviceCollection.AddFluentUIComponents();
+        //serviceCollection.AddSingleton(provider => _mefComposer.Provider);
         serviceCollection.AddSingleton<IWindowService, WindowService>();
-        serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
-        serviceCollection.AddScoped<PopoverService, PopoverService>();
+        //serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
+        //serviceCollection.AddScoped<PopoverService, PopoverService>();
         serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
-        serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
-        serviceCollection.AddScoped<UIDialogService, UIDialogService>();
-        serviceCollection.AddScoped<FontService, FontService>();
-        serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
+        //serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
+        //serviceCollection.AddScoped<UIDialogService, UIDialogService>();
+        serviceCollection.AddSingleton<ISettingsProvider, SettingsProvider>();
+        serviceCollection.AddSingleton<ISettingsStorage, SettingsStorage>();
+        serviceCollection.AddSingleton<IThemeListener, ThemeListener>();
+        serviceCollection.AddSingleton<IFileStorage, FileStorage>();
+        serviceCollection.AddSingleton<IFontProvider, FontProvider>();
+        serviceCollection.AddSingleton<TitleBarInfoProvider>();
+        serviceCollection.AddSingleton<EfficiencyModeService>();
+        //serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
 
         ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
         ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        LoggingExtensions.LoggerFactory = loggerFactory;
-        _logger = typeof(MainWindow).Log();
+        //LoggingExtensions.LoggerFactory = loggerFactory;
+        _logger = loggerFactory.CreateLogger(nameof(MainWindow));
 
         return serviceProvider;
     }
@@ -201,70 +204,14 @@ public partial class MainWindow : MicaWindowWithOverlay
     private void InitializeLowPriorityServices()
     {
         // Start the Taskbar Jump List service after the web view loaded.
-        _mefComposer.Provider.Import<TaskbarJumpListService>();
+        //_mefComposer.Provider.Import<TaskbarJumpListService>();
 
         // Treat command line arguments.
-        _mefComposer.Provider.Import<CommandLineLauncherService>().HandleCommandLineArguments();
+        //_mefComposer.Provider.Import<CommandLineLauncherService>().HandleCommandLineArguments();
     }
 
-    private void SetPositionAndSize()
-    {
-        var dpiHelper = new DpiHelper(this);
-        double DPI_SCALE = dpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var windowInteropHelper = new WindowInteropHelper(this);
-        var screen = Screen.FromHandle(windowInteropHelper.Handle);
-        Guard.IsNotNull(screen);
 
-        SixLabors.ImageSharp.Rectangle? bounds = _settingsProvider.GetSetting(PredefinedSettings.MainWindowBounds);
-        bool isWindowVisibleOnScreen
-            = bounds is not null
-            && screen.WorkingArea.Contains(
-                new Rectangle(
-                    bounds.Value.X,
-                    bounds.Value.Y,
-                    bounds.Value.Width,
-                    bounds.Value.Height));
 
-        if (!isWindowVisibleOnScreen || bounds is null)
-        {
-            int width = (int)(Math.Max(screen.WorkingArea.Width - 400, 1200) / DPI_SCALE);
-            int height = (int)(Math.Max(screen.WorkingArea.Height - 200, 600) / DPI_SCALE);
-
-            // Center the window on the screen.
-            bounds = new(
-                x: (int)(((screen.WorkingArea.Width / DPI_SCALE) - width) / 2),
-                y: (int)(((screen.WorkingArea.Height / DPI_SCALE) - height) / 2),
-                width,
-                height);
-        }
-
-        Left = bounds.Value.X;
-        Top = bounds.Value.Y;
-        Width = bounds.Value.Width;
-        Height = bounds.Value.Height;
-
-        if (_settingsProvider.GetSetting(PredefinedSettings.MainWindowMaximized))
-        {
-            WindowState = System.Windows.WindowState.Maximized;
-        }
-    }
-
-    private void SavePositionAndSize()
-    {
-        var windowService = (WindowService)_serviceProvider.GetService<IWindowService>()!;
-        if (!windowService.IsCompactOverlayMode)
-        {
-            _settingsProvider.SetSetting(
-                PredefinedSettings.MainWindowBounds,
-                new SixLabors.ImageSharp.Rectangle(
-                    (int)Left,
-                    (int)Top,
-                    (int)Width,
-                    (int)Height));
-
-            _settingsProvider.SetSetting(PredefinedSettings.MainWindowMaximized, WindowState == System.Windows.WindowState.Maximized);
-        }
-    }
 
     private void LogUnhandledException(Exception exception)
     {
