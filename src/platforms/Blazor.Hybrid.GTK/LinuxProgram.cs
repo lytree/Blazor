@@ -1,4 +1,4 @@
-﻿using Gio;
+using Gio;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Blazor.Shared.Core;
@@ -60,7 +60,8 @@ internal class LinuxProgram
         //    = new MefComposer(
         //        assemblies: new[] { typeof(MainWindowViewModel).Assembly, typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly },
         //        pluginFolders);
-
+        var loggerFactory = serviceProvider.GetRequiredService<LoggerFactory>();
+        Logger = loggerFactory.CreateLogger(nameof(LinuxProgram));
         LogInitialization((DateTime.Now - _startTime).TotalMilliseconds);
         LogAppStarting();
 
@@ -83,7 +84,7 @@ internal class LinuxProgram
         //MefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
 
         //// Clear older temp files.
-        //FileHelper.ClearTempFiles(Constants.AppTempFolder);
+        FileHelper.ClearTempFiles(Constants.AppTempFolder);
 
         Application.OnActivate -= OnApplicationActivate;
         Application.OnShutdown -= OnApplicationShutdown;
