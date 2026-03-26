@@ -1,4 +1,4 @@
-﻿<controls:MicaWindowWithOverlay
+﻿<Window
     x:Class="Blazor.Hybrid.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -32,4 +32,4 @@
       </webview:CustomBlazorWebView.RootComponents>
     </webview:CustomBlazorWebView>
   </Grid>
-</controls:MicaWindowWithOverlay>
+</Window>

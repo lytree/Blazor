@@ -24,7 +24,7 @@ namespace Blazor.Hybrid.Windows;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : MicaWindowWithOverlay
+public partial class MainWindow : Window
 {
     private static MainWindow? mainWindowInstance;
 
@@ -111,8 +111,7 @@ public partial class MainWindow : MicaWindowWithOverlay
         //SavePositionAndSize();
 
         // Dispose every disposable tool instance.
-        //_mefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
-
+        _serviceProvider.Dispose();
         // Clear older temp files.
         FileHelper.ClearTempFiles(Constants.AppTempFolder);
     }
