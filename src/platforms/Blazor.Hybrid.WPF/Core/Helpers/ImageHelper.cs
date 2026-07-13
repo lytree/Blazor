@@ -6,8 +6,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using CommunityToolkit.Diagnostics;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
+using SkiaSharp;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace Blazor.Hybrid.Windows.Core.Helpers;
@@ -74,20 +73,16 @@ internal static partial class ImageHelper
         return imageSource;
     }
 
-    internal static MemoryStream GetPngMemoryStreamFromImage(SixLabors.ImageSharp.Image image)
+    internal static MemoryStream GetPngMemoryStreamFromImage(SKBitmap image)
     {
         Guard.IsNotNull(image);
 
-        var encoder = new PngEncoder
-        {
-            ColorType = PngColorType.RgbWithAlpha,
-            TransparentColorMode = PngTransparentColorMode.Preserve,
-            BitDepth = PngBitDepth.Bit8,
-            CompressionLevel = PngCompressionLevel.BestSpeed
-        };
-
         var pngMemoryStream = new MemoryStream();
-        image.SaveAsPng(pngMemoryStream, encoder);
+        using (var skImage = SKImage.FromBitmap(image))
+        {
+            using var data = skImage.Encode(SKEncodedImageFormat.Png, 100);
+            data.SaveTo(pngMemoryStream);
+        }
         pngMemoryStream.Seek(0, SeekOrigin.Begin);
 
         return pngMemoryStream;

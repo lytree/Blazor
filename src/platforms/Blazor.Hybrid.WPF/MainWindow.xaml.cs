@@ -16,7 +16,6 @@ using CommunityToolkit.Diagnostics;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SixLabors.ImageSharp;
 using ServiceCollection = Microsoft.Extensions.DependencyInjection.ServiceCollection;
 
 namespace Blazor.Hybrid.Windows;

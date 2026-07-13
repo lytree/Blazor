@@ -1,5 +1,4 @@
-﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace Blazor.Hybrid.Shared;
 
@@ -42,7 +41,7 @@ public interface IClipboard
     /// This method may try to access to the UI thread.
     /// </remarks>
     /// <returns>The image currently stored in the system clipboard, or null if nothing is present.</returns>
-    Task<Image<Rgba32>?> GetClipboardImageAsync();
+    Task<SKBitmap?> GetClipboardImageAsync();
 
     /// <summary>
     /// Sets text to the system clipboard.
@@ -69,5 +68,5 @@ public interface IClipboard
     /// This method may try to access to the UI thread.
     /// </remarks>
     /// <param name="image">The image to be stored in the system clipboard.</param>
-    Task SetClipboardImageAsync(Image? image);
+    Task SetClipboardImageAsync(SKBitmap? image);
 }

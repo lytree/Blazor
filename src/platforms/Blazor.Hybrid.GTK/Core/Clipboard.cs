@@ -5,9 +5,7 @@ using Blazor.Shared.Core;
 using Gdk;
 using GLib;
 using Microsoft.Extensions.Logging;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace Blazor.Hybrid.Linux;
 
@@ -38,7 +36,7 @@ internal sealed partial class Clipboard : IClipboard
                 return text;
             }
 
-            Image<Rgba32>? image = await GetClipboardImageAsync();
+            SKBitmap? image = await GetClipboardImageAsync();
             if (image is not null)
             {
                 return image;
@@ -99,12 +97,12 @@ internal sealed partial class Clipboard : IClipboard
         return null;
     }
 
-    public async Task<Image<Rgba32>?> GetClipboardImageAsync()
+    public async Task<SKBitmap?> GetClipboardImageAsync()
     {
         try
         {
             Gdk.Clipboard clipboard = Gdk.Display.GetDefault()!.GetClipboard();
-            var tcs = new TaskCompletionSource<Image<Rgba32>?>();
+            var tcs = new TaskCompletionSource<SKBitmap?>();
             try
             {
                 var callbackHandler = Gio.AsyncResultHelper.NewFromPointer(clipboard.Handle.DangerousGetHandle(), false);
@@ -115,8 +113,8 @@ internal sealed partial class Clipboard : IClipboard
                     string tempFile = Path.GetTempFileName();
                     texture.SaveToPng(tempFile);
 
-                    using Image image = await Image.LoadAsync(tempFile);
-                    tcs.SetResult(image.CloneAs<Rgba32>(image.Configuration));
+                    using var image = SKBitmap.Decode(tempFile);
+                    tcs.SetResult(image?.Copy());
 
                     File.Delete(tempFile);
                     texture.Dispose();
@@ -136,22 +134,18 @@ internal sealed partial class Clipboard : IClipboard
         return null;
     }
 
-    public async Task SetClipboardImageAsync(Image? image)
+    public Task SetClipboardImageAsync(SKBitmap? image)
     {
         Gdk.Clipboard clipboard = Gdk.Display.GetDefault()!.GetClipboard();
 
         if (image is not null)
         {
-            var encoder = new PngEncoder
-            {
-                ColorType = PngColorType.RgbWithAlpha,
-                TransparentColorMode = PngTransparentColorMode.Preserve,
-                BitDepth = PngBitDepth.Bit8,
-                CompressionLevel = PngCompressionLevel.BestSpeed
-            };
-
             var pngMemoryStream = new MemoryStream();
-            await image.SaveAsPngAsync(pngMemoryStream, encoder);
+            using (var skImage = SKImage.FromBitmap(image))
+            {
+                using var data = skImage.Encode(SKEncodedImageFormat.Png, 100);
+                data.SaveTo(pngMemoryStream);
+            }
             pngMemoryStream.Seek(0, SeekOrigin.Begin);
 
             using var pngBytes = GLib.Bytes.New(pngMemoryStream.ToArray());
@@ -162,6 +156,8 @@ internal sealed partial class Clipboard : IClipboard
         {
             clipboard.SetText(string.Empty);
         }
+
+        return Task.CompletedTask;
     }
 
     public Task SetClipboardFilesAsync(FileInfo[]? filePaths)

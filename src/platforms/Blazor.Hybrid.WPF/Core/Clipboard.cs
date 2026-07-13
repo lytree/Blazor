@@ -8,8 +8,7 @@ using Blazor.Hybrid.Windows.Core.Helpers;
 using Blazor.Hybrid.Windows.Helpers;
 using Blazor.Shared.Core;
 using Microsoft.Extensions.Logging;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 using DataFormats = System.Windows.DataFormats;
 using DataObject = System.Windows.DataObject;
 using Image = System.Drawing.Image;
@@ -101,9 +100,9 @@ internal sealed partial class Clipboard : IClipboard
             });
     }
 
-    public Task<Image<Rgba32>?> GetClipboardImageAsync()
+    public Task<SKBitmap?> GetClipboardImageAsync()
     {
-        return ThreadHelper.RunOnUIThreadAsync<Image<Rgba32>?>(
+        return ThreadHelper.RunOnUIThreadAsync<SKBitmap?>(
             DispatcherPriority.Background,
             () =>
             {
@@ -165,7 +164,7 @@ internal sealed partial class Clipboard : IClipboard
             });
     }
 
-    public async Task SetClipboardImageAsync(SixLabors.ImageSharp.Image? image)
+    public async Task SetClipboardImageAsync(SKBitmap? image)
     {
         try
         {
@@ -220,7 +219,7 @@ internal sealed partial class Clipboard : IClipboard
         return files.ToArray();
     }
 
-    private static Image<Rgba32>? GetClipboardImageInternal()
+    private static SKBitmap? GetClipboardImageInternal()
     {
         System.Windows.IDataObject dataObject = System.Windows.Clipboard.GetDataObject();
         BitmapSource? bitmapSource = GetBitmapSourceFromDataObject(dataObject);
@@ -235,8 +234,7 @@ internal sealed partial class Clipboard : IClipboard
 
             pngMemoryStream.Seek(0, SeekOrigin.Begin);
 
-            using var image = SixLabors.ImageSharp.Image.Load(pngMemoryStream);
-            return image.CloneAs<Rgba32>(image.Configuration);
+            return SKBitmap.Decode(pngMemoryStream);
         }
 
         return null;
