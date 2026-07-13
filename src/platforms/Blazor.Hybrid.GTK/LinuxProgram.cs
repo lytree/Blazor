@@ -1,4 +1,4 @@
-﻿using Gio;
+using Gio;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Blazor.Shared.Core;
@@ -15,7 +15,7 @@ internal class LinuxProgram
     //private static MefComposer? MefComposer;
 
     private readonly WindowService _windowService = new();
-    private readonly ServiceCollection _serviceCollection = new();
+    private ServiceProvider _serviceProvider;
     private readonly DateTime _startTime = DateTime.Now;
 
     private MainWindow? _mainWindow;
@@ -37,7 +37,7 @@ internal class LinuxProgram
     private void OnApplicationActivate(object sender, object e)
     {
         // Initialize services and logging.
-        ServiceProvider serviceProvider = InitializeServices();
+        _serviceProvider = InitializeServices();
 
         // Listen for unhandled exceptions.
         AppDomain.CurrentDomain.UnhandledException += (_, ex) =>
@@ -60,7 +60,8 @@ internal class LinuxProgram
         //    = new MefComposer(
         //        assemblies: new[] { typeof(MainWindowViewModel).Assembly, typeof(DevToysBlazorResourceManagerAssemblyIdentifier).Assembly },
         //        pluginFolders);
-
+        var loggerFactory = _serviceProvider.GetRequiredService<LoggerFactory>();
+        Logger = loggerFactory.CreateLogger(nameof(LinuxProgram));
         LogInitialization((DateTime.Now - _startTime).TotalMilliseconds);
         LogAppStarting();
 
@@ -72,18 +73,18 @@ internal class LinuxProgram
         //LanguageManager.Instance.SetCurrentCulture(languageDefinition);
 
         // Create and open main window.
-        _mainWindow = new MainWindow(serviceProvider, (Gtk.Application)sender);
+        _mainWindow = new MainWindow(_serviceProvider, (Gtk.Application)sender);
     }
 
     private void OnApplicationShutdown(object sender, object e)
     {
         // Guard.IsNotNull(MefComposer);
-
+        
         //// Dispose every disposable tool instance.
-        //MefComposer.Provider.Import<GuiToolProvider>().DisposeTools();
+        _serviceProvider.Dispose();
 
         //// Clear older temp files.
-        //FileHelper.ClearTempFiles(Constants.AppTempFolder);
+        FileHelper.ClearTempFiles(Constants.AppTempFolder);
 
         Application.OnActivate -= OnApplicationActivate;
         Application.OnShutdown -= OnApplicationShutdown;
@@ -91,9 +92,10 @@ internal class LinuxProgram
 
     private ServiceProvider InitializeServices()
     {
-        _serviceCollection.AddBlazorWebView();
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddBlazorWebView();
 
-        _serviceCollection.AddLogging((builder) =>
+        serviceCollection.AddLogging((builder) =>
         {
 #if DEBUG
             //builder.AddDebug();
@@ -110,21 +112,21 @@ internal class LinuxProgram
         });
 
         //_serviceCollection.AddSingleton(provider => MefComposer!.Provider);
-        _serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
+        serviceCollection.AddSingleton<IWindowService>(provider => _windowService);
         //_serviceCollection.AddScoped<DocumentEventService, DocumentEventService>();
         // _serviceCollection.AddScoped<PopoverService, PopoverService>();
-        _serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
+        serviceCollection.AddScoped<ContextMenuService, ContextMenuService>();
         //_serviceCollection.AddScoped<GlobalDialogService, GlobalDialogService>();
         // _serviceCollection.AddScoped<UIDialogService, UIDialogService>();
         // _serviceCollection.AddScoped<FontService, FontService>();
         //_serviceCollection.AddScoped<MonacoLanguageService, MonacoLanguageService>();
-        _serviceCollection.AddSingleton<ISettingsProvider, SettingsProvider>();
-        _serviceCollection.AddSingleton<ISettingsStorage, SettingsStorage>();
-        _serviceCollection.AddSingleton<IThemeListener, ThemeListener>();
-        _serviceCollection.AddSingleton<IFileStorage, FileStorage>();
-        _serviceCollection.AddSingleton<IFontProvider, FontProvider>();
-        _serviceCollection.AddSingleton<TitleBarInfoProvider>();
-        ServiceProvider serviceProvider = _serviceCollection.BuildServiceProvider();
+        serviceCollection.AddSingleton<ISettingsProvider, SettingsProvider>();
+        serviceCollection.AddSingleton<ISettingsStorage, SettingsStorage>();
+        serviceCollection.AddSingleton<IThemeListener, ThemeListener>();
+        serviceCollection.AddSingleton<IFileStorage, FileStorage>();
+        serviceCollection.AddSingleton<IFontProvider, FontProvider>();
+        serviceCollection.AddSingleton<TitleBarInfoProvider>();
+        ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
         ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
