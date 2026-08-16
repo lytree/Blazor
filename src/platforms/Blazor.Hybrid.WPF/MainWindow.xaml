@@ -16,9 +16,9 @@
     MinWidth="600"
     MinHeight="400"
     Title="{Binding TitleWithToolName}"
-    TitleBarMarginLeft="{Binding TitleBarMarginLeft}"
-    TitleBarMarginRight="{Binding TitleBarMarginRight}"
-    TitleBarWindowStateButtonsWidth="{Binding TitleBarWindowStateButtonsWidth, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
+    controls:TitleBarProperties.TitleBarMarginLeft="{Binding TitleBarMarginLeft}"
+    controls:TitleBarProperties.TitleBarMarginRight="{Binding TitleBarMarginRight}"
+    controls:TitleBarProperties.TitleBarWindowStateButtonsWidth="{Binding TitleBarWindowStateButtonsWidth, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
   <Grid>
     <!-- Interestingly, on some monitors, setting a margin of 2px makes the BlazorWebView rendering a white line in diagonale.
              See https://github.com/veler/DevToys/issues/878 -->

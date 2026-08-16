@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Web.Services.Description;
+using System.Windows;
 using System.Windows.Interop;
 using Blazor.Hybrid.Core.Settings;
 using Blazor.Hybrid.Shared;
@@ -30,6 +31,8 @@ public partial class MainWindow : Window
     private readonly ServiceProvider _serviceProvider;
     private readonly DateTime _uiLoadingTime;
     private readonly ISettingsProvider _settingsProvider;
+    private readonly EfficiencyModeService _efficiencyModeService;
+    private readonly IThemeListener _themeListener;
     private ILogger? _logger;
 
     public MainWindow()

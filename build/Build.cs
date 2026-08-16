@@ -1,4 +1,4 @@
-#:package Cake.Frosting@6.1.0
+#:package Cake.Frosting@6.2.0
 #:property TargetFramework=net10.0
 #:property OutputType=Exe
 #:property RunWorkingDirectory=$(MSBuildProjectDirectory)
@@ -29,7 +29,6 @@ public static class BuildParameters
     public const string LinuxSolutionPath = "../Blazor-Linux.slnx"; // 确保路径正确
     public const string WindowsSolutionPath = "../Blazor-Windows.slnx"; // 确保路径正确
     public const string ServerSolutionPath = "../Blazor-Server.slnx"; // 确保路径正确
-    public const string MacSolutionPath = "../Blazor-Mac.slnx"; // 确保路径正确
     public const string Configuration = "Release";
     public const string PackageOutputDirectory = "../packages";
     public const string Version = "Version";

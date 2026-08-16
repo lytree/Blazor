@@ -10,7 +10,7 @@ namespace Blazor.Hybrid.Windows.Core;
 
 internal sealed class WindowService : IWindowService
 {
-    private MicaWindowWithOverlay? _window;
+    private Window? _window;
     private bool _isCompactOverlayMode;
     private WindowStateBackup? _nonCompactOverlayModeWindowState;
     private WindowStateBackup? _compactOverlayModeWindowState;
@@ -35,7 +35,7 @@ internal sealed class WindowService : IWindowService
         }
     }
 
-    internal void SetWindow(MicaWindowWithOverlay window)
+    internal void SetWindow(Window window)
     {
         Guard.IsNull(_window);
         Guard.IsNotNull(window);

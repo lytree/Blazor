@@ -1,9 +1,9 @@
 <Solution>
   <Folder Name="/Document/">
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Build.target" />
-    <File Path="Directory.Packages.props" />
-    <File Path="Environment.props" />
+    <File Path="src/Directory.Build.props" />
+    <File Path="src/Directory.Build.target" />
+    <File Path="src/Directory.Packages.props" />
+    <File Path="src/Environment.props" />
   </Folder>
   <Folder Name="/platforms/">
     <Project Path="src/platforms/Blazor.Hybrid.WPF/Blazor.Hybrid.WPF.csproj" />
