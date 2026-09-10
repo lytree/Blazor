@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blazor.Shared.Core;
 
@@ -12,14 +7,14 @@ namespace Blazor.Shared.Core;
 public sealed class BlazorEmbeddedFileProvider : IFileProvider
 {
     private const string Content = "_content/";
-    private const string ContentDevToysBlazor = "_content/Blazor.Shared";
+    private const string ContentBlazorShared = "_content/Blazor.Shared";
 
     private readonly EmbeddedFileProvider _embeddedFileProvider
         = new(typeof(BlazorEmbeddedFileProvider).Assembly, baseNamespace: string.Empty);
 
     public IDirectoryContents GetDirectoryContents(string subpath)
     {
-        if (subpath.StartsWith(ContentDevToysBlazor))
+        if (subpath.StartsWith(ContentBlazorShared))
         {
             subpath = subpath.Substring(Content.Length);
             return _embeddedFileProvider.GetDirectoryContents(subpath);
@@ -30,7 +25,7 @@ public sealed class BlazorEmbeddedFileProvider : IFileProvider
 
     public IFileInfo GetFileInfo(string subpath)
     {
-        if (subpath.StartsWith(ContentDevToysBlazor))
+        if (subpath.StartsWith(ContentBlazorShared))
         {
             subpath = subpath.Substring(Content.Length);
             return _embeddedFileProvider.GetFileInfo(subpath);

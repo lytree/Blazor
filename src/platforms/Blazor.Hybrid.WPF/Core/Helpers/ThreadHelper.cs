@@ -13,7 +13,7 @@ public static class ThreadHelper
     {
         if (!IsOnUIThread())
         {
-            throw new Exception("The UI thread is expected, but the current call stack is running on another thread.");
+            throw new InvalidOperationException("The UI thread is expected, but the current call stack is running on another thread.");
         }
     }
 
@@ -21,7 +21,7 @@ public static class ThreadHelper
     {
         if (IsOnUIThread())
         {
-            throw new Exception("The UI thread is not expected, but the current call stack is running on UI thread.");
+            throw new InvalidOperationException("The UI thread is not expected, but the current call stack is running on UI thread.");
         }
     }
 

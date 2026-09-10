@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Web.Services.Description;
 using System.Windows;
 using System.Windows.Interop;
 using Blazor.Hybrid.Core.Settings;

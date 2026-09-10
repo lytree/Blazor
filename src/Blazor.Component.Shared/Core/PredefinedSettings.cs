@@ -6,7 +6,7 @@ namespace Blazor.Shared.Core;
 public static class PredefinedSettings
 {
     /// <summary>
-    /// Preferred default fonts. The app will the first font in this list that is available on the system.
+    /// Preferred default fonts. The app will use the first font in this list that is available on the system.
     /// </summary>
     public static readonly string[] DefaultFonts
         =

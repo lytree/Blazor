@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <!--
+    Windows 长路径校验。
+    本文件必须命名为 Directory.Build.targets（复数），MSBuild 才会自动导入。
+    https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation
+  -->
+  <Target Name="_BlazorLongPathEnabled"
+          BeforeTargets="CoreCompile"
+          Condition="'$([MSBuild]::IsOsPlatform(Windows))' and '$(MSBuildThisFileDirectory.Length)' &gt; 25">
+    <Warning Condition="'$(registry:HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem@LongPathsEnabled)' != '1'"
+             Text="LongPath is not enabled, you may experience build errors. Enable it by running (as administrator): Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name LongPathsEnabled -Value 1. More information: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later" />
+  </Target>
+
+</Project>

@@ -23,7 +23,7 @@ namespace Blazor.Hybrid.Linux;
 [SupportedOSPlatform("linux")]
 internal sealed partial class BlazorWebView : IDisposable
 {
-    private const string DevToysInteropName = "devtoyswebinterop";
+    private const string BlazorInteropName = "blazorwebinterop";
     private const string Scheme = "app";
     internal const string AppHostAddress = "localhost";
     internal static readonly Uri AppOriginUri = new($"{Scheme}://{AppHostAddress}/");
@@ -44,7 +44,7 @@ internal sealed partial class BlazorWebView : IDisposable
             };
             window.external = {
                 sendMessage: function(message) {
-                    window.webkit.messageHandlers.{{DevToysInteropName}}.postMessage(message);
+                    window.webkit.messageHandlers.{{BlazorInteropName}}.postMessage(message);
                 },
                 receiveMessage: function(callback) {
                     window.__receiveMessageCallbacks.push(callback);
@@ -225,8 +225,8 @@ internal sealed partial class BlazorWebView : IDisposable
             userContentManager,
             HandleScriptMessageReceivedSignal,
             after: false,
-            detail: DevToysInteropName);
-        if (!userContentManager.RegisterScriptMessageHandler(DevToysInteropName, null))
+            detail: BlazorInteropName);
+        if (!userContentManager.RegisterScriptMessageHandler(BlazorInteropName, null))
         {
             throw new Exception("Could not register script message handler");
         }
