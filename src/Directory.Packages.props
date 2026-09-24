@@ -8,6 +8,7 @@
         <GirCore>0.8.1</GirCore>
     </PropertyGroup>
     <ItemGroup>
+        <PackageVersion Include="AspNetCore.SassCompiler" Version="1.103.1" />
         <PackageVersion Include="CommunityToolkit.Common" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Diagnostics" Version="$(CommunityToolkitVersion)" />
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitVersion)" />

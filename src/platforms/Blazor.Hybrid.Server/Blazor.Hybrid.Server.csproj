@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+    <PackageReference Include="AspNetCore.SassCompiler" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,9 @@
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <!-- SCSS 源码仅用于编译，不作为静态资源发布 -->
+    <Content Remove="wwwroot\scss\**" />
+    <None Include="sasscompiler.json" />
   </ItemGroup>
 
 </Project>

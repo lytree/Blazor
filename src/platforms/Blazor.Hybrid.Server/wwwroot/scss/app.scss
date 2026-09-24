@@ -1,0 +1,8 @@
+// wwwroot/scss/app.scss
+// 多文件 SCSS 编译入口：构建时 wwwroot/scss 下所有非 _ 前缀的 .scss
+// 会被 AspNetCore.SassCompiler 独立编译为 wwwroot 下的同名 .css。
+// 本文件 @use 同目录的 partial 模块，汇总输出为 wwwroot/app.css。
+
+@use 'base';
+@use 'links';
+@use 'components';

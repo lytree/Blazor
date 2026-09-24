@@ -1,0 +1,11 @@
+{
+  // SCSS 多文件编译配置（AspNetCore.SassCompiler）
+  // Source 目录下所有非 _ 前缀的 .scss 均作为独立入口编译到 Target，
+  // 以 _ 开头的 partial 仅作为模块被 @use 引用，不会单独生成 .css。
+  "Source": "wwwroot/scss",
+  "Target": "wwwroot",
+  // scoped css（*.razor.scss）支持，扫描 Components/Pages/Shared/Views
+  "GenerateScopedCss": true,
+  "ScopedCssFolders": [ "Views", "Pages", "Shared", "Components" ],
+  "IncludePaths": []
+}

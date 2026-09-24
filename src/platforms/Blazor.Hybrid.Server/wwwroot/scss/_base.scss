@@ -1,0 +1,8 @@
+// _base.scss — 全局基础样式
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
